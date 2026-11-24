@@ -41,8 +41,11 @@ It tells a student which scholarships they qualify for, picks the best combinati
 
 ## Commands (fill in as they are created)
 - Web: `cd web && npm install && npm run dev`
-- API: `cd api && pip install -r requirements.txt && uvicorn main:app --reload`
+- API: `cd api && pip install -r requirements-dev.txt && uvicorn main:app --reload --env-file ../.env` (copy `.env.example` to `.env`; it points `SAARTHI_SCHEMES_PATH` at the EXAMPLE fixture until `data/schemes.json` exists)
+- API tests: `cd api && pytest`
 - Engine tests: `cd engine && pytest`
+- Vault tests: `cd web && npm run test:vault`
+- Web against the real API: in `web/.env.local` set `NEXT_PUBLIC_USE_MOCKS=false` and `NEXT_PUBLIC_API_BASE_URL=http://localhost:8000`
 
 ## Deadline context
 First-round submission closes **24 Nov 2026, 11:59 PM IST**. The first-round repo needs a basic working demo. Prefer a thin, working vertical slice over broad, half-finished features.

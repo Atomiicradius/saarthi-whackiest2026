@@ -176,8 +176,8 @@ function realApi(): VaultApi | null {
   return {
     encryptFile: (file, passphrase) => call("encryptFile", file, passphrase) as Promise<VaultBlob>,
     decryptBlob: (blob, passphrase) => call("decryptBlob", blob, passphrase) as Promise<Blob>,
-    // The real module keeps the chain itself, so `chain` is not passed on.
-    appendAudit: (entry) => call("appendAudit", entry) as Promise<AuditEntry>,
+    // The UI seeds its own log, so the chain is passed on and the next idx continues from it.
+    appendAudit: (entry, chain) => call("appendAudit", entry, chain) as Promise<AuditEntry>,
     verifyChain: (entries) => call("verifyChain", entries) as Promise<VerifyResult>,
   };
 }
