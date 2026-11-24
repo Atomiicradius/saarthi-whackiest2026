@@ -11,16 +11,23 @@ All money is INR per year unless stated. All dates are ISO 8601 (`YYYY-MM-DD`). 
   "id": "example-scheme-001",            // stable slug
   "name": "EXAMPLE scheme name",
   "provider": "central | karnataka | other",
+  "portal": "nsp | other",                // PROPOSED, see section 5: the merit/welfare rule applies to nsp only
+  "scheme_type": "merit | welfare",       // drives the optimiser rule in section 5
   "level": ["UG"],                        // UG | PG | DIPLOMA
   "amount_inr_per_year": 0,               // number or null if unknown
-  "deadline": "2026-12-31",               // or null
+  "deadline": "2026-12-31",               // or null; if application_window is set, its `closes` is authoritative
+  "application_window": {                 // or null if unknown
+    "ay": "2026-27",
+    "opens": "2026-07-01",                // placeholder, YYYY-MM-DD
+    "closes": "2026-10-31",               // placeholder, YYYY-MM-DD
+    "status": "open | closed | upcoming"
+  },
   "criteria": [                           // ALL must hold for eligibility
     { "field": "annual_family_income_inr", "op": "<=", "value": 250000 },
     { "field": "category", "op": "in", "value": ["SC", "ST"] }
   ],
   "docs_required": ["income_certificate", "caste_certificate", "marksheet"],
-  "exclusive_with": ["example-scheme-002"],   // cannot hold both
-  "exclusivity_group": null,                  // e.g. "central-one-per-session"
+  "exclusive_with": [],                       // ONLY where an official source states the pair is exclusive; else empty
   "portal_url": "https://example.invalid",
   "source_url": "https://example.invalid",    // REQUIRED: official notice or guideline
   "confidence": 0.9,                          // 0..1, lower goes to human review
@@ -32,6 +39,13 @@ All money is INR per year unless stated. All dates are ISO 8601 (`YYYY-MM-DD`). 
 **The values above are placeholders.** Never invent real scheme criteria, amounts or deadlines. Populate only from official portals and guideline documents. Records without a `source_url` must not be loaded into the engine.
 
 Supported operators: `==`, `!=`, `<`, `<=`, `>`, `>=`, `in`, `not_in`, `exists`.
+
+**Application window (UI rules):**
+- Eligibility is decided by `criteria` only. The window never changes a verdict.
+- `status: "closed"` is shown as "Closed, opens around <month>" (month taken from the previous cycle's `opens`). Never show a closed scheme as upcoming.
+- `status: "upcoming"` is only for a window whose opening date is officially announced.
+- Known fact: NSP student applications for AY 2026-27 closed on 2026-10-31.
+- Each window needs a source (the scheme's `source_url`). `status` is a snapshot as of `last_verified`; recompute it from `opens` and `closes` when the date matters.
 
 ## 2. Student profile
 
@@ -92,10 +106,14 @@ Output includes the question text in the requested language, optional answer cho
 ## 5. Portfolio optimiser
 
 - Input: eligible schemes (and optionally `unknown` ones weighted by a probability, default excluded).
-- Constraints: `exclusive_with` pairs and `exclusivity_group` (at most one per group).
+- Constraints:
+  - **NSP merit/welfare rule (from AY 2026-27):** among schemes with `portal: "nsp"`, select **at most one** `merit` scheme (the best by `amount_inr_per_year * weight`, ties broken by the earlier `application_window.closes` or `deadline`) and **all** eligible `welfare` schemes. Source: scholarships.gov.in announcements; Cabinet Secretariat memo of 12 Nov 2025.
+  - The rule applies to NSP schemes only. State and private schemes may differ, so they are not limited by it.
+  - `exclusive_with` pairs: at most one of each pair. Fill this field only where an official source states it.
 - Objective: maximise `sum(amount_inr_per_year * weight)` where `weight` reflects deadline urgency and application effort (default 1).
 - Scale is small (tens of schemes); a brute force or simple ILP is fine.
-- Output: the selected set, its total value, and the alternatives dropped because of exclusivity (with reasons).
+- Output: the selected set, its total value, and the alternatives dropped (other merit schemes, exclusive pairs) with reasons.
+- Closed windows: how the optimiser treats schemes whose window is closed is an open decision (see `decisions-and-progress.md`).
 
 ## 6. API (FastAPI, JSON)
 
@@ -179,5 +197,5 @@ Keep at least these:
 1. A profile that is clearly eligible for several schemes.
 2. A profile that is ineligible by a small margin (near-miss).
 3. A profile with many unknown fields (drives the interview).
-4. A profile that hits an exclusivity conflict.
+4. A profile eligible for two or more NSP merit schemes plus welfare schemes (tests the merit/welfare rule).
 Never use real people's data.

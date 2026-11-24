@@ -26,10 +26,20 @@ A 1st-3rd year engineering student in Karnataka, possibly Kannada-speaking, on a
 |---|---|
 | Searchable list of scholarships | Adaptive interview that asks only the questions that matter |
 | Tells you what you qualify for | Also tells you what you almost qualify for, and what to do |
-| Lists every scheme | Optimises the best combination, given mutually exclusive schemes |
+| Lists every scheme | Optimises the best combination under the NSP rule (one merit scheme plus any welfare schemes) |
 | English forms | Voice in Kannada, Hindi or English |
 | Upload documents to a server | Client-side encrypted vault, ciphertext only on the server |
 | You fill the portal yourself | Copilot pre-fills and checks rejection risk; the user does OTP, CAPTCHA and submit |
+
+## Main competitor: myScheme
+**myScheme** is the government's own scheme-discovery portal. It is the tool a judge will compare us to, so say so openly and lead with what it does not give the student. Differentiators, in this order:
+1. **Near-miss guidance:** what the student almost qualifies for and what would fix it.
+2. **Portfolio planning:** the best combination under the NSP merit/welfare rule, not just a list.
+3. **Cross-document consistency check:** name and date-of-birth mismatches, expired certificates (hack-day feature).
+4. **Voice** in Kannada, Hindi or English.
+5. **Client-side encrypted vault**, ciphertext only on the server.
+
+Do not state what myScheme lacks until we have checked it (see unverified items).
 
 ## Core design principle
 **The LLM converses and extracts. The rules engine decides.** The LLM never reads documents and never determines eligibility.
@@ -84,7 +94,8 @@ Failure paths to design for: voice fails (tap-to-answer fallback), no documents 
 - Not legal advice. Do not claim compliance with India's DPDP Act 2023.
 
 ## Unverified items (check before stating as fact)
-- Which central schemes are mutually exclusive (for example one central scholarship per session).
+- What myScheme does and does not offer today (near-miss, voice, document checks); verify before claiming a gap.
+- Resolved: NSP allows one merit scheme plus any welfare schemes from AY 2026-27 (D12). State and private scheme rules are still unchecked.
 - Whether Kannada works in ElevenLabs agent mode.
 - ElevenLabs retention and data-residency settings on our plan tier.
 - Exact amounts, deadlines and criteria for each scheme (use official sources).
