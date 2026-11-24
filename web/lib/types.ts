@@ -98,6 +98,12 @@ export interface OptimizeResponse {
   dropped: { scheme_id: string; reason: string }[];
 }
 
+export interface SlotCandidate {
+  field: ProfileFieldName;
+  value: FieldValue;
+  confidence: number;
+}
+
 export interface ApiErrorBody {
   error: { code: string; message: string };
 }

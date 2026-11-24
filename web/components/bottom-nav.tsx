@@ -4,8 +4,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/cn";
 import { NAV_TABS } from "@/lib/nav";
+import { useSession } from "@/lib/session";
 
 export function BottomNav() {
+  const { t } = useSession();
   const pathname = usePathname();
   return (
     <nav
@@ -26,7 +28,7 @@ export function BottomNav() {
                 )}
               >
                 <Icon className="size-6" aria-hidden />
-                {label}
+                {t(label)}
                 <span
                   className={cn("h-1 w-6 rounded-full", active ? "bg-primary" : "bg-transparent")}
                   aria-hidden

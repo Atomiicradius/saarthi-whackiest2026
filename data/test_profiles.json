@@ -1,0 +1,57 @@
+{
+  "_comment": "Synthetic profiles only (section 11 of context/data-and-contracts.md). No real people. Values are plain field values; null means unknown.",
+  "profiles": [
+    {
+      "id": "eligible-several",
+      "about": "Clearly eligible for several schemes (Ravi, the demo persona)",
+      "profile": {
+        "state_of_domicile": "Karnataka",
+        "category": "OBC",
+        "minority_community": false,
+        "gender": "M",
+        "disability": false,
+        "annual_family_income_inr": 240000,
+        "course": "BE-CSE",
+        "course_level": "UG",
+        "year_of_study": 2,
+        "institution_type": "private",
+        "last_exam_marks_pct": 78.5
+      }
+    },
+    {
+      "id": "near-miss",
+      "about": "Ineligible by a small margin: income just over a cap, marks just under a minimum",
+      "profile": {
+        "state_of_domicile": "Karnataka",
+        "category": "OBC",
+        "gender": "F",
+        "annual_family_income_inr": 265000,
+        "course_level": "UG",
+        "year_of_study": 1,
+        "last_exam_marks_pct": 72
+      }
+    },
+    {
+      "id": "mostly-unknown",
+      "about": "Almost nothing known yet; drives the interview",
+      "profile": {
+        "course_level": "UG"
+      }
+    },
+    {
+      "id": "merit-and-welfare",
+      "about": "Eligible for two NSP merit schemes and NSP welfare schemes (tests the merit/welfare rule)",
+      "profile": {
+        "state_of_domicile": "Karnataka",
+        "category": "SC",
+        "gender": "F",
+        "disability": false,
+        "annual_family_income_inr": 180000,
+        "course_level": "UG",
+        "year_of_study": 3,
+        "institution_type": "govt",
+        "last_exam_marks_pct": 88
+      }
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 import en from "@/i18n/en.json";
+import hi from "@/i18n/hi.json";
+import kn from "@/i18n/kn.json";
 
-// hi.json and kn.json will be added here once translated. Until then every locale uses English.
 export type Locale = "en" | "hi" | "kn";
 
 export const LANGUAGE_CHIPS: { locale: Locale; label: string }[] = [
@@ -9,7 +10,7 @@ export const LANGUAGE_CHIPS: { locale: Locale; label: string }[] = [
   { locale: "en", label: "English" },
 ];
 
-const dictionaries: Record<Locale, unknown> = { en, hi: en, kn: en };
+const dictionaries: Record<Locale, unknown> = { en, hi, kn };
 
 type Vars = Record<string, string | number>;
 

@@ -27,6 +27,9 @@ export const ANSWER_CONFIG: Partial<Record<ProfileFieldName, AnswerConfig>> = {
     values: { Government: "govt", Aided: "aided", Private: "private" },
   },
   last_exam_marks_pct: { kind: "stepper", min: 0, max: 100, step: 1, start: 75 },
+  gender: { kind: "chips", values: { Female: "F", Male: "M", Other: "O" } },
+  disability: { kind: "chips", values: { Yes: true, No: false } },
+  minority_community: { kind: "chips", values: { Yes: true, No: false } },
 };
 
 const INSTITUTION_LABELS: Record<string, string> = {

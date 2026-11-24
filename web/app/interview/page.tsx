@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import { getSchemeCount, interviewNext } from "@/lib/api";
@@ -17,8 +17,9 @@ import { Card } from "@/components/ui/card";
 import { ANSWER_CONFIG, chipValue, displayValue } from "@/lib/answer-config";
 import { cn } from "@/lib/cn";
 import { useSession } from "@/lib/session";
+import { useVoiceAnswer } from "@/lib/use-voice-answer";
 import raviProfile from "@/mocks/ravi.profile.json";
-import type { FieldValue, InterviewNext, Profile } from "@/lib/types";
+import type { FieldValue, InterviewNext, Profile, ProfileFieldName } from "@/lib/types";
 
 export default function InterviewPage() {
   const router = useRouter();
@@ -78,6 +79,13 @@ export default function InterviewPage() {
   );
 
   const field = question?.field ?? null;
+
+  // A spoken answer is proposed like a tapped one, so the read-back still asks the student.
+  const proposeSpoken = useCallback(
+    (asked: ProfileFieldName, value: FieldValue) => proposeAnswer(asked, value, "voice"),
+    [proposeAnswer],
+  );
+  const voice = useVoiceAnswer(field, locale, proposeSpoken);
   const tapped = field ? profile[field] : undefined;
   // "Start as Ravi" suggests Ravi's answer for each question; the student still confirms it.
   const suggested =
@@ -120,10 +128,29 @@ export default function InterviewPage() {
       ? t("interview.loading")
       : field === null
         ? `${t("interview.done")}. ${t("interview.doneBody")}`
-        : question.question;
+        : voice.note
+          ? t(`voice.${voice.note.key}`, { text: voice.note.heard ?? "" })
+          : question.question;
+
+  // Choice labels come from the API in English (they key answer-config); only the text shown
+  // is translated.
+  const choiceText = (label: string) => {
+    const key = `choices.${label}`;
+    const text = t(key);
+    return text === key ? label : text;
+  };
 
   return (
-    <PageColumns guide={<GuidePanel state={guideState} message={guideMessage} showMic />}>
+    <PageColumns
+      guide={
+        <GuidePanel
+          state={guideState}
+          message={guideMessage}
+          showMic
+          voice={voice.available ? { state: voice.state, onPress: voice.press } : undefined}
+        />
+      }
+    >
       <div className="space-y-4">
         <header>
           <h1 className="font-serif text-3xl font-semibold leading-tight lg:text-4xl">
@@ -204,7 +231,7 @@ export default function InterviewPage() {
                         "hover:border-primary hover:bg-surface",
                       )}
                     >
-                      {label}
+                      {choiceText(label)}
                     </button>
                   ))}
                 </div>

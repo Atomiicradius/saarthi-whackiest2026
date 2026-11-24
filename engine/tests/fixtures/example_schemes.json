@@ -1,0 +1,317 @@
+[
+  {
+    "id": "example-merit-a",
+    "name": "EXAMPLE Merit Scholarship A",
+    "provider": "central",
+    "portal": "nsp",
+    "scheme_type": "merit",
+    "level": [
+      "UG"
+    ],
+    "amount_inr_per_year": 60000,
+    "deadline": "2027-01-15",
+    "application_window": {
+      "ay": "2026-27",
+      "opens": "2026-11-01",
+      "closes": "2027-01-15",
+      "status": "open"
+    },
+    "criteria": [
+      {
+        "field": "last_exam_marks_pct",
+        "op": ">=",
+        "value": 75
+      },
+      {
+        "field": "annual_family_income_inr",
+        "op": "<=",
+        "value": 800000
+      }
+    ],
+    "docs_required": [
+      "income_certificate",
+      "marksheet"
+    ],
+    "exclusive_with": [],
+    "portal_url": "https://example.invalid",
+    "source_url": "https://example.invalid/merit-a",
+    "confidence": 0.9,
+    "last_verified": "2026-11-24",
+    "notes": ""
+  },
+  {
+    "id": "example-merit-b",
+    "name": "EXAMPLE Merit Scholarship B",
+    "provider": "central",
+    "portal": "nsp",
+    "scheme_type": "merit",
+    "level": [
+      "UG"
+    ],
+    "amount_inr_per_year": 40000,
+    "deadline": "2027-01-31",
+    "application_window": {
+      "ay": "2026-27",
+      "opens": "2026-11-01",
+      "closes": "2027-01-31",
+      "status": "open"
+    },
+    "criteria": [
+      {
+        "field": "last_exam_marks_pct",
+        "op": ">=",
+        "value": 70
+      }
+    ],
+    "docs_required": [
+      "marksheet"
+    ],
+    "exclusive_with": [],
+    "portal_url": "https://example.invalid",
+    "source_url": "https://example.invalid/merit-b",
+    "confidence": 0.9,
+    "last_verified": "2026-11-24",
+    "notes": ""
+  },
+  {
+    "id": "example-welfare-c",
+    "name": "EXAMPLE Welfare Scholarship C",
+    "provider": "central",
+    "portal": "nsp",
+    "scheme_type": "welfare",
+    "level": [
+      "UG"
+    ],
+    "amount_inr_per_year": 30000,
+    "deadline": "2027-01-20",
+    "application_window": {
+      "ay": "2026-27",
+      "opens": "2026-11-01",
+      "closes": "2027-01-20",
+      "status": "open"
+    },
+    "criteria": [
+      {
+        "field": "annual_family_income_inr",
+        "op": "<=",
+        "value": 250000
+      },
+      {
+        "field": "category",
+        "op": "in",
+        "value": [
+          "OBC",
+          "SC",
+          "ST"
+        ]
+      }
+    ],
+    "docs_required": [
+      "income_certificate",
+      "caste_certificate"
+    ],
+    "exclusive_with": [],
+    "portal_url": "https://example.invalid",
+    "source_url": "https://example.invalid/welfare-c",
+    "confidence": 0.85,
+    "last_verified": "2026-11-24",
+    "notes": ""
+  },
+  {
+    "id": "example-welfare-d",
+    "name": "EXAMPLE Karnataka Welfare Grant D",
+    "provider": "karnataka",
+    "portal": "other",
+    "scheme_type": "welfare",
+    "level": [
+      "UG"
+    ],
+    "amount_inr_per_year": 20000,
+    "deadline": "2026-12-20",
+    "application_window": {
+      "ay": "2026-27",
+      "opens": "2026-10-01",
+      "closes": "2026-12-20",
+      "status": "open"
+    },
+    "criteria": [
+      {
+        "field": "state_of_domicile",
+        "op": "==",
+        "value": "Karnataka"
+      },
+      {
+        "field": "annual_family_income_inr",
+        "op": "<=",
+        "value": 300000
+      }
+    ],
+    "docs_required": [
+      "income_certificate"
+    ],
+    "exclusive_with": [],
+    "portal_url": "https://example.invalid",
+    "source_url": "https://example.invalid/welfare-d",
+    "confidence": 0.8,
+    "last_verified": "2026-11-24",
+    "notes": ""
+  },
+  {
+    "id": "example-welfare-e",
+    "name": "EXAMPLE Welfare Support E",
+    "provider": "central",
+    "portal": "nsp",
+    "scheme_type": "welfare",
+    "level": [
+      "UG"
+    ],
+    "amount_inr_per_year": 25000,
+    "deadline": "2026-10-31",
+    "application_window": {
+      "ay": "2026-27",
+      "opens": "2026-06-01",
+      "closes": "2026-10-31",
+      "status": "closed"
+    },
+    "criteria": [
+      {
+        "field": "annual_family_income_inr",
+        "op": "<=",
+        "value": 300000
+      }
+    ],
+    "docs_required": [
+      "income_certificate"
+    ],
+    "exclusive_with": [],
+    "portal_url": "https://example.invalid",
+    "source_url": "https://example.invalid/welfare-e",
+    "confidence": 0.85,
+    "last_verified": "2026-11-24",
+    "notes": ""
+  },
+  {
+    "id": "example-welfare-f",
+    "name": "EXAMPLE Low-Income Welfare F",
+    "provider": "central",
+    "portal": "nsp",
+    "scheme_type": "welfare",
+    "level": [
+      "UG"
+    ],
+    "amount_inr_per_year": 35000,
+    "deadline": "2027-01-10",
+    "application_window": {
+      "ay": "2026-27",
+      "opens": "2026-11-01",
+      "closes": "2027-01-10",
+      "status": "open"
+    },
+    "criteria": [
+      {
+        "field": "annual_family_income_inr",
+        "op": "<=",
+        "value": 220000
+      },
+      {
+        "field": "course_level",
+        "op": "in",
+        "value": [
+          "UG"
+        ]
+      }
+    ],
+    "docs_required": [
+      "income_certificate"
+    ],
+    "exclusive_with": [],
+    "portal_url": "https://example.invalid",
+    "source_url": "https://example.invalid/welfare-f",
+    "confidence": 0.85,
+    "last_verified": "2026-11-24",
+    "notes": ""
+  },
+  {
+    "id": "example-welfare-g",
+    "name": "EXAMPLE Category Grant G",
+    "provider": "karnataka",
+    "portal": "other",
+    "scheme_type": "welfare",
+    "level": [
+      "UG"
+    ],
+    "amount_inr_per_year": 15000,
+    "deadline": "2027-02-10",
+    "application_window": {
+      "ay": "2026-27",
+      "opens": "2026-12-01",
+      "closes": "2027-02-10",
+      "status": "upcoming"
+    },
+    "criteria": [
+      {
+        "field": "category",
+        "op": "in",
+        "value": [
+          "OBC"
+        ]
+      },
+      {
+        "field": "state_of_domicile",
+        "op": "==",
+        "value": "Karnataka"
+      },
+      {
+        "field": "annual_family_income_inr",
+        "op": "<=",
+        "value": 300000
+      }
+    ],
+    "docs_required": [
+      "caste_certificate"
+    ],
+    "exclusive_with": [],
+    "portal_url": "https://example.invalid",
+    "source_url": "https://example.invalid/welfare-g",
+    "confidence": 0.8,
+    "last_verified": "2026-11-24",
+    "notes": ""
+  },
+  {
+    "id": "example-welfare-h",
+    "name": "EXAMPLE SC/ST Fellowship H",
+    "provider": "central",
+    "portal": "nsp",
+    "scheme_type": "welfare",
+    "level": [
+      "UG"
+    ],
+    "amount_inr_per_year": 50000,
+    "deadline": "2027-01-25",
+    "application_window": {
+      "ay": "2026-27",
+      "opens": "2026-11-01",
+      "closes": "2027-01-25",
+      "status": "open"
+    },
+    "criteria": [
+      {
+        "field": "category",
+        "op": "in",
+        "value": [
+          "SC",
+          "ST"
+        ]
+      }
+    ],
+    "docs_required": [
+      "caste_certificate"
+    ],
+    "exclusive_with": [],
+    "portal_url": "https://example.invalid",
+    "source_url": "https://example.invalid/welfare-h",
+    "confidence": 0.9,
+    "last_verified": "2026-11-24",
+    "notes": ""
+  }
+]

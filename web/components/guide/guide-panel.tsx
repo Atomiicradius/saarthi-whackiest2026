@@ -6,6 +6,7 @@ import { MicButton } from "@/components/guide/mic-button";
 import { SpeechBubble } from "@/components/guide/speech-bubble";
 import { cn } from "@/lib/cn";
 import { useSession } from "@/lib/session";
+import type { MicState } from "@/lib/use-voice-answer";
 
 interface GuidePanelProps {
   state: GuideState;
@@ -13,6 +14,8 @@ interface GuidePanelProps {
   /** "panel" stacks the guide above its bubble on desktop; "strip" is always one row. */
   variant?: "panel" | "strip";
   showMic?: boolean;
+  /** Real voice input. Without it the mic only explains where voice answers are taken. */
+  voice?: { state: MicState; onPress: () => void };
 }
 
 const LISTEN_MS = 2600;
@@ -22,6 +25,7 @@ export function GuidePanel({
   message,
   variant = "panel",
   showMic = false,
+  voice,
 }: GuidePanelProps) {
   const { t } = useSession();
   const [listening, setListening] = useState(false);
@@ -33,9 +37,14 @@ export function GuidePanel({
     return () => clearTimeout(timer);
   }, [listening]);
 
-  // While "listening", the guide says plainly that voice is not available yet.
-  const shownState: GuideState = listening ? "listening" : state;
-  const shownMessage = listening ? t("interview.micSoon") : message;
+  // Without real voice input, pressing the mic says where voice answers can be given.
+  const recording = voice?.state === "recording";
+  const shownState: GuideState = listening || recording ? "listening" : state;
+  const shownMessage = recording
+    ? t("voice.listening")
+    : listening
+      ? t("interview.micSoon")
+      : message;
 
   return (
     <section
@@ -50,7 +59,11 @@ export function GuidePanel({
         <SpeechBubble text={shownMessage} stacked={stacked} />
         {showMic && (
           <div className={cn(stacked && "lg:flex lg:justify-center")}>
-            <MicButton onPress={() => setListening(true)} />
+            {voice ? (
+              <MicButton state={voice.state} onPress={voice.onPress} />
+            ) : (
+              <MicButton state="idle" onPress={() => setListening(true)} />
+            )}
           </div>
         )}
       </div>
