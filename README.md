@@ -127,21 +127,24 @@ We're upfront about this, since it matters for judging the demo honestly. Update
 
 | Component | Status |
 |---|:---:|
-| Scheme dataset (central + Karnataka, undergraduate engineering) | 🟡 **In progress**, being collected from official sources |
-| Eligibility engine (tri-state verdicts, explanations, near-miss) | 🟡 **Planned for round 1** |
-| Adaptive interview (information-gain question picker) | 🟡 **Planned for round 1** |
-| Encrypted vault (browser-side AES-256-GCM) and audit log | 🟡 **Planned for round 1** |
-| Voice interview and spoken results (ElevenLabs) | 🟡 **Planned**, depends on language testing |
-| Portfolio optimiser | 🟡 **Planned** |
-| Application copilot | 🟠 **Sandbox demo only**, never real government portals |
+| Scheme dataset (central + Karnataka, undergraduate engineering) | 🟡 **In progress**, being collected from official sources. The demo runs on clearly labelled EXAMPLE schemes until it lands |
+| Eligibility engine (tri-state verdicts, explanations, near-miss) | ✅ **Working**, 53 unit tests |
+| Adaptive interview (information-gain question picker) | ✅ **Working**, questions in English, Hindi and Kannada |
+| Portfolio optimiser (NSP one-merit-plus-welfare rule) | ✅ **Working** |
+| API (FastAPI, every endpoint in the contract) | ✅ **Working**, 44 tests |
+| Encrypted vault (browser-side AES-256-GCM) and hash-chained audit log | ✅ **Working** in the browser, 13 tests. The server endpoints exist; the app does not upload ciphertext to them yet |
+| Voice answers and read-aloud (ElevenLabs) | ✅ **Working** in English, Hindi and Kannada: speak an answer, confirm the read-back |
+| App text in English, Hindi and Kannada | ✅ **Working**. Scheme names and verdict reasons stay in English |
+| Application copilot | 🟠 **Sandbox demo only**, never real government portals. Not built yet |
+| On-device OCR, consent grants, recovery key | ⚪ **Planned** |
 | Cross-document consistency checker, helper mode, reminders | ⚪ **Roadmap** |
 
 **Limits to keep in mind**
 - Scheme criteria, amounts and deadlines go stale. Every record carries a `source_url` and `last_verified` date.
 - Saarthi says a student *appears eligible*. It is not an approval, and the official notice is the final word.
-- Kannada speech recognition quality on real, noisy audio is still being tested.
+- Speech recognition was tested on clean synthetic speech in all three languages. Real, noisy, regional-accent audio is still to be tested, so every answer is read back for confirmation and tapping always works.
 - Voice audio goes to a cloud service. Students are asked to speak profile answers only, never IDs or document contents.
-- A lost passphrase means lost vault data, so a recovery key is offered.
+- A lost passphrase means lost vault data. A printed recovery key is planned.
 - Saarthi is not legal advice, and we make no claim of compliance with India's Digital Personal Data Protection Act, 2023.
 
 ---
@@ -160,22 +163,27 @@ We're upfront about this, since it matters for judging the demo honestly. Update
 ## Getting Started
 
 ```bash
-# Backend
-cd api
-pip install -r requirements.txt
-uvicorn main:app --reload
+# 1. Settings: copy both example files. Add an ElevenLabs key to .env for voice (optional).
+cp .env.example .env
+cp web/.env.example web/.env.local
 
-# Frontend
+# 2. Backend (Python 3.11+)
+cd api
+pip install -r requirements-dev.txt
+uvicorn main:app --reload --env-file ../.env
+
+# 3. Frontend (Node 22+), in a second terminal
 cd web
 npm install
 npm run dev
 
-# Engine tests
-cd engine
-pytest
+# Tests
+cd engine && pytest           # rules engine
+cd api && pytest              # API
+cd web && npm run test:vault  # vault and audit chain
 ```
 
-Copy `.env.example` to `.env` and add your own keys. **Never commit real keys, real documents or personal data.** The repo uses synthetic profiles only.
+Without an ElevenLabs key everything works except voice; tap to answer instead. On a free ElevenLabs plan, use one of the default voices (the example file sets one). **Never commit real keys, real documents or personal data.** The repo uses synthetic profiles only.
 
 Open **http://localhost:3000**.
 

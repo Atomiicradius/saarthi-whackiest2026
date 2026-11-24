@@ -4,9 +4,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/cn";
 import { NAV_TABS } from "@/lib/nav";
+import { useSession } from "@/lib/session";
 
 // Desktop navigation: a pill bar in the header. Phones keep the bottom bar.
 export function TopNav() {
+  const { t } = useSession();
   const pathname = usePathname();
   return (
     <nav
@@ -27,7 +29,7 @@ export function TopNav() {
                 )}
               >
                 <Icon className="size-5" aria-hidden />
-                {label}
+                {t(label)}
               </Link>
             </li>
           );

@@ -52,7 +52,7 @@ export function SpeechBubble({ text, stacked = false }: SpeechBubbleProps) {
           <p aria-hidden className="invisible">
             {text}
           </p>
-          <p aria-hidden className="absolute inset-0 p-4 pr-14">
+          <p aria-hidden className="pointer-events-none absolute inset-0 p-4 pr-14">
             {shown}
           </p>
         </div>
