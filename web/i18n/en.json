@@ -5,7 +5,7 @@
   },
   "lang": {
     "label": "Language",
-    "fallbackNote": "Showing English for now. Hindi and Kannada are coming."
+    "fallbackNote": "Scheme names and the reasons for each result are shown in English."
   },
   "interview": {
     "title": "A few quick questions",
@@ -20,7 +20,7 @@
     "profileTitle": "Your profile",
     "profileEmpty": "Not answered yet",
     "mic": "Speak your answer",
-    "micSoon": "Voice is coming soon. Tap an answer for now.",
+    "micSoon": "Start the questions to answer by voice.",
     "done": "That is all we need",
     "doneBody": "We have enough to check your schemes.",
     "seeResults": "See my results",
@@ -208,5 +208,34 @@
   },
   "guide": {
     "label": "Your guide"
+  },
+  "voice": {
+    "listening": "I am listening. Say your answer, then press stop.",
+    "stop": "Stop",
+    "working": "Understanding",
+    "heard": "I heard: “{text}”",
+    "notUnderstood": "I heard “{text}” but could not find the answer in it. Try again, or tap an answer.",
+    "denied": "I cannot use the microphone. Allow it in your browser, or tap an answer.",
+    "failed": "Voice did not work just now. Please tap an answer.",
+    "readAloud": "Read aloud",
+    "readAloudSoon": "Read aloud (needs the API)"
+  },
+  "choices": {
+    "Karnataka": "Karnataka",
+    "Another state": "Another state",
+    "Government": "Government",
+    "Aided": "Aided",
+    "Private": "Private",
+    "Female": "Female",
+    "Male": "Male",
+    "Other": "Other",
+    "Yes": "Yes",
+    "No": "No"
+  },
+  "nav": {
+    "home": "Home",
+    "schemes": "Schemes",
+    "vault": "Vault",
+    "audit": "Audit"
   }
 }

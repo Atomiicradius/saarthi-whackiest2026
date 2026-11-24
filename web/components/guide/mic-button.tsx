@@ -1,20 +1,35 @@
 "use client";
 
-import { Mic } from "lucide-react";
+import { LoaderCircle, Mic, Square } from "lucide-react";
+import { cn } from "@/lib/cn";
 import { useSession } from "@/lib/session";
+import type { MicState } from "@/lib/use-voice-answer";
 
-// PLACEHOLDER: voice input is not built yet. Pressing it only makes the guide look as if it is
-// listening for a moment and says so. The real handler (ElevenLabs speech-to-text) goes here later.
-export function MicButton({ onPress }: { onPress: () => void }) {
+// Press to record an answer, press again to stop. Tapping an answer always works as well.
+export function MicButton({ state, onPress }: { state: MicState; onPress: () => void }) {
   const { t } = useSession();
+  const recording = state === "recording";
+  const working = state === "working";
+  const Icon = working ? LoaderCircle : recording ? Square : Mic;
   return (
     <button
       type="button"
       onClick={onPress}
-      className="inline-flex min-h-12 items-center gap-2 rounded-full border border-border bg-surface px-5 text-sm font-semibold text-ink"
+      disabled={working}
+      aria-pressed={recording}
+      className={cn(
+        "inline-flex min-h-12 items-center gap-2 rounded-full border px-5 text-sm font-semibold",
+        recording
+          ? "border-danger bg-danger text-white"
+          : "border-border bg-surface text-ink hover:border-primary",
+        working && "opacity-80",
+      )}
     >
-      <Mic className="size-5 text-primary" aria-hidden />
-      {t("interview.mic")}
+      <Icon
+        className={cn("size-5", !recording && "text-primary", working && "animate-spin")}
+        aria-hidden
+      />
+      {working ? t("voice.working") : recording ? t("voice.stop") : t("interview.mic")}
     </button>
   );
 }

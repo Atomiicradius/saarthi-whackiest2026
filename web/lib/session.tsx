@@ -41,8 +41,8 @@ interface Session {
   /** "ravi" pre-fills Ravi's answers as suggestions in the interview. */
   persona: "ravi" | null;
   setPersona: (persona: "ravi" | null) => void;
-  /** Records a tapped answer that the student has not confirmed yet. */
-  proposeAnswer: (field: ProfileFieldName, value: FieldValue) => void;
+  /** Records a tapped or spoken answer that the student has not confirmed yet. */
+  proposeAnswer: (field: ProfileFieldName, value: FieldValue, source?: "tap" | "voice") => void;
   /** Drops an unconfirmed answer ("Change"). */
   discardAnswer: (field: ProfileFieldName) => void;
   /** Stores the answer as confirmed and records the step ("Yes"). */
@@ -75,9 +75,12 @@ export function SessionProvider({ children }: { children: ReactNode }) {
     [locale],
   );
 
-  const proposeAnswer = useCallback((field: ProfileFieldName, value: FieldValue) => {
-    setProfile((current) => ({ ...current, [field]: { value, source: "tap", confirmed: false } }));
-  }, []);
+  const proposeAnswer = useCallback(
+    (field: ProfileFieldName, value: FieldValue, source: "tap" | "voice" = "tap") => {
+      setProfile((current) => ({ ...current, [field]: { value, source, confirmed: false } }));
+    },
+    [],
+  );
 
   const discardAnswer = useCallback((field: ProfileFieldName) => {
     setProfile((current) => {
@@ -90,7 +93,7 @@ export function SessionProvider({ children }: { children: ReactNode }) {
   const confirmAnswer = useCallback((step: Step, value: FieldValue) => {
     setProfile((current) => ({
       ...current,
-      [step.field]: { value, source: "tap", confirmed: true },
+      [step.field]: { value, source: current[step.field]?.source ?? "tap", confirmed: true },
     }));
     setSteps((current) => [...current, step]);
   }, []);
