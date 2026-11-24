@@ -8,7 +8,7 @@ import { PageColumns } from "@/components/page-columns";
 import { DocRow } from "@/components/vault/doc-row";
 import { Chip } from "@/components/ui/chip";
 import { useSession } from "@/lib/session";
-import { useStaggerReveal } from "@/lib/use-stagger-reveal";
+import { useReveal } from "@/lib/use-reveal";
 import { vaultMode } from "@/lib/vault-adapter";
 import type { Scheme } from "@/lib/types";
 
@@ -46,7 +46,7 @@ export default function VaultPage() {
     return [...byDoc.entries()];
   }, [schemes, selected]);
 
-  useStaggerReveal(container, schemes !== null);
+  useReveal(container, schemes !== null);
 
   return (
     <PageColumns ref={container} guide={<GuidePanel state="idle" message={t("vault.guide")} />}>

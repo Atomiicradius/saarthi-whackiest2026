@@ -63,7 +63,7 @@ export function ChainEntry({ entry, status, edited, isLast, t }: ChainEntryProps
   const broken = status === "broken";
 
   return (
-    <li className="flex gap-3">
+    <li data-reveal className="flex gap-3">
       <div className="flex w-8 shrink-0 flex-col items-center">
         <span
           ref={node}
