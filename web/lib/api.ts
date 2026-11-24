@@ -53,6 +53,9 @@ export function getSchemes(): Promise<Scheme[]> {
   return request<Scheme[]>("GET", "/schemes");
 }
 
+// True when the built-in sample data is used instead of the API.
+export const usingMocks = USE_MOCKS;
+
 export function getSchemeCount(): Promise<number> {
   if (USE_MOCKS) return mockReply(interviewMock.total_schemes);
   return getSchemes().then((schemes) => schemes.length);

@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
-import { getSchemeCount, interviewNext } from "@/lib/api";
+import { evaluate, getSchemeCount, interviewNext, usingMocks } from "@/lib/api";
 import { GuidePanel } from "@/components/guide/guide-panel";
 import type { GuideState } from "@/components/guide/guide";
 import { LanguageChips } from "@/components/interview/language-chips";
@@ -73,10 +73,32 @@ export default function InterviewPage() {
       .catch(() => setTotalSchemes(0));
   }, []);
 
-  const remaining = useMemo(
-    () => Math.max(0, totalSchemes - steps.reduce((sum, step) => sum + step.resolves, 0)),
-    [totalSchemes, steps],
-  );
+  // "Schemes still possible" = schemes the engine has not ruled out (eligible or unknown) for the
+  // answers so far. With the sample data there is no engine, so the scripted per-question counts
+  // are used instead. The API's resolves_estimate is a forecast of how many unknowns a question
+  // would settle either way, not a count of eliminations, so it must not be subtracted.
+  const [possible, setPossible] = useState<number | null>(null);
+  const stepsKey = steps.map((step) => step.field).join(",");
+  useEffect(() => {
+    if (usingMocks || stepsKey === "") return;
+    let cancelled = false;
+    evaluate(profileRef.current)
+      .then((results) => {
+        if (!cancelled) setPossible(results.filter((r) => r.verdict !== "ineligible").length);
+      })
+      .catch(() => undefined);
+    return () => {
+      cancelled = true;
+    };
+  }, [stepsKey]);
+
+  const remaining = useMemo(() => {
+    if (usingMocks) {
+      return Math.max(0, totalSchemes - steps.reduce((sum, step) => sum + step.resolves, 0));
+    }
+    if (steps.length === 0 || possible === null) return totalSchemes;
+    return Math.min(totalSchemes, possible);
+  }, [totalSchemes, steps, possible]);
 
   const field = question?.field ?? null;
 
