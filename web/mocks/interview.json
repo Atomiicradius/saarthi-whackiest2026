@@ -1,0 +1,47 @@
+{
+  "total_schemes": 31,
+  "questions": [
+    {
+      "field": "state_of_domicile",
+      "question": "Which state do you live in?",
+      "choices": ["Karnataka", "Another state"],
+      "resolves_estimate": 4
+    },
+    {
+      "field": "category",
+      "question": "Which category are you in?",
+      "choices": ["GEN", "OBC", "SC", "ST", "EWS"],
+      "resolves_estimate": 5
+    },
+    {
+      "field": "annual_family_income_inr",
+      "question": "What is your family's yearly income?",
+      "choices": null,
+      "resolves_estimate": 6
+    },
+    {
+      "field": "course_level",
+      "question": "Which level are you studying?",
+      "choices": ["UG", "PG", "DIPLOMA"],
+      "resolves_estimate": 3
+    },
+    {
+      "field": "year_of_study",
+      "question": "Which year are you in?",
+      "choices": ["1", "2", "3", "4"],
+      "resolves_estimate": 2
+    },
+    {
+      "field": "institution_type",
+      "question": "What type of college do you study in?",
+      "choices": ["Government", "Aided", "Private"],
+      "resolves_estimate": 2
+    },
+    {
+      "field": "last_exam_marks_pct",
+      "question": "What were your marks in the last exam?",
+      "choices": null,
+      "resolves_estimate": 2
+    }
+  ]
+}

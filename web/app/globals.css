@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+/* Design tokens. Light mode only. */
+:root {
+  --bg: #faf7f2;
+  --surface: #ffffff;
+  --border: #e7e1d6;
+  --ink: #14213d;
+  --primary: #0f3d3e;
+  --muted: #6b6f76;
+  --success: #2f7d5b;
+  --danger: #b3412f;
+  --amber: #e8a33d;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-border: var(--border);
+  --color-ink: var(--ink);
+  --color-primary: var(--primary);
+  --color-muted: var(--muted);
+  --color-success: var(--success);
+  --color-danger: var(--danger);
+  --color-amber: var(--amber);
+  --font-serif: var(--font-fraunces), Georgia, serif;
+  --font-sans:
+    var(--font-jakarta), var(--font-kannada), var(--font-devanagari), system-ui, sans-serif;
+}
+
+html {
+  color-scheme: light;
+  background: var(--bg);
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 2px;
+}

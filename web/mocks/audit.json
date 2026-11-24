@@ -1,0 +1,32 @@
+[
+  {
+    "idx": 0,
+    "ts": "2026-11-24T14:02:11+05:30",
+    "actor": "user",
+    "action": "grant",
+    "fields": ["annual_family_income_inr", "category"],
+    "purpose": "sandbox-portal:example-welfare-c",
+    "prev_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+    "hash": "167d69c1adb54400664266776daac99f19b98c9818240167d0e25389649231f6"
+  },
+  {
+    "idx": 1,
+    "ts": "2026-11-24T14:03:40+05:30",
+    "actor": "copilot",
+    "action": "prefill",
+    "fields": ["annual_family_income_inr", "category"],
+    "purpose": "sandbox-portal:example-welfare-c",
+    "prev_hash": "167d69c1adb54400664266776daac99f19b98c9818240167d0e25389649231f6",
+    "hash": "cb80bfa3e7c335efde5ce40433589df1abf3c18255284c0238adc45216f3f6bf"
+  },
+  {
+    "idx": 2,
+    "ts": "2026-11-24T14:10:05+05:30",
+    "actor": "user",
+    "action": "revoke",
+    "fields": ["annual_family_income_inr", "category"],
+    "purpose": "sandbox-portal:example-welfare-c",
+    "prev_hash": "cb80bfa3e7c335efde5ce40433589df1abf3c18255284c0238adc45216f3f6bf",
+    "hash": "87ba5e3866d5ac608c52589c436a465633506942fcbd4dce48f1456110f915a7"
+  }
+]

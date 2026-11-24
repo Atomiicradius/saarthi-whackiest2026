@@ -1,0 +1,338 @@
+{
+  "_comment": "EXAMPLE data only. Three blocks, each shaped like one API response: GET /schemes, POST /eligibility/evaluate, POST /optimize.",
+  "schemes": [
+    {
+      "id": "example-merit-a",
+      "name": "EXAMPLE Merit Scholarship A",
+      "provider": "central",
+      "portal": "nsp",
+      "scheme_type": "merit",
+      "level": ["UG"],
+      "amount_inr_per_year": 60000,
+      "deadline": "2027-01-15",
+      "application_window": {
+        "ay": "2026-27",
+        "opens": "2026-11-01",
+        "closes": "2027-01-15",
+        "status": "open"
+      },
+      "criteria": [
+        { "field": "last_exam_marks_pct", "op": ">=", "value": 75 },
+        { "field": "annual_family_income_inr", "op": "<=", "value": 800000 }
+      ],
+      "docs_required": ["income_certificate", "marksheet"],
+      "exclusive_with": [],
+      "portal_url": "https://example.invalid",
+      "source_url": "https://example.invalid/merit-a",
+      "confidence": 0.9,
+      "last_verified": "2026-11-24",
+      "notes": ""
+    },
+    {
+      "id": "example-merit-b",
+      "name": "EXAMPLE Merit Scholarship B",
+      "provider": "central",
+      "portal": "nsp",
+      "scheme_type": "merit",
+      "level": ["UG"],
+      "amount_inr_per_year": 40000,
+      "deadline": "2027-01-31",
+      "application_window": {
+        "ay": "2026-27",
+        "opens": "2026-11-01",
+        "closes": "2027-01-31",
+        "status": "open"
+      },
+      "criteria": [{ "field": "last_exam_marks_pct", "op": ">=", "value": 70 }],
+      "docs_required": ["marksheet"],
+      "exclusive_with": [],
+      "portal_url": "https://example.invalid",
+      "source_url": "https://example.invalid/merit-b",
+      "confidence": 0.9,
+      "last_verified": "2026-11-24",
+      "notes": ""
+    },
+    {
+      "id": "example-welfare-c",
+      "name": "EXAMPLE Welfare Scholarship C",
+      "provider": "central",
+      "portal": "nsp",
+      "scheme_type": "welfare",
+      "level": ["UG"],
+      "amount_inr_per_year": 30000,
+      "deadline": "2027-01-20",
+      "application_window": {
+        "ay": "2026-27",
+        "opens": "2026-11-01",
+        "closes": "2027-01-20",
+        "status": "open"
+      },
+      "criteria": [
+        { "field": "annual_family_income_inr", "op": "<=", "value": 250000 },
+        { "field": "category", "op": "in", "value": ["OBC", "SC", "ST"] }
+      ],
+      "docs_required": ["income_certificate", "caste_certificate"],
+      "exclusive_with": [],
+      "portal_url": "https://example.invalid",
+      "source_url": "https://example.invalid/welfare-c",
+      "confidence": 0.85,
+      "last_verified": "2026-11-24",
+      "notes": ""
+    },
+    {
+      "id": "example-welfare-d",
+      "name": "EXAMPLE Karnataka Welfare Grant D",
+      "provider": "karnataka",
+      "portal": "other",
+      "scheme_type": "welfare",
+      "level": ["UG"],
+      "amount_inr_per_year": 20000,
+      "deadline": "2026-12-20",
+      "application_window": {
+        "ay": "2026-27",
+        "opens": "2026-10-01",
+        "closes": "2026-12-20",
+        "status": "open"
+      },
+      "criteria": [
+        { "field": "state_of_domicile", "op": "==", "value": "Karnataka" },
+        { "field": "annual_family_income_inr", "op": "<=", "value": 300000 }
+      ],
+      "docs_required": ["income_certificate"],
+      "exclusive_with": [],
+      "portal_url": "https://example.invalid",
+      "source_url": "https://example.invalid/welfare-d",
+      "confidence": 0.8,
+      "last_verified": "2026-11-24",
+      "notes": ""
+    },
+    {
+      "id": "example-welfare-e",
+      "name": "EXAMPLE Welfare Support E",
+      "provider": "central",
+      "portal": "nsp",
+      "scheme_type": "welfare",
+      "level": ["UG"],
+      "amount_inr_per_year": 25000,
+      "deadline": "2026-10-31",
+      "application_window": {
+        "ay": "2026-27",
+        "opens": "2026-06-01",
+        "closes": "2026-10-31",
+        "status": "closed"
+      },
+      "criteria": [{ "field": "annual_family_income_inr", "op": "<=", "value": 300000 }],
+      "docs_required": ["income_certificate"],
+      "exclusive_with": [],
+      "portal_url": "https://example.invalid",
+      "source_url": "https://example.invalid/welfare-e",
+      "confidence": 0.85,
+      "last_verified": "2026-11-24",
+      "notes": ""
+    },
+    {
+      "id": "example-welfare-f",
+      "name": "EXAMPLE Low-Income Welfare F",
+      "provider": "central",
+      "portal": "nsp",
+      "scheme_type": "welfare",
+      "level": ["UG"],
+      "amount_inr_per_year": 35000,
+      "deadline": "2027-01-10",
+      "application_window": {
+        "ay": "2026-27",
+        "opens": "2026-11-01",
+        "closes": "2027-01-10",
+        "status": "open"
+      },
+      "criteria": [
+        { "field": "annual_family_income_inr", "op": "<=", "value": 220000 },
+        { "field": "course_level", "op": "in", "value": ["UG"] }
+      ],
+      "docs_required": ["income_certificate"],
+      "exclusive_with": [],
+      "portal_url": "https://example.invalid",
+      "source_url": "https://example.invalid/welfare-f",
+      "confidence": 0.85,
+      "last_verified": "2026-11-24",
+      "notes": ""
+    },
+    {
+      "id": "example-welfare-g",
+      "name": "EXAMPLE Category Grant G",
+      "provider": "karnataka",
+      "portal": "other",
+      "scheme_type": "welfare",
+      "level": ["UG"],
+      "amount_inr_per_year": 15000,
+      "deadline": "2027-02-10",
+      "application_window": {
+        "ay": "2026-27",
+        "opens": "2026-12-01",
+        "closes": "2027-02-10",
+        "status": "upcoming"
+      },
+      "criteria": [
+        { "field": "category", "op": "in", "value": ["OBC"] },
+        { "field": "state_of_domicile", "op": "==", "value": "Karnataka" },
+        { "field": "annual_family_income_inr", "op": "<=", "value": 300000 }
+      ],
+      "docs_required": ["caste_certificate"],
+      "exclusive_with": [],
+      "portal_url": "https://example.invalid",
+      "source_url": "https://example.invalid/welfare-g",
+      "confidence": 0.8,
+      "last_verified": "2026-11-24",
+      "notes": ""
+    },
+    {
+      "id": "example-welfare-h",
+      "name": "EXAMPLE SC/ST Fellowship H",
+      "provider": "central",
+      "portal": "nsp",
+      "scheme_type": "welfare",
+      "level": ["UG"],
+      "amount_inr_per_year": 50000,
+      "deadline": "2027-01-25",
+      "application_window": {
+        "ay": "2026-27",
+        "opens": "2026-11-01",
+        "closes": "2027-01-25",
+        "status": "open"
+      },
+      "criteria": [{ "field": "category", "op": "in", "value": ["SC", "ST"] }],
+      "docs_required": ["caste_certificate"],
+      "exclusive_with": [],
+      "portal_url": "https://example.invalid",
+      "source_url": "https://example.invalid/welfare-h",
+      "confidence": 0.9,
+      "last_verified": "2026-11-24",
+      "notes": ""
+    }
+  ],
+  "results": [
+    {
+      "scheme_id": "example-merit-a",
+      "verdict": "eligible",
+      "reasons": [
+        { "field": "last_exam_marks_pct", "status": "met", "detail": "Marks 78.5% (needs 75%)" },
+        {
+          "field": "annual_family_income_inr",
+          "status": "met",
+          "detail": "Income ₹2.4 lakh is within the ₹8 lakh limit"
+        }
+      ],
+      "missing_fields": []
+    },
+    {
+      "scheme_id": "example-merit-b",
+      "verdict": "eligible",
+      "reasons": [
+        { "field": "last_exam_marks_pct", "status": "met", "detail": "Marks 78.5% (needs 70%)" }
+      ],
+      "missing_fields": []
+    },
+    {
+      "scheme_id": "example-welfare-c",
+      "verdict": "eligible",
+      "reasons": [
+        {
+          "field": "annual_family_income_inr",
+          "status": "met",
+          "detail": "Income ₹2.4 lakh is within the ₹2.5 lakh limit"
+        },
+        { "field": "category", "status": "met", "detail": "Category OBC is accepted (OBC, SC, ST)" }
+      ],
+      "missing_fields": []
+    },
+    {
+      "scheme_id": "example-welfare-d",
+      "verdict": "eligible",
+      "reasons": [
+        { "field": "state_of_domicile", "status": "met", "detail": "State Karnataka matches" },
+        {
+          "field": "annual_family_income_inr",
+          "status": "met",
+          "detail": "Income ₹2.4 lakh is within the ₹3 lakh limit"
+        }
+      ],
+      "missing_fields": []
+    },
+    {
+      "scheme_id": "example-welfare-e",
+      "verdict": "eligible",
+      "reasons": [
+        {
+          "field": "annual_family_income_inr",
+          "status": "met",
+          "detail": "Income ₹2.4 lakh is within the ₹3 lakh limit"
+        }
+      ],
+      "missing_fields": []
+    },
+    {
+      "scheme_id": "example-welfare-f",
+      "verdict": "ineligible",
+      "reasons": [
+        {
+          "field": "annual_family_income_inr",
+          "status": "failed",
+          "detail": "Income ₹2.4 lakh is above the ₹2.2 lakh limit"
+        },
+        { "field": "course_level", "status": "met", "detail": "Level UG is accepted" }
+      ],
+      "missing_fields": [],
+      "near_miss": {
+        "field": "annual_family_income_inr",
+        "gap": "Income is ₹20,000 above the limit",
+        "fixable": false
+      }
+    },
+    {
+      "scheme_id": "example-welfare-g",
+      "verdict": "unknown",
+      "reasons": [
+        {
+          "field": "category",
+          "status": "unknown",
+          "detail": "Category OBC is stated but not yet backed by a document"
+        },
+        { "field": "state_of_domicile", "status": "met", "detail": "State Karnataka matches" },
+        {
+          "field": "annual_family_income_inr",
+          "status": "met",
+          "detail": "Income ₹2.4 lakh is within the ₹3 lakh limit"
+        }
+      ],
+      "missing_fields": ["category"],
+      "near_miss": {
+        "field": "category",
+        "gap": "A valid caste certificate would confirm your category",
+        "fixable": true
+      }
+    },
+    {
+      "scheme_id": "example-welfare-h",
+      "verdict": "ineligible",
+      "reasons": [
+        {
+          "field": "category",
+          "status": "failed",
+          "detail": "Category OBC is not accepted (SC, ST)"
+        }
+      ],
+      "missing_fields": []
+    }
+  ],
+  "optimize": {
+    "selected": ["example-merit-a", "example-welfare-c", "example-welfare-d"],
+    "total_inr_per_year": 110000,
+    "dropped": [
+      {
+        "scheme_id": "example-merit-b",
+        "reason": "Only one merit scheme is allowed on NSP, and Merit Scholarship A is worth more"
+      },
+      { "scheme_id": "example-welfare-e", "reason": "Application window is closed" }
+    ]
+  }
+}

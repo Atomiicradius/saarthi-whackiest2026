@@ -10,6 +10,8 @@
 
 Prefer boring, well-known libraries. Add a dependency only when it saves real time, and note it in the commit message.
 
+**Approved web dependencies** (pin exact versions; ask before adding anything else): `tailwindcss` (with its `@tailwindcss/postcss` plugin), shadcn/ui (copy-in components, written by hand in `web/components/ui`; no Radix or helper packages), `lucide-react`, `gsap`, `lenis` (approved, not installed yet). Next.js, React, TypeScript, ESLint and Prettier are part of the stack above.
+
 ## General rules
 - Make the smallest change that completes the task. No drive-by refactors.
 - Match the contracts in `data-and-contracts.md` exactly. Do not invent fields or endpoints.

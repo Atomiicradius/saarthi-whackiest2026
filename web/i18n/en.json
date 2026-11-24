@@ -1,0 +1,110 @@
+{
+  "app": {
+    "name": "Saarthi",
+    "tagline": "Find the scholarships you appear eligible for"
+  },
+  "lang": {
+    "label": "Language",
+    "fallbackNote": "Showing English for now. Hindi and Kannada are coming."
+  },
+  "interview": {
+    "title": "A few quick questions",
+    "step": "Question {current}",
+    "back": "Back",
+    "change": "Change",
+    "yes": "Yes",
+    "readback": "{answer}, correct?",
+    "confirmed": "Confirmed",
+    "narrowing": "{total} schemes → {remaining} still possible",
+    "narrowingLabel": "Schemes still possible",
+    "profileTitle": "Your profile",
+    "profileEmpty": "Not answered yet",
+    "mic": "Speak your answer",
+    "micSoon": "Voice is coming soon. Tap an answer for now.",
+    "done": "That is all we need",
+    "doneBody": "We have enough to check your schemes.",
+    "seeResults": "See my results",
+    "stepperUp": "Increase",
+    "stepperDown": "Decrease",
+    "useThis": "Use this answer",
+    "loading": "Loading the next question",
+    "error": "Could not load the next question. Please try again.",
+    "retry": "Try again"
+  },
+  "fields": {
+    "state_of_domicile": "State",
+    "category": "Category",
+    "minority_community": "Minority community",
+    "gender": "Gender",
+    "disability": "Disability",
+    "annual_family_income_inr": "Family income",
+    "course": "Course",
+    "course_level": "Level",
+    "year_of_study": "Year",
+    "institution_type": "Institution",
+    "last_exam_marks_pct": "Last exam marks"
+  },
+  "results": {
+    "title": "Your results",
+    "heroLabel": "Best plan",
+    "heroBody": "Together these appear to be worth about",
+    "perYear": "a year",
+    "schemeCount": "{count} schemes in your plan",
+    "schemeCountOne": "1 scheme in your plan",
+    "noPlan": "No open scheme fits yet",
+    "lane": {
+      "eligible": "Appears eligible",
+      "almost": "Almost eligible",
+      "not": "Not eligible",
+      "closed": "Closed for now"
+    },
+    "laneEmpty": "Nothing here",
+    "verdict": {
+      "eligible": "Appears eligible",
+      "almost": "Almost eligible",
+      "unknown": "Need more answers",
+      "ineligible": "Not eligible"
+    },
+    "tag": {
+      "merit": "Merit",
+      "welfare": "Welfare"
+    },
+    "pick": "Plan pick",
+    "welfareIncluded": "In your plan",
+    "perYearShort": "/ year",
+    "amountUnknown": "Amount not confirmed",
+    "status": {
+      "openUntil": "Open until {date}",
+      "closed": "Closed, opens around {month}",
+      "opens": "Opens {date}",
+      "deadline": "Deadline {date}",
+      "unknown": "Dates not confirmed"
+    },
+    "reasonMet": "Met",
+    "reasonFailed": "Not met",
+    "reasonUnknown": "Not known yet",
+    "howToQualify": "How to qualify",
+    "fixable": "You can fix this",
+    "notFixable": "Cannot be fixed by you",
+    "keepReady": "Keep ready: {docs}",
+    "answerMore": "Answer: {fields}",
+    "source": "Source",
+    "verified": "verified {date}",
+    "footer": "Check the official notice before applying.",
+    "loading": "Checking your schemes",
+    "error": "Could not load your results. Please try again.",
+    "retry": "Try again",
+    "startOver": "Answer again",
+    "notInPlan": "Eligible, not in plan",
+    "sampleData": "Sample data: scheme names, amounts and dates are examples, not real schemes."
+  },
+  "docs": {
+    "income_certificate": "income certificate",
+    "caste_certificate": "caste certificate",
+    "marksheet": "marksheet",
+    "bonafide_certificate": "bonafide certificate"
+  },
+  "demo": {
+    "resetToRavi": "Reset to Ravi"
+  }
+}

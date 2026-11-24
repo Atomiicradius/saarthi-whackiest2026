@@ -20,3 +20,9 @@ __pycache__/
 Thumbs.db
 .vscode/
 .idea/
+
+# generated
+*.tsbuildinfo
+next-env.d.ts
+# written by `next dev`, not by the team
+web/AGENTS.md

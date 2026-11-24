@@ -69,12 +69,12 @@ Update this file when a task finishes or a decision is made. Newest entries at t
 - [ ] Vault blob endpoints and audit head endpoint
 
 ### Web (`/web`)
-- [ ] Language picker and intake flow (tap-to-answer)
+- [x] Language picker and intake flow (tap-to-answer)
 - [ ] Voice interview with read-back confirmation
-- [ ] Results page: eligible, almost eligible, not eligible
+- [x] Results page: eligible, almost eligible, not eligible (mock data)
 - [ ] Vault: passphrase, encrypt, decrypt
 - [ ] Audit log view with verification
-- [ ] Mobile viewport checked
+- [x] Mobile viewport checked (390x844, interview and results)
 
 ### Sandbox and copilot
 - [ ] Sandbox portal form
@@ -95,3 +95,4 @@ Add one line per finished task: `YYYY-MM-DD HH:MM · owner · what changed · co
 - 2026-11-24 · planning · context files written
 - 2026-11-24 · setup · repo scaffold, .gitignore, .env.example, context files added · see git log
 - 2026-11-24 · context · D12-D14: NSP merit/welfare rule, application_window, myScheme competitor · see git log
+- 2026-11-24 · web · design system, interview and results screens on mock data (voice, vault and audit UI not built; routes stubbed) · see git log
