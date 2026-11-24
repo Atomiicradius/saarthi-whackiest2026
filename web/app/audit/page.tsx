@@ -10,7 +10,7 @@ import type { GuideState } from "@/components/guide/guide";
 import { PageColumns } from "@/components/page-columns";
 import { Button } from "@/components/ui/button";
 import { useSession } from "@/lib/session";
-import { useStaggerReveal } from "@/lib/use-stagger-reveal";
+import { useReveal } from "@/lib/use-reveal";
 import { vault, type VerifyResult } from "@/lib/vault-adapter";
 import type { AuditEntry } from "@/lib/types";
 
@@ -25,7 +25,7 @@ export default function AuditPage() {
   const [running, setRunning] = useState(false);
   const timeline = useRef<gsap.core.Timeline | null>(null);
   const container = useRef<HTMLElement>(null);
-  useStaggerReveal(container, true);
+  useReveal(container, true);
 
   useEffect(() => () => void timeline.current?.kill(), []);
 
@@ -172,7 +172,7 @@ export default function AuditPage() {
 
       {finished && <ChainStrip statuses={entries.map((_, index) => statusOf(index))} t={t} />}
 
-      <ol data-reveal className="mt-6">
+      <ol className="mt-6">
         {entries.map((entry, index) => (
           <ChainEntry
             key={entry.idx}

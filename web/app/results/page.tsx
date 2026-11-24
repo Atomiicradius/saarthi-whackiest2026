@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 import { formatInr } from "@/lib/format";
 import { buildLanes } from "@/lib/results-model";
 import { useSession } from "@/lib/session";
-import { useStaggerReveal } from "@/lib/use-stagger-reveal";
+import { useReveal } from "@/lib/use-reveal";
 import type { EligibilityResult, OptimizeResponse, Scheme } from "@/lib/types";
 
 interface Loaded {
@@ -61,7 +61,7 @@ export default function ResultsPage() {
     [data],
   );
 
-  useStaggerReveal(container, lanes !== null);
+  useReveal(container, lanes !== null);
 
   const guideState: GuideState = failed
     ? "concerned"

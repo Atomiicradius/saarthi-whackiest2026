@@ -45,6 +45,7 @@ export function CipherPane({ ciphertextBase64 }: { ciphertextBase64: string }) {
         ))}
       </div>
       <pre
+        data-lenis-prevent
         tabIndex={0}
         aria-label={t("serverView.onServer")}
         className="max-h-72 overflow-auto break-all whitespace-pre-wrap rounded-2xl bg-ink p-4 font-mono text-xs leading-relaxed text-white/90"

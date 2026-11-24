@@ -7,6 +7,7 @@ import {
 } from "next/font/google";
 import Link from "next/link";
 import { AmbientBackground } from "@/components/AmbientBackground";
+import { SmoothScroll } from "@/components/SmoothScroll";
 import { BottomNav } from "@/components/bottom-nav";
 import { TopNav } from "@/components/top-nav";
 import { DemoReset } from "@/components/demo-reset";
@@ -45,9 +46,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <body>
         <SessionProvider>
+          <SmoothScroll />
           <AmbientBackground />
-          <div className="mx-auto min-h-dvh max-w-[1280px] px-4 pb-28 pt-2 sm:px-6 lg:px-10 lg:pb-12">
-            <header className="flex items-center justify-between gap-3 py-3">
+          <header className="sticky top-0 z-30 border-b border-[#E7E1D6]/60 bg-[#FAF7F2]/80 backdrop-blur-md">
+            <div className="mx-auto flex max-w-[1280px] items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-10">
               <Link href="/" className="font-serif text-xl font-semibold text-primary">
                 Saarthi
               </Link>
@@ -55,7 +57,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <div className="min-w-12">
                 <DemoReset />
               </div>
-            </header>
+            </div>
+          </header>
+          <div className="mx-auto min-h-dvh max-w-[1280px] px-4 pb-28 pt-2 sm:px-6 lg:px-10 lg:pb-12">
             {children}
           </div>
           <BottomNav />

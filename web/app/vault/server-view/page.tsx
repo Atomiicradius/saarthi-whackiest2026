@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/cn";
 import { useSession } from "@/lib/session";
-import { useStaggerReveal } from "@/lib/use-stagger-reveal";
+import { useReveal } from "@/lib/use-reveal";
 import { vault } from "@/lib/vault-adapter";
 
 interface Unlocked {
@@ -30,7 +30,7 @@ export default function ServerViewPage() {
   const [wrong, setWrong] = useState(false);
   const [unlocked, setUnlocked] = useState<Unlocked | null>(null);
   const container = useRef<HTMLElement>(null);
-  useStaggerReveal(container, true);
+  useReveal(container, true);
 
   const doc = documents.find((item) => item.docKey === chosen) ?? documents[0];
   const isUnlocked = doc && unlocked?.docKey === doc.docKey ? unlocked : null;
@@ -132,7 +132,10 @@ export default function ServerViewPage() {
           {isUnlocked ? (
             <div className="space-y-2">
               {isUnlocked.text !== null && (
-                <pre className="max-h-72 overflow-auto whitespace-pre-wrap rounded-2xl bg-bg p-4 text-sm">
+                <pre
+                  data-lenis-prevent
+                  className="max-h-72 overflow-auto whitespace-pre-wrap rounded-2xl bg-bg p-4 text-sm"
+                >
                   {isUnlocked.text}
                 </pre>
               )}

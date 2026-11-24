@@ -50,3 +50,44 @@ body {
   outline: 3px solid var(--primary);
   outline-offset: 2px;
 }
+
+/* Lenis smooth scroll needs these. Inner scroll areas carry data-lenis-prevent. */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* Every control shows it is clickable. */
+button:not(:disabled),
+a[href],
+[role="button"],
+summary,
+select,
+label[for] {
+  cursor: pointer;
+}
+button:disabled {
+  cursor: not-allowed;
+}
+button:not(:disabled),
+a[href] {
+  transition:
+    filter 0.15s ease,
+    transform 0.15s ease;
+}
+button:not(:disabled):not([aria-pressed="true"]):hover,
+a[href].inline-flex:hover {
+  filter: brightness(0.96);
+}
+button:not(:disabled):active {
+  transform: scale(0.98);
+}

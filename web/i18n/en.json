@@ -115,7 +115,24 @@
     "startAsRavi": "Start as Ravi",
     "raviNote": "Ravi is a sample student with example data.",
     "answerMyself": "Answer the questions myself",
-    "guideHello": "Hello! I am your guide. I help you find scholarships you appear eligible for."
+    "guideHello": "Hello! I am your guide. I help you find scholarships you appear eligible for.",
+    "how": {
+      "title": "How it works",
+      "step1": "Answer by voice or tap",
+      "step1Body": "A few short questions, each one read back to you.",
+      "step2": "See your best plan",
+      "step2Body": "The schemes you appear eligible for, in one plan.",
+      "step3": "Keep your documents private",
+      "step3Body": "Encrypted on your device before anything is stored."
+    },
+    "diff": {
+      "title": "What makes it different",
+      "nearMiss": "Near-miss guidance",
+      "planner": "Best-plan picker",
+      "vault": "Encrypted vault",
+      "audit": "Tamper-evident audit log"
+    },
+    "startAgain": "Ready? Start as Ravi"
   },
   "vault": {
     "title": "Your vault",
