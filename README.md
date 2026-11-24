@@ -56,7 +56,6 @@ India has many central and state scholarships, but students from underserved bac
 
 ## Previews
 
-<!-- Add the PNGs to docs/screenshots/, then delete this comment line and the closing marker below.
 | Home | Voice interview |
 |:---:|:---:|
 | <img src="docs/screenshots/landing.png" width="100%" alt="Landing page with the Guide" /> | <img src="docs/screenshots/interview.png" width="100%" alt="Interview with read-back confirmation" /> |
@@ -69,9 +68,8 @@ India has many central and state scholarships, but students from underserved bac
   <b>Tamper-evident audit log</b><br/><br/>
   <img src="docs/screenshots/audit-broken.png" width="100%" alt="Audit chain broken at an edited entry" />
 </div>
--->
 
-*Screenshots coming soon.*
+*Prototype screenshots, shown with labelled sample data.*
 
 ## How Saarthi Is Different
 
