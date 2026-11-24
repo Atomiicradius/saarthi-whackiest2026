@@ -140,12 +140,14 @@ We're upfront about this, since it matters for judging the demo honestly. Update
 | Component | Status |
 |---|:---:|
 | Scheme dataset (central + Karnataka, undergraduate engineering) | 🟡 **In progress**, being collected from official sources. The demo runs on clearly labelled EXAMPLE schemes until it lands |
-| Eligibility engine (tri-state verdicts, explanations, near-miss) | ✅ **Working**, 53 unit tests |
+| Eligibility engine (tri-state verdicts, explanations, near-miss) | ✅ **Built and tested** in `/engine`, used by the UI in API mode |
 | Adaptive interview (information-gain question picker) | ✅ **Working**, questions in English, Hindi and Kannada |
 | Portfolio optimiser (NSP one-merit-plus-welfare rule) | ✅ **Working** |
 | API (FastAPI, every endpoint in the contract) | ✅ **Working**, 44 tests |
-| Encrypted vault (browser-side AES-256-GCM) and hash-chained audit log | ✅ **Working** in the browser, 13 tests. The server endpoints exist; the app does not upload ciphertext to them yet |
-| Voice answers and read-aloud (ElevenLabs) | ✅ **Working** in English, Hindi and Kannada: speak an answer, confirm the read-back |
+| Encrypted vault (browser-side AES-256-GCM) | ✅ **Client-side encryption works** (AES-256-GCM in the browser) |
+| Hash-chained audit log | ✅ **Hash chain** with verify and tamper demo |
+| Ciphertext upload to the server | 🟡 **Planned** |
+| Voice answers and read-aloud (ElevenLabs) | 🟡 **Works in API mode** with an ElevenLabs key (English, Hindi, Kannada), tested only on clean synthetic speech. Off in the default mock mode |
 | App text in English, Hindi and Kannada | ✅ **Working**. Scheme names and verdict reasons stay in English |
 | Application copilot | 🟠 **Sandbox demo only**, never real government portals. Not built yet |
 | On-device OCR, consent grants, recovery key | ⚪ **Planned** |
@@ -179,7 +181,7 @@ Design goals. In the prototype today, documents are encrypted in the browser wit
 ```bash
 # 1. Settings: copy both example files. Add an ElevenLabs key to .env for voice (optional).
 cp .env.example .env
-cp web/.env.example web/.env.local   # NEXT_PUBLIC_USE_MOCKS=false in web/.env.local uses the API at http://localhost:8000, which must be running (true = built-in sample data)
+cp web/.env.example web/.env.local   # NEXT_PUBLIC_USE_MOCKS=false in web/.env.local uses the API at http://localhost:8000, which must be running (true, the default, = built-in sample data)
 
 # 2. Backend (Python 3.11+)
 cd api
