@@ -17,7 +17,7 @@ Update this file when a task finishes or a decision is made. Newest entries at t
 | D9 | 2026-11-24 | Repo name `saarthi-unlocked-whackiest-2026` | No naming rule exists on the site or in the PDF; includes project, track and hackathon |
 | D10 | 2026-11-24 | PPT file name format `TeamName_Track4` | Required by the guidelines (`TeamName_TrackNumber`) |
 | D11 | 2026-11-24 | Proposed stack: Next.js + TypeScript, FastAPI, pure-Python engine, JSON data | Fast to build; see `code-standards.md`. **Confirmed 2026-11-24.** Dependencies beyond those named in `code-standards.md` need approval first. |
-| D12 | 2026-11-24 | Replace exclusivity logic with the NSP rule: at most one `merit` scheme plus any number of `welfare` schemes (AY 2026-27 onward). Add `scheme_type` to the scheme record; keep `exclusive_with` only where an official source states it; `exclusivity_group` removed. The rule covers NSP schemes only, so a `portal: "nsp"` field is **proposed** to mark them. | Source cited by the team: scholarships.gov.in announcements; Cabinet Secretariat memo of 12 Nov 2025. Contract change: `data-and-contracts.md` sections 1, 5, 11. |
+| D12 | 2026-11-24 | Replace exclusivity logic with the NSP rule: at most one `merit` scheme plus any number of `welfare` schemes (AY 2026-27 onward). Add `scheme_type` to the scheme record; keep `exclusive_with` only where an official source states it; `exclusivity_group` removed. The rule covers NSP schemes only, so `portal: "nsp" | "other"` marks them (confirmed by the team). | Source cited by the team: scholarships.gov.in announcements; Cabinet Secretariat memo of 12 Nov 2025. Contract change: `data-and-contracts.md` sections 1, 5, 11. |
 | D13 | 2026-11-24 | Add `application_window` (`ay`, `opens`, `closes`, `status`) to the scheme record. NSP applications for AY 2026-27 closed 2026-10-31. UI shows closed schemes as "Closed, opens around <month>", never as upcoming. | Students must not be sent to a closed window. Contract change: `data-and-contracts.md` section 1. |
 | D14 | 2026-11-24 | Name myScheme (the government portal) as the main competitor. Lead with near-miss guidance, portfolio planning, cross-document consistency check, voice and the client-side encrypted vault. | Judges will compare us to it; see `project-context.md`. |
 
@@ -29,7 +29,6 @@ Update this file when a task finishes or a decision is made. Newest entries at t
 5. Whether to use a database or JSON only for round 1.
 6. Hosting for the demo (local only, Vercel, or AWS).
 7. Whether the optimiser may select schemes whose application window is closed, or lists them separately as "closed".
-8. Confirm the proposed `portal: "nsp" | "other"` field (D12), or name another way to mark NSP schemes.
 
 ## Unverified items (do not state as fact until checked)
 - [x] Which central schemes are mutually exclusive: resolved for NSP by D12 (one merit plus any welfare). State and private schemes still need their own check.

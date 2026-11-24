@@ -11,7 +11,7 @@ All money is INR per year unless stated. All dates are ISO 8601 (`YYYY-MM-DD`). 
   "id": "example-scheme-001",            // stable slug
   "name": "EXAMPLE scheme name",
   "provider": "central | karnataka | other",
-  "portal": "nsp | other",                // PROPOSED, see section 5: the merit/welfare rule applies to nsp only
+  "portal": "nsp | other",                // the merit/welfare rule in section 5 applies to nsp only
   "scheme_type": "merit | welfare",       // drives the optimiser rule in section 5
   "level": ["UG"],                        // UG | PG | DIPLOMA
   "amount_inr_per_year": 0,               // number or null if unknown
