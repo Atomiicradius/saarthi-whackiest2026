@@ -7,7 +7,6 @@ import {
 } from "next/font/google";
 import Link from "next/link";
 import { AmbientBackground } from "@/components/AmbientBackground";
-import { FlameCursor } from "@/components/FlameCursor";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { BottomNav } from "@/components/bottom-nav";
 import { TopNav } from "@/components/top-nav";
@@ -49,8 +48,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <SessionProvider>
           <SmoothScroll />
           <AmbientBackground />
-          <FlameCursor />
-          <header className="sticky top-0 z-30 bg-[rgba(250,247,242,0.84)] backdrop-blur-sm">
+          <header className="sticky top-0 z-30 border-b border-[#E7E1D6]/60 bg-[#FAF7F2]/80 backdrop-blur-md">
             <div className="mx-auto flex max-w-[1280px] items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-10">
               <Link href="/" className="font-serif text-xl font-semibold text-primary">
                 Saarthi

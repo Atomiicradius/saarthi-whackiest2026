@@ -91,10 +91,3 @@ a[href].inline-flex:hover {
 button:not(:disabled):active {
   transform: scale(0.98);
 }
-
-/* The flame cursor hides the native cursor only while it is running (html.flame-active). */
-html.flame-active,
-html.flame-active
-  *:not(input):not(textarea):not(select):not([data-native-cursor]):not([data-native-cursor] *) {
-  cursor: none !important;
-}
