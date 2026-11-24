@@ -149,7 +149,7 @@ async def transcribe(
 @app.post("/api/voice/speak")
 async def speak(body: SpeakRequest) -> Response:
     try:
-        audio = await voice.speak(body.text)
+        audio = await voice.speak(body.text, body.lang)
     except voice.VoiceUnavailable as error:
         raise ApiError(503, "voice_unavailable", str(error)) from error
     return Response(content=audio, media_type="audio/mpeg")

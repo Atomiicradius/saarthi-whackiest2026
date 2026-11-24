@@ -53,9 +53,93 @@ YES = r"\b(?:yes|yeah|haan|han|ha)\b|ಹೌದು|हाँ|हां"
 NO = r"\b(?:no|nope|nahi|nahin|illa)\b|ಇಲ್ಲ|नहीं"
 BOOLEAN_FIELDS = ("disability", "minority_community")
 
+# Hindi and Kannada phrases are rewritten into the English forms the rules above understand.
+# Python's \b breaks inside Indic words (vowel signs are not word characters), so these use
+# lookarounds on the Devanagari-to-Kannada Unicode range instead.
+INDIC = "ऀ-೿"
+INDIC_FRACTIONS = {
+    "डेढ़": "1.5",
+    "ढाई": "2.5",
+    "ಒಂದೂವರೆ": "1.5",
+    "ಎರಡೂವರೆ": "2.5",
+    "ಮೂರೂವರೆ": "3.5",
+    "ನಾಲ್ಕೂವರೆ": "4.5",
+}
+INDIC_NUMBERS = {
+    "एक": 1,
+    "दो": 2,
+    "तीन": 3,
+    "चार": 4,
+    "पांच": 5,
+    "पाँच": 5,
+    "छह": 6,
+    "सात": 7,
+    "आठ": 8,
+    "नौ": 9,
+    "दस": 10,
+    "ಒಂದು": 1,
+    "ಎರಡು": 2,
+    "ಮೂರು": 3,
+    "ನಾಲ್ಕು": 4,
+    "ಐದು": 5,
+    "ಆರು": 6,
+    "ಏಳು": 7,
+    "ಎಂಟು": 8,
+    "ಒಂಬತ್ತು": 9,
+    "ಹತ್ತು": 10,
+}
+# (pattern, replacement); units and suffixes may be glued to a Kannada case ending.
+INDIC_PHRASES: list[tuple[str, str]] = [
+    (r"(?:पहले|पहला|पहली)\s*(?:साल|वर्ष)", " 1st year "),
+    (r"(?:दूसरे|दूसरा|दूसरी)\s*(?:साल|वर्ष)", " 2nd year "),
+    (r"(?:तीसरे|तीसरा|तीसरी)\s*(?:साल|वर्ष)", " 3rd year "),
+    (r"(?:चौथे|चौथा|चौथी)\s*(?:साल|वर्ष)", " 4th year "),
+    (r"ಮೊದಲ(?:ನೇ)?\s*ವರ್ಷ", " 1st year "),
+    (r"ಎರಡನೇ\s*ವರ್ಷ", " 2nd year "),
+    (r"ಮೂರನೇ\s*ವರ್ಷ", " 3rd year "),
+    (r"ನಾಲ್ಕನೇ\s*ವರ್ಷ", " 4th year "),
+    (r"लाख|ಲಕ್ಷ", " lakh "),
+    (r"हज़ार|हजार|ಸಾವಿರ", " thousand "),
+    (r"करोड़|ಕೋಟಿ", " crore "),
+    (r"प्रतिशत|ಶೇಕಡಾ|ಶೇಕಡ", " percent "),
+    (r"इंजीनियरिंग|ಇಂಜಿನಿಯರಿಂಗ್|ಎಂಜಿನಿಯರಿಂಗ್", " engineering "),
+    (r"डिप्लोमा|ಡಿಪ್ಲೊಮಾ", " diploma "),
+    (r"कर्नाटक|ಕರ್ನಾಟಕ", " karnataka "),
+    (r"अनुसूचित जनजाति|ಪರಿಶಿಷ್ಟ ಪಂಗಡ", " scheduled tribe "),
+    (r"अनुसूचित जाति|ಪರಿಶಿಷ್ಟ ಜಾತಿ", " scheduled caste "),
+    (r"ओबीसी|ಒಬಿಸಿ|ಓಬಿಸಿ", " obc "),
+    (r"सामान्य वर्ग|ಸಾಮಾನ್ಯ ವರ್ಗ", " general "),
+    (r"सरकारी|ಸರ್ಕಾರಿ", " government "),
+    (r"प्राइवेट|निजी|ಖಾಸಗಿ", " private "),
+    (r"अनुदानित|ಅನುದಾನಿತ", " aided "),
+    # Kannada ಹುಡುಗಿ (girl) starts with ಹುಡುಗ (boy), so the longer word goes first.
+    (r"लड़की|ಹುಡುಗಿ", " girl "),
+    (r"लड़का|ಹುಡುಗ", " boy "),
+]
+# Devanagari and Kannada digits to ASCII.
+INDIC_DIGITS = str.maketrans("०१२३४५६७८९೦೧೨೩೪೫೬೭೮೯", "01234567890123456789")
+
+
+def _from_indic(text: str) -> str:
+    text = text.translate(INDIC_DIGITS)
+    # साढ़े N means N and a half.
+    hindi = "|".join(word for word in INDIC_NUMBERS if "ऀ" <= word[0] <= "ॿ")
+    text = re.sub(
+        rf"साढ़े\s*({hindi}|\d+)",
+        lambda m: str((INDIC_NUMBERS.get(m.group(1)) or int(m.group(1))) + 0.5),
+        text,
+    )
+    for word, value in INDIC_FRACTIONS.items():
+        text = text.replace(word, f" {value} ")
+    for pattern, replacement in INDIC_PHRASES:
+        text = re.sub(pattern, replacement, text)
+    for word, value in INDIC_NUMBERS.items():
+        text = re.sub(rf"(?<![{INDIC}]){word}(?![{INDIC}])", f" {value} ", text)
+    return text
+
 
 def _normalise(text: str) -> str:
-    text = text.lower().replace(",", "")
+    text = _from_indic(text.lower().replace(",", ""))
     words = "|".join(WORD_NUMBERS)
     text = re.sub(
         rf"\b({words})( and a half)?\b",
@@ -105,9 +189,12 @@ def extract(transcript: str, expecting_field: str | None) -> list[dict[str, Any]
     income = _income(text)
     if income is not None:
         offer("annual_family_income_inr", _as_number(income), EXPLICIT)
-    marks = re.search(r"(\d+(?:\.\d+)?)\s*(?:%|percent|per cent)", text)
+    # "78 percent", or "percent 78" as Kannada puts it (ಶೇಕಡಾ 78).
+    marks = re.search(
+        r"(\d+(?:\.\d+)?)\s*(?:%|percent|per cent)|(?:percent|per cent)\s*(\d+(?:\.\d+)?)", text
+    )
     if marks:
-        offer("last_exam_marks_pct", _as_number(float(marks.group(1))), EXPLICIT)
+        offer("last_exam_marks_pct", _as_number(float(marks.group(1) or marks.group(2))), EXPLICIT)
     year = re.search(rf"\b({'|'.join(YEARS)})\s*year\b", text)
     if year:
         offer("year_of_study", YEARS[year.group(1)], EXPLICIT)

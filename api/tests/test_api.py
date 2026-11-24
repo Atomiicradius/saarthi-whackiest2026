@@ -134,7 +134,7 @@ def test_voice_without_key_is_unavailable(client):
 def test_voice_speak_proxies_audio(client, monkeypatch):
     import voice
 
-    async def fake_speak(text):
+    async def fake_speak(text, lang):
         return b"ID3-fake-mp3"
 
     monkeypatch.setattr(voice, "speak", fake_speak)

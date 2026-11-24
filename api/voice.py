@@ -45,14 +45,22 @@ async def transcribe(audio: bytes, filename: str, content_type: str, lang: str) 
     return str(response.json().get("text", ""))
 
 
-async def speak(text: str) -> bytes:
+def tts_model(lang: str) -> str:
+    # Tested 2026-11-24: flash v2.5 speaks English and Hindi well but turns Kannada into
+    # anglicised gibberish, while eleven_v3 speaks Kannada that transcribes back word for word.
+    if lang == "kn":
+        return os.environ.get("ELEVENLABS_TTS_MODEL_KN", "eleven_v3")
+    return os.environ.get("ELEVENLABS_TTS_MODEL", "eleven_flash_v2_5")
+
+
+async def speak(text: str, lang: str) -> bytes:
     key = _key()
     voice_id = os.environ.get("ELEVENLABS_VOICE_ID", "")
     if not voice_id:
         raise VoiceUnavailable("ELEVENLABS_VOICE_ID is not set")
-    # Multilingual models pick the language from the text itself, so `lang` is not sent: some
-    # models reject an explicit language_code. Set ELEVENLABS_TTS_MODEL to one that speaks Kannada.
-    body = {"text": text, "model_id": os.environ.get("ELEVENLABS_TTS_MODEL", "eleven_flash_v2_5")}
+    # The model picks the language from the text itself, so no language_code is sent: some models
+    # reject one.
+    body = {"text": text, "model_id": tts_model(lang)}
     async with httpx.AsyncClient(timeout=TIMEOUT) as client:
         response = await client.post(
             f"{ELEVENLABS}/text-to-speech/{voice_id}",
