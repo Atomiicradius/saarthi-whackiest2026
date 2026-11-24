@@ -6,7 +6,7 @@ import {
   Plus_Jakarta_Sans,
 } from "next/font/google";
 import Link from "next/link";
-import { AmbientBackground } from "@/components/ambient-background";
+import { AmbientBackground } from "@/components/AmbientBackground";
 import { BottomNav } from "@/components/bottom-nav";
 import { TopNav } from "@/components/top-nav";
 import { DemoReset } from "@/components/demo-reset";

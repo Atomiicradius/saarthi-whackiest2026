@@ -19,7 +19,7 @@ export function Lane({ title, tone, views, t }: LaneProps) {
         <Chip tone={tone}>{views.length}</Chip>
       </div>
       {views.length === 0 ? (
-        <p className="mt-3 text-sm text-muted">{t("results.laneEmpty")}</p>
+        <p className="text-soft mt-3 text-sm">{t("results.laneEmpty")}</p>
       ) : (
         <div className="mt-3 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
           {views.map((view) => (

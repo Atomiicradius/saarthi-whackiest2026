@@ -14,6 +14,7 @@ interface GuideProps {
 }
 
 const LOOK_RANGE = 4; // how far the pupils may move, in SVG units
+const LAMP_TILT_DEGREES = 5; // how far the flame glow may lean
 
 // An original character: a small lantern spirit with a teal body and an amber glow on top.
 export function Guide({ state = "idle", mouthLevel = 0, className }: GuideProps) {
@@ -58,6 +59,10 @@ export function Guide({ state = "idle", mouthLevel = 0, className }: GuideProps)
     const followers = gsap.utils.toArray<SVGElement>("[data-follow]", root);
     const toX = gsap.quickTo(followers, "x", { duration: 0.35, ease: "power3" });
     const toY = gsap.quickTo(followers, "y", { duration: 0.35, ease: "power3" });
+    // The flame glow leans a few degrees toward the cursor, from the same direction as the eyes.
+    const lamp = root.querySelector("[data-lamp]");
+    gsap.set(lamp, { svgOrigin: "100 70" });
+    const toTilt = gsap.quickTo(lamp, "rotation", { duration: 0.35, ease: "power3" });
     const onMove = (event: PointerEvent) => {
       if (event.pointerType === "touch") return;
       const box = root.getBoundingClientRect();
@@ -67,6 +72,7 @@ export function Guide({ state = "idle", mouthLevel = 0, className }: GuideProps)
       const reach = Math.min(1, distance / 260);
       toX((dx / distance) * LOOK_RANGE * reach);
       toY((dy / distance) * LOOK_RANGE * reach);
+      toTilt((dx / distance) * reach * LAMP_TILT_DEGREES);
     };
     window.addEventListener("pointermove", onMove, { passive: true });
 
@@ -194,8 +200,10 @@ export function Guide({ state = "idle", mouthLevel = 0, className }: GuideProps)
       />
 
       <g data-root>
-        <circle data-glow cx="100" cy="50" r="48" fill={`url(#${glowId})`} />
-        <path data-flame d="M100 34 C108 46 110 56 100 66 C90 56 92 46 100 34 Z" fill="#ffe3a8" />
+        <g data-lamp>
+          <circle data-glow cx="100" cy="50" r="48" fill={`url(#${glowId})`} />
+          <path data-flame d="M100 34 C108 46 110 56 100 66 C90 56 92 46 100 34 Z" fill="#ffe3a8" />
+        </g>
         <path
           d="M84 70 Q100 34 116 70"
           fill="none"

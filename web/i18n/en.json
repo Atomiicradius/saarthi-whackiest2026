@@ -135,7 +135,7 @@
     "encryptedSize": "{size} stored as ciphertext",
     "viewServer": "What the server sees",
     "failed": "Could not encrypt this file. Please try again.",
-    "stubNote": "Demo vault: it uses your browser's WebCrypto, but the real vault module is not connected yet.",
+    "stubNote": "Prototype vault: AES-256-GCM in your browser",
     "loading": "Loading your documents",
     "lockedBadge": "Locked",
     "guide": "I lock each document on this device before anything is stored. The server only ever sees scrambled bytes."
@@ -170,9 +170,9 @@
     "okTitle": "Chain verified",
     "okBody": "All {count} entries match their hashes. Nothing was changed.",
     "brokenTitle": "Chain broken at entry #{idx}",
-    "brokenBody": "Entry #{idx} no longer matches its hash, so it was changed after it was written. Entries after it cannot be trusted.",
+    "brokenBody": "Entry #{idx} no longer matches its hash, so it was changed after it was written. Every entry after it cannot be verified.",
     "editedTag": "Edited in memory",
-    "afterBreak": "Cannot be trusted",
+    "afterBreak": "Cannot be verified: it comes after a changed entry",
     "genesis": "genesis",
     "prev": "prev {hash}",
     "fields": "Fields",
@@ -183,7 +183,11 @@
     "guide": "Every use of your data is written down here, as field names only.",
     "guideChecking": "Checking each link in the chain.",
     "guideOk": "Every link holds. Nothing was changed.",
-    "guideBroken": "Entry #{idx} was changed after it was written, so the chain breaks there."
+    "guideBroken": "Entry #{idx} was changed after it was written, so the chain breaks there.",
+    "stripLabel": "Chain status",
+    "stripOk": "Verified",
+    "stripBroken": "Changed",
+    "stripAfter": "Cannot be verified"
   },
   "guide": {
     "label": "Your guide"

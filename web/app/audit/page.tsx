@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import gsap from "gsap";
 import { CircleCheck, TriangleAlert } from "lucide-react";
 import { ChainEntry, type EntryStatus } from "@/components/audit/chain-entry";
+import { ChainStrip } from "@/components/audit/chain-strip";
 import { GuidePanel } from "@/components/guide/guide-panel";
 import type { GuideState } from "@/components/guide/guide";
 import { PageColumns } from "@/components/page-columns";
@@ -168,6 +169,8 @@ export default function AuditPage() {
           </div>
         </div>
       )}
+
+      {finished && <ChainStrip statuses={entries.map((_, index) => statusOf(index))} t={t} />}
 
       <ol data-reveal className="mt-6">
         {entries.map((entry, index) => (

@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { Lock } from "lucide-react";
 import { getSchemes, optimize } from "@/lib/api";
 import { GuidePanel } from "@/components/guide/guide-panel";
 import { PageColumns } from "@/components/page-columns";
 import { DocRow } from "@/components/vault/doc-row";
-import { SampleDataBanner } from "@/components/sample-data-banner";
+import { Chip } from "@/components/ui/chip";
 import { useSession } from "@/lib/session";
 import { useStaggerReveal } from "@/lib/use-stagger-reveal";
 import { vaultMode } from "@/lib/vault-adapter";
@@ -54,9 +55,10 @@ export default function VaultPage() {
       </h1>
       <p className="text-soft mt-2">{t("vault.intro")}</p>
       {vaultMode === "stub" && (
-        <p className="mt-3 rounded-2xl bg-amber px-4 py-3 text-sm font-semibold text-ink">
+        <Chip className="mt-3">
+          <Lock className="size-3.5" aria-hidden />
           {t("vault.stubNote")}
-        </p>
+        </Chip>
       )}
 
       {schemes === null ? (
@@ -65,7 +67,6 @@ export default function VaultPage() {
         </p>
       ) : (
         <div className="mt-4 space-y-3">
-          <SampleDataBanner schemes={schemes} text={t("results.sampleData")} />
           {needed.map(([docKey, names]) => (
             <DocRow key={docKey} docKey={docKey} neededFor={names} />
           ))}
