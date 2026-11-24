@@ -42,7 +42,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <body>
         <SessionProvider>
-          <div className="mx-auto min-h-dvh max-w-[480px] px-4 pb-28 pt-4">
+          <div className="mx-auto min-h-dvh max-w-4xl px-4 pb-28 pt-4">
             <div className="mb-3 flex justify-end">
               <DemoReset />
             </div>

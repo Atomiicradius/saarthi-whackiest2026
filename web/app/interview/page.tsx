@@ -16,12 +16,23 @@ import { ReadAloudButton } from "@/components/ui/read-aloud-button";
 import { ANSWER_CONFIG, chipValue, displayValue } from "@/lib/answer-config";
 import { cn } from "@/lib/cn";
 import { useSession } from "@/lib/session";
-import type { InterviewNext } from "@/lib/types";
+import raviProfile from "@/mocks/ravi.profile.json";
+import type { FieldValue, InterviewNext, Profile } from "@/lib/types";
 
 export default function InterviewPage() {
   const router = useRouter();
-  const { profile, steps, locale, t, proposeAnswer, discardAnswer, confirmAnswer, goBack } =
-    useSession();
+  const {
+    profile,
+    steps,
+    locale,
+    persona,
+    t,
+    setPersona,
+    proposeAnswer,
+    discardAnswer,
+    confirmAnswer,
+    goBack,
+  } = useSession();
   const [totalSchemes, setTotalSchemes] = useState(0);
   const [attempt, setAttempt] = useState(0);
   const [loaded, setLoaded] = useState<{ key: string; question: InterviewNext } | null>(null);
@@ -65,28 +76,40 @@ export default function InterviewPage() {
   );
 
   const field = question?.field ?? null;
-  const pending = field ? profile[field] : undefined;
-  const hasPending = Boolean(pending && !pending.confirmed && pending.value !== null);
+  const tapped = field ? profile[field] : undefined;
+  // "Start as Ravi" suggests Ravi's answer for each question; the student still confirms it.
+  const suggested =
+    persona === "ravi" && field ? (raviProfile as Profile)[field]?.value : undefined;
+  const pendingValue: FieldValue | undefined =
+    tapped && !tapped.confirmed ? tapped.value : suggested;
+  const hasPending = pendingValue !== undefined && pendingValue !== null;
   const config = field ? ANSWER_CONFIG[field] : undefined;
 
   const stepperValue =
     config?.kind === "stepper" ? (stepper?.field === field ? stepper.value : config.start) : 0;
 
   function confirm() {
-    if (!question || !field) return;
-    confirmAnswer({ field, question: question.question, resolves: question.resolves_estimate });
+    if (!question || !field || !hasPending) return;
+    confirmAnswer(
+      { field, question: question.question, resolves: question.resolves_estimate },
+      pendingValue,
+    );
+  }
+
+  function change() {
+    if (field) discardAnswer(field);
+    setPersona(null);
   }
 
   function back() {
-    if (field && hasPending) discardAnswer(field);
+    if (hasPending) change();
     else goBack();
   }
 
-  const answerText =
-    field && pending && pending.value !== null ? displayValue(field, pending.value) : "";
+  const answerText = field && hasPending ? displayValue(field, pendingValue) : "";
 
   return (
-    <main className="space-y-4">
+    <main className="mx-auto max-w-[480px] space-y-4">
       <header>
         <p className="font-serif text-sm font-semibold uppercase tracking-wide text-primary">
           {t("app.name")}
@@ -156,14 +179,14 @@ export default function InterviewPage() {
               <ReadAloudButton text={question.question} />
             </div>
 
-            {hasPending && pending ? (
+            {hasPending ? (
               <ReadbackBubbles
                 answerText={answerText}
                 readbackText={t("interview.readback", {
                   answer: `${t(`fields.${field}`)} ${answerText}`,
                 })}
                 onYes={confirm}
-                onChange={() => discardAnswer(field)}
+                onChange={change}
               />
             ) : config?.kind === "stepper" ? (
               <StepperInput

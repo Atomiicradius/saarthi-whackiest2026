@@ -20,6 +20,7 @@ Update this file when a task finishes or a decision is made. Newest entries at t
 | D12 | 2026-11-24 | Replace exclusivity logic with the NSP rule: at most one `merit` scheme plus any number of `welfare` schemes (AY 2026-27 onward). Add `scheme_type` to the scheme record; keep `exclusive_with` only where an official source states it; `exclusivity_group` removed. The rule covers NSP schemes only, so `portal: "nsp" | "other"` marks them (confirmed by the team). | Source cited by the team: scholarships.gov.in announcements; Cabinet Secretariat memo of 12 Nov 2025. Contract change: `data-and-contracts.md` sections 1, 5, 11. |
 | D13 | 2026-11-24 | Add `application_window` (`ay`, `opens`, `closes`, `status`) to the scheme record. NSP applications for AY 2026-27 closed 2026-10-31. UI shows closed schemes as "Closed, opens around <month>", never as upcoming. | Students must not be sent to a closed window. Contract change: `data-and-contracts.md` section 1. |
 | D14 | 2026-11-24 | Name myScheme (the government portal) as the main competitor. Lead with near-miss guidance, portfolio planning, cross-document consistency check, voice and the client-side encrypted vault. | Judges will compare us to it; see `project-context.md`. |
+| D15 | 2026-11-24 | The web app reaches the vault only through `web/lib/vault-adapter.ts`. The real module is picked up automatically when `web/vault/index.ts` (or `.tsx`) exists and exports `encryptFile(file, passphrase)`, `decryptBlob(blob, passphrase)`, `appendAudit(entry)` and `verifyChain(entries)` (each may be sync or async). Until then an in-file STUB (WebCrypto AES-256-GCM and SHA-256) runs and the vault screen says so. `next.config.ts` makes the choice at startup, so restart `npm run dev` after the vault lands. | Lets the UI ship while the vault owner works in `web/vault`. Contract notes: blob format is section 7, audit entry is section 8. |
 
 ## Open decisions
 1. Final project name (Saarthi is a placeholder; check for existing products with that name).
@@ -72,8 +73,8 @@ Update this file when a task finishes or a decision is made. Newest entries at t
 - [x] Language picker and intake flow (tap-to-answer)
 - [ ] Voice interview with read-back confirmation
 - [x] Results page: eligible, almost eligible, not eligible (mock data)
-- [ ] Vault: passphrase, encrypt, decrypt
-- [ ] Audit log view with verification
+- [x] Vault: passphrase, encrypt, decrypt (UI on the adapter stub; real vault module not connected)
+- [x] Audit log view with verification (verify and demo tamper; on the adapter stub)
 - [x] Mobile viewport checked (390x844, interview and results)
 
 ### Sandbox and copilot
@@ -95,4 +96,5 @@ Add one line per finished task: `YYYY-MM-DD HH:MM · owner · what changed · co
 - 2026-11-24 · planning · context files written
 - 2026-11-24 · setup · repo scaffold, .gitignore, .env.example, context files added · see git log
 - 2026-11-24 · context · D12-D14: NSP merit/welfare rule, application_window, myScheme competitor · see git log
-- 2026-11-24 · web · design system, interview and results screens on mock data (voice, vault and audit UI not built; routes stubbed) · see git log
+- 2026-11-24 · web · design system, interview and results screens on mock data · see git log
+- 2026-11-24 · web · landing, vault, server view and audit log screens; vault adapter with stub (D15) · see git log

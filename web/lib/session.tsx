@@ -1,10 +1,20 @@
 "use client";
 
-import { createContext, useCallback, useContext, useMemo, useState, type ReactNode } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useMemo,
+  useRef,
+  useState,
+  type ReactNode,
+} from "react";
+import auditMock from "@/mocks/audit.json";
 import interviewMock from "@/mocks/interview.json";
 import raviProfile from "@/mocks/ravi.profile.json";
 import { translate, type Locale } from "@/lib/i18n";
-import type { FieldValue, Profile, ProfileFieldName } from "@/lib/types";
+import { vault, type NewAuditEntry, type VaultBlob } from "@/lib/vault-adapter";
+import type { AuditEntry, FieldValue, Profile, ProfileFieldName } from "@/lib/types";
 
 // One answered question. `resolves` feeds the "schemes still possible" bar.
 export interface Step {
@@ -13,31 +23,52 @@ export interface Step {
   resolves: number;
 }
 
+// A document the student encrypted. Only the encrypted blob is kept, never the readable file.
+export interface StoredDoc {
+  docKey: string;
+  fileName: string;
+  fileSize: number;
+  mime: string;
+  blob: VaultBlob;
+}
+
 interface Session {
   locale: Locale;
   setLocale: (locale: Locale) => void;
   t: (path: string, vars?: Record<string, string | number>) => string;
   profile: Profile;
   steps: Step[];
+  /** "ravi" pre-fills Ravi's answers as suggestions in the interview. */
+  persona: "ravi" | null;
+  setPersona: (persona: "ravi" | null) => void;
   /** Records a tapped answer that the student has not confirmed yet. */
   proposeAnswer: (field: ProfileFieldName, value: FieldValue) => void;
   /** Drops an unconfirmed answer ("Change"). */
   discardAnswer: (field: ProfileFieldName) => void;
-  /** Marks the answer confirmed and records the step ("Yes"). */
-  confirmAnswer: (step: Step) => void;
+  /** Stores the answer as confirmed and records the step ("Yes"). */
+  confirmAnswer: (step: Step, value: FieldValue) => void;
   /** Undoes the last confirmed step and returns it. */
   goBack: () => Step | undefined;
   restart: () => void;
   loadRavi: () => void;
+  documents: StoredDoc[];
+  addDocument: (doc: StoredDoc) => void;
+  audit: AuditEntry[];
+  /** Appends to the audit chain through the vault adapter. Field names only, never values. */
+  recordAudit: (entry: NewAuditEntry) => Promise<void>;
 }
 
 const SessionContext = createContext<Session | null>(null);
 
-// The profile lives in memory only. It is never written to localStorage or the URL.
+// Everything lives in memory only. Nothing is written to localStorage or the URL.
 export function SessionProvider({ children }: { children: ReactNode }) {
   const [locale, setLocale] = useState<Locale>("en");
   const [profile, setProfile] = useState<Profile>({});
   const [steps, setSteps] = useState<Step[]>([]);
+  const [persona, setPersona] = useState<"ravi" | null>(null);
+  const [documents, setDocuments] = useState<StoredDoc[]>([]);
+  const [audit, setAudit] = useState<AuditEntry[]>(auditMock as AuditEntry[]);
+  const auditRef = useRef(audit);
 
   const t = useCallback(
     (path: string, vars?: Record<string, string | number>) => translate(locale, path, vars),
@@ -56,11 +87,11 @@ export function SessionProvider({ children }: { children: ReactNode }) {
     });
   }, []);
 
-  const confirmAnswer = useCallback((step: Step) => {
-    setProfile((current) => {
-      const answer = current[step.field];
-      return answer ? { ...current, [step.field]: { ...answer, confirmed: true } } : current;
-    });
+  const confirmAnswer = useCallback((step: Step, value: FieldValue) => {
+    setProfile((current) => ({
+      ...current,
+      [step.field]: { value, source: "tap", confirmed: true },
+    }));
     setSteps((current) => [...current, step]);
   }, []);
 
@@ -79,9 +110,11 @@ export function SessionProvider({ children }: { children: ReactNode }) {
   const restart = useCallback(() => {
     setProfile({});
     setSteps([]);
+    setPersona(null);
   }, []);
 
   const loadRavi = useCallback(() => {
+    setPersona(null);
     setProfile(raviProfile as Profile);
     setSteps(
       interviewMock.questions.map((question) => ({
@@ -92,6 +125,16 @@ export function SessionProvider({ children }: { children: ReactNode }) {
     );
   }, []);
 
+  const addDocument = useCallback((doc: StoredDoc) => {
+    setDocuments((current) => [...current.filter((item) => item.docKey !== doc.docKey), doc]);
+  }, []);
+
+  const recordAudit = useCallback(async (entry: NewAuditEntry) => {
+    const appended = await vault.appendAudit(entry, auditRef.current);
+    auditRef.current = [...auditRef.current, appended];
+    setAudit(auditRef.current);
+  }, []);
+
   const value = useMemo<Session>(
     () => ({
       locale,
@@ -99,24 +142,35 @@ export function SessionProvider({ children }: { children: ReactNode }) {
       t,
       profile,
       steps,
+      persona,
+      setPersona,
       proposeAnswer,
       discardAnswer,
       confirmAnswer,
       goBack,
       restart,
       loadRavi,
+      documents,
+      addDocument,
+      audit,
+      recordAudit,
     }),
     [
       locale,
       t,
       profile,
       steps,
+      persona,
       proposeAnswer,
       discardAnswer,
       confirmAnswer,
       goBack,
       restart,
       loadRavi,
+      documents,
+      addDocument,
+      audit,
+      recordAudit,
     ],
   );
 

@@ -53,7 +53,7 @@ export default function ResultsPage() {
   useStaggerReveal(container, lanes !== null);
 
   return (
-    <main ref={container}>
+    <main ref={container} className="mx-auto max-w-[480px]">
       <h1 className="sr-only">{t("results.title")}</h1>
 
       {failed && (

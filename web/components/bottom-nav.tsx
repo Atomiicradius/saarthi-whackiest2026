@@ -6,7 +6,7 @@ import { House, ListChecks, Lock, ScrollText } from "lucide-react";
 import { cn } from "@/lib/cn";
 
 const TABS = [
-  { href: "/interview", label: "Home", icon: House },
+  { href: "/", label: "Home", icon: House },
   { href: "/results", label: "Schemes", icon: ListChecks },
   { href: "/vault", label: "Vault", icon: Lock },
   { href: "/audit", label: "Audit", icon: ScrollText },
