@@ -44,9 +44,9 @@ India has many central and state scholarships, but students from underserved bac
 
 | Step | Description |
 |---|---|
-| **1. Ask** | A short voice or tap interview. The next question is chosen by information gain, so a student answers about 6-8 questions, not a 40-field form. Every answer is read back for confirmation. |
+| **1. Ask** | A short voice or tap interview. The next question is chosen by information gain, so a student answers a handful of questions, not a long form. Every answer is read back for confirmation. |
 | **2. Match** | A deterministic rules engine checks each scheme and returns *eligible*, *ineligible* or *unknown*, with the reason for every verdict. It also shows near-misses ("you miss this by Rs 20,000" or "you'd qualify with a caste certificate"). |
-| **3. Optimise** | Some schemes are mutually exclusive. Saarthi picks the best combination by expected value, deadline urgency and effort. |
+| **3. Optimise** | On the National Scholarship Portal a student can apply for one merit-based scheme plus welfare-based schemes. Saarthi picks the best merit scheme by value and deadline and keeps every eligible welfare scheme. State and private schemes may follow different rules. |
 | **4. Protect** | Documents are encrypted in the browser (AES-256-GCM) with a key from the student's passphrase. The server only ever sees ciphertext. Every access is written to a tamper-evident audit log. |
 | **5. Apply** | A copilot pre-fills the application form and checks rejection risk. The student does OTP, CAPTCHA and final submit. |
 
@@ -56,18 +56,32 @@ India has many central and state scholarships, but students from underserved bac
 
 ## Previews
 
-*Screenshots coming soon.*
-
-<!--
-| Voice Interview | Results |
+<!-- Add the PNGs to docs/screenshots/, then delete this comment line and the closing marker below.
+| Home | Voice interview |
 |:---:|:---:|
-| <img src="docs/screenshots/interview.png" width="100%" alt="Voice interview" /> | <img src="docs/screenshots/results.png" width="100%" alt="Eligibility results" /> |
+| <img src="docs/screenshots/landing.png" width="100%" alt="Landing page with the Guide" /> | <img src="docs/screenshots/interview.png" width="100%" alt="Interview with read-back confirmation" /> |
+
+| Best plan and lanes | Vault: what the server sees |
+|:---:|:---:|
+| <img src="docs/screenshots/results.png" width="100%" alt="Best plan with eligible, almost eligible and closed lanes" /> | <img src="docs/screenshots/server-view.png" width="100%" alt="Document on device versus ciphertext on server" /> |
 
 <div align="center">
-  <b>Encrypted Vault & Audit Log</b><br/><br/>
-  <img src="docs/screenshots/vault.png" width="100%" alt="Vault and audit log" />
+  <b>Tamper-evident audit log</b><br/><br/>
+  <img src="docs/screenshots/audit-broken.png" width="100%" alt="Audit chain broken at an edited entry" />
 </div>
 -->
+
+*Screenshots coming soon.*
+
+## How Saarthi Is Different
+
+Government portals such as myScheme already help students check scheme eligibility. To our knowledge, Saarthi adds a few things on top:
+
+- **Near-miss guidance:** what is missing, and whether the student can fix it.
+- **A best-plan picker** that respects the National Scholarship Portal's one-merit-plus-welfare rule.
+- **An encrypted on-device vault** so documents never reach our server in readable form.
+- **A tamper-evident audit log** of every use of the student's data.
+- **Voice, in the student's language** (planned, depends on language testing).
 
 ---
 
@@ -77,9 +91,9 @@ India has many central and state scholarships, but students from underserved bac
 flowchart TD
     A(["Student<br/>voice or tap"]) --> B
 
-    subgraph WEB["Browser (PWA)"]
+    subgraph WEB["Browser (web app)"]
         B["Interview UI<br/>read-back confirmation"]
-        V["Vault<br/>on-device OCR + AES-256-GCM"]
+        V["Vault<br/>AES-256-GCM (on-device OCR planned)"]
         L["Audit log<br/>hash-chained"]
     end
 
@@ -89,7 +103,7 @@ flowchart TD
     subgraph DET["Deterministic, no LLM"]
         E["Rules engine<br/>tri-state verdicts + reasons"]
         Q["Question picker<br/>information gain"]
-        O["Portfolio optimiser<br/>exclusivity constraints"]
+        O["Portfolio optimiser<br/>merit / welfare rule"]
     end
 
     C --> E
@@ -112,7 +126,7 @@ flowchart TD
     class D,S store;
 ```
 
-- **Frontend:** Next.js, TypeScript, PWA, WebCrypto
+- **Frontend:** Next.js, TypeScript, WebCrypto (PWA planned)
 - **Backend:** FastAPI, Pydantic, Python
 - **Voice:** ElevenLabs speech-to-text and text-to-speech, called from the backend (keys stay server-side)
 - **Data:** a structured scheme dataset built from official portals and guideline documents
@@ -127,12 +141,13 @@ We're upfront about this, since it matters for judging the demo honestly. Update
 
 | Component | Status |
 |---|:---:|
-| Scheme dataset (central + Karnataka, undergraduate engineering) | 🟡 **In progress**, being collected from official sources |
-| Eligibility engine (tri-state verdicts, explanations, near-miss) | 🟡 **Planned for round 1** |
-| Adaptive interview (information-gain question picker) | 🟡 **Planned for round 1** |
-| Encrypted vault (browser-side AES-256-GCM) and audit log | 🟡 **Planned for round 1** |
-| Voice interview and spoken results (ElevenLabs) | 🟡 **Planned**, depends on language testing |
-| Portfolio optimiser | 🟡 **Planned** |
+| Scheme dataset (central + Karnataka, undergraduate) | 🟡 **In progress.** The prototype currently shows labelled sample data. A hand-verified set from official sources is being loaded. |
+| Interview with read-back confirmation and a live "schemes still possible" counter | 🟢 **Built** (prototype UI) |
+| Results: best plan, merit/welfare rule, almost-eligible guidance, closed-window lane, source links | 🟢 **Built** (prototype UI, on sample data) |
+| Eligibility engine in `/engine` (tri-state verdicts, reasons, near-miss) | 🟡 **In progress**, not yet in this repository. It is being connected to the UI. |
+| Encrypted vault (browser-side AES-256-GCM) with "what the server sees" view | 🟢 **Built** as a prototype using the browser's WebCrypto. The dedicated vault module is being integrated. |
+| Hash-chained audit log with verify and tamper demo | 🟢 **Built** (prototype) |
+| Voice interview and spoken results (ElevenLabs) | 🟡 **Planned.** The microphone control is a placeholder, and Kannada quality is still being tested. |
 | Application copilot | 🟠 **Sandbox demo only**, never real government portals |
 | Cross-document consistency checker, helper mode, reminders | ⚪ **Roadmap** |
 
@@ -141,18 +156,20 @@ We're upfront about this, since it matters for judging the demo honestly. Update
 - Saarthi says a student *appears eligible*. It is not an approval, and the official notice is the final word.
 - Kannada speech recognition quality on real, noisy audio is still being tested.
 - Voice audio goes to a cloud service. Students are asked to speak profile answers only, never IDs or document contents.
-- A lost passphrase means lost vault data, so a recovery key is offered.
+- A lost passphrase means lost vault data, so a recovery key is planned.
 - Saarthi is not legal advice, and we make no claim of compliance with India's Digital Personal Data Protection Act, 2023.
 
 ---
 
 ## Security Model
 
+Design goals. In the prototype today, documents are encrypted in the browser with AES-256-GCM and the audit log is hash-chained. On-device OCR, per-field consent grants and the copilot are planned.
+
 - **Client-side encryption:** each document gets a fresh AES-256-GCM key, wrapped by a key derived from the student's passphrase. The passphrase and plaintext never leave the browser.
-- **On-device OCR:** raw documents are never uploaded for processing.
-- **Consent per field and purpose:** grants are explicit and expire.
+- **On-device OCR (planned):** raw documents are never uploaded for processing.
+- **Consent per field and purpose (planned):** grants are explicit and expire.
 - **Hash-chained audit log:** each entry includes the hash of the previous one, so edits are detectable. It records field names and purposes, never values.
-- **Copilot hardening:** form filling is deterministic field mapping. Page text is never treated as instructions, and only an allowlisted domain is used.
+- **Copilot hardening (planned):** form filling is deterministic field mapping. Page text is never treated as instructions, and only an allowlisted domain is used.
 - **Never stored or logged:** government ID numbers, raw voice audio, OTPs, passphrases.
 
 ---
@@ -160,17 +177,17 @@ We're upfront about this, since it matters for judging the demo honestly. Update
 ## Getting Started
 
 ```bash
-# Backend
-cd api
-pip install -r requirements.txt
-uvicorn main:app --reload
-
-# Frontend
+# Frontend (available now)
 cd web
 npm install
 npm run dev
 
-# Engine tests
+# Backend (not yet in this repository)
+cd api
+pip install -r requirements.txt
+uvicorn main:app --reload
+
+# Engine tests (not yet in this repository)
 cd engine
 pytest
 ```
@@ -184,7 +201,7 @@ Open **http://localhost:3000**.
 ## Project Structure
 
 ```
-web/       Next.js + TypeScript PWA (UI, voice, vault, copilot UI)
+web/       Next.js + TypeScript app (UI, vault and audit prototype, copilot UI planned)
 api/       FastAPI: schemes, eligibility, interview, optimiser, voice proxy
 engine/    Pure-Python rules engine, question picker, optimiser
 data/      Scheme dataset and synthetic test profiles
@@ -203,7 +220,7 @@ Built by:
 
 | Name |
 |---|
-| Ibrahim |
+| Ibrahim Kasheef |
 | Rishon Thomas Joby |
 | Samarth P Rao |
 | Samarth Sainath Naik |
