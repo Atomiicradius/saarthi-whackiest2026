@@ -2,25 +2,18 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { House, ListChecks, Lock, ScrollText } from "lucide-react";
 import { cn } from "@/lib/cn";
-
-const TABS = [
-  { href: "/", label: "Home", icon: House },
-  { href: "/results", label: "Schemes", icon: ListChecks },
-  { href: "/vault", label: "Vault", icon: Lock },
-  { href: "/audit", label: "Audit", icon: ScrollText },
-];
+import { NAV_TABS } from "@/lib/nav";
 
 export function BottomNav() {
   const pathname = usePathname();
   return (
     <nav
       aria-label="Main"
-      className="fixed inset-x-0 bottom-0 z-20 border-t border-border bg-surface/95 backdrop-blur"
+      className="fixed inset-x-0 bottom-0 z-20 border-t border-border bg-surface/95 backdrop-blur lg:hidden"
     >
       <ul className="mx-auto flex max-w-[480px]">
-        {TABS.map(({ href, label, icon: Icon }) => {
+        {NAV_TABS.map(({ href, label, icon: Icon }) => {
           const active = pathname === href;
           return (
             <li key={href} className="flex-1">

@@ -2,6 +2,8 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { getSchemes, optimize } from "@/lib/api";
+import { GuidePanel } from "@/components/guide/guide-panel";
+import { PageColumns } from "@/components/page-columns";
 import { DocRow } from "@/components/vault/doc-row";
 import { SampleDataBanner } from "@/components/sample-data-banner";
 import { useSession } from "@/lib/session";
@@ -46,9 +48,11 @@ export default function VaultPage() {
   useStaggerReveal(container, schemes !== null);
 
   return (
-    <main ref={container} className="mx-auto max-w-[480px]">
-      <h1 className="font-serif text-3xl font-semibold leading-tight">{t("vault.title")}</h1>
-      <p className="mt-2 text-muted">{t("vault.intro")}</p>
+    <PageColumns ref={container} guide={<GuidePanel state="idle" message={t("vault.guide")} />}>
+      <h1 className="font-serif text-3xl font-semibold leading-tight lg:text-4xl">
+        {t("vault.title")}
+      </h1>
+      <p className="text-soft mt-2">{t("vault.intro")}</p>
       {vaultMode === "stub" && (
         <p className="mt-3 rounded-2xl bg-amber px-4 py-3 text-sm font-semibold text-ink">
           {t("vault.stubNote")}
@@ -56,7 +60,7 @@ export default function VaultPage() {
       )}
 
       {schemes === null ? (
-        <p role="status" className="py-16 text-center text-muted">
+        <p role="status" className="text-soft py-16 text-center">
           {t("vault.loading")}
         </p>
       ) : (
@@ -67,6 +71,6 @@ export default function VaultPage() {
           ))}
         </div>
       )}
-    </main>
+    </PageColumns>
   );
 }

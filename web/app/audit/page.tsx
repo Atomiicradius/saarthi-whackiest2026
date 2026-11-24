@@ -4,6 +4,9 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import gsap from "gsap";
 import { CircleCheck, TriangleAlert } from "lucide-react";
 import { ChainEntry, type EntryStatus } from "@/components/audit/chain-entry";
+import { GuidePanel } from "@/components/guide/guide-panel";
+import type { GuideState } from "@/components/guide/guide";
+import { PageColumns } from "@/components/page-columns";
 import { Button } from "@/components/ui/button";
 import { useSession } from "@/lib/session";
 import { useStaggerReveal } from "@/lib/use-stagger-reveal";
@@ -75,12 +78,27 @@ export default function AuditPage() {
 
   const finished = result !== null && !running;
 
+  const guideState: GuideState = running
+    ? "thinking"
+    : finished
+      ? result.ok
+        ? "happy"
+        : "concerned"
+      : "idle";
+  const guideMessage = running
+    ? t("audit.guideChecking")
+    : finished
+      ? result.ok
+        ? t("audit.guideOk")
+        : t("audit.guideBroken", { idx: result.brokenAt ?? 0 })
+      : t("audit.guide");
+
   return (
-    <main ref={container} className="mx-auto max-w-[480px]">
-      <h1 data-reveal className="font-serif text-3xl font-semibold leading-tight">
+    <PageColumns ref={container} guide={<GuidePanel state={guideState} message={guideMessage} />}>
+      <h1 data-reveal className="font-serif text-3xl font-semibold leading-tight lg:text-4xl">
         {t("audit.title")}
       </h1>
-      <p data-reveal className="mt-2 text-muted">
+      <p data-reveal className="text-soft mt-2">
         {t("audit.intro")}
       </p>
 
@@ -113,9 +131,9 @@ export default function AuditPage() {
           </Button>
         )}
       </div>
-      {DEMO_MODE && <p className="mt-2 text-xs text-muted">{t("audit.demoNote")}</p>}
+      {DEMO_MODE && <p className="mt-2 text-xs text-soft">{t("audit.demoNote")}</p>}
 
-      <p role="status" className="mt-3 min-h-5 text-sm text-muted">
+      <p role="status" className="mt-3 min-h-5 text-sm text-soft">
         {running
           ? t("audit.verifying", {
               n: Math.min(revealed + 1, entries.length),
@@ -163,6 +181,6 @@ export default function AuditPage() {
           />
         ))}
       </ol>
-    </main>
+    </PageColumns>
   );
 }

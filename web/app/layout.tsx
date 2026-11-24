@@ -5,7 +5,10 @@ import {
   Noto_Sans_Kannada,
   Plus_Jakarta_Sans,
 } from "next/font/google";
+import Link from "next/link";
+import { AmbientBackground } from "@/components/ambient-background";
 import { BottomNav } from "@/components/bottom-nav";
+import { TopNav } from "@/components/top-nav";
 import { DemoReset } from "@/components/demo-reset";
 import { SessionProvider } from "@/lib/session";
 import "./globals.css";
@@ -42,10 +45,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <body>
         <SessionProvider>
-          <div className="mx-auto min-h-dvh max-w-4xl px-4 pb-28 pt-4">
-            <div className="mb-3 flex justify-end">
-              <DemoReset />
-            </div>
+          <AmbientBackground />
+          <div className="mx-auto min-h-dvh max-w-[1280px] px-4 pb-28 pt-2 sm:px-6 lg:px-10 lg:pb-12">
+            <header className="flex items-center justify-between gap-3 py-3">
+              <Link href="/" className="font-serif text-xl font-semibold text-primary">
+                Saarthi
+              </Link>
+              <TopNav />
+              <div className="min-w-12">
+                <DemoReset />
+              </div>
+            </header>
             {children}
           </div>
           <BottomNav />

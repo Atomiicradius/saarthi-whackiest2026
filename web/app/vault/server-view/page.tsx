@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import Link from "next/link";
 import { Lock, LockOpen } from "lucide-react";
+import { GuidePanel } from "@/components/guide/guide-panel";
 import { CipherPane } from "@/components/vault/cipher-pane";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -73,7 +74,7 @@ export default function ServerViewPage() {
     return (
       <main className="py-16 text-center">
         <h1 className="font-serif text-3xl font-semibold">{t("serverView.title")}</h1>
-        <p className="mt-3 text-muted">{t("serverView.empty")}</p>
+        <p className="mt-3 text-soft">{t("serverView.empty")}</p>
         <Link
           href="/vault"
           className="mt-4 inline-flex min-h-12 items-center rounded-2xl bg-primary px-5 font-semibold text-white"
@@ -86,7 +87,10 @@ export default function ServerViewPage() {
 
   return (
     <main ref={container}>
-      <h1 data-reveal className="font-serif text-3xl font-semibold leading-tight">
+      <div className="mb-6 max-w-3xl">
+        <GuidePanel variant="strip" state="idle" message={t("serverView.guide")} />
+      </div>
+      <h1 data-reveal className="font-serif text-3xl font-semibold leading-tight lg:text-4xl">
         {t("serverView.title")}
       </h1>
 
@@ -141,11 +145,11 @@ export default function ServerViewPage() {
                 />
               )}
               {isUnlocked.text === null && !isUnlocked.imageUrl && (
-                <p className="rounded-2xl bg-bg p-4 text-sm text-muted">
+                <p className="rounded-2xl bg-bg p-4 text-sm text-soft">
                   {t("serverView.noPreview")}
                 </p>
               )}
-              <p className="text-xs text-muted">{t("serverView.readable")}</p>
+              <p className="text-xs text-soft">{t("serverView.readable")}</p>
             </div>
           ) : (
             <form onSubmit={unlock} className="space-y-3 rounded-2xl bg-bg p-4">
@@ -182,7 +186,7 @@ export default function ServerViewPage() {
           </div>
           <CipherPane ciphertextBase64={doc.blob.data.ciphertext} />
           <p className="font-semibold">{t("serverView.serverCaption")}</p>
-          <p className="text-xs text-muted">
+          <p className="text-xs text-soft">
             {t("serverView.alsoStored")} {t("serverView.neverStored")}
           </p>
         </Card>

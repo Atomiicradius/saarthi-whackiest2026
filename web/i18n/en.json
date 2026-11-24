@@ -96,7 +96,9 @@
     "retry": "Try again",
     "startOver": "Answer again",
     "notInPlan": "Eligible, not in plan",
-    "sampleData": "Sample data: scheme names, amounts and dates are examples, not real schemes."
+    "sampleData": "Sample data: scheme names, amounts and dates are examples, not real schemes.",
+    "guide": "I found {count} schemes for your plan, worth about {total} a year. They appear eligible, so check each official notice before applying.",
+    "guideNone": "I could not find an open scheme for your plan yet."
   },
   "docs": {
     "income_certificate": "income certificate",
@@ -112,7 +114,8 @@
     "pitch": "Answer a few questions by voice or tap, in your language. Your documents stay encrypted on your own device.",
     "startAsRavi": "Start as Ravi",
     "raviNote": "Ravi is a sample student with example data.",
-    "answerMyself": "Answer the questions myself"
+    "answerMyself": "Answer the questions myself",
+    "guideHello": "Hello! I am your guide. I help you find scholarships you appear eligible for."
   },
   "vault": {
     "title": "Your vault",
@@ -134,7 +137,8 @@
     "failed": "Could not encrypt this file. Please try again.",
     "stubNote": "Demo vault: it uses your browser's WebCrypto, but the real vault module is not connected yet.",
     "loading": "Loading your documents",
-    "lockedBadge": "Locked"
+    "lockedBadge": "Locked",
+    "guide": "I lock each document on this device before anything is stored. The server only ever sees scrambled bytes."
   },
   "serverView": {
     "title": "What the server sees",
@@ -153,7 +157,8 @@
     "empty": "No encrypted document yet.",
     "goVault": "Go to the vault",
     "noPreview": "No preview for this file type. It stays encrypted.",
-    "selectDoc": "Document"
+    "selectDoc": "Document",
+    "guide": "On the left is your document, readable only here. On the right is everything the server ever holds."
   },
   "audit": {
     "title": "Audit log",
@@ -174,6 +179,13 @@
     "purpose": "Purpose",
     "demoNote": "Demo control: this edits one entry in memory only.",
     "sandboxPurpose": "Sandbox replica portal · {scheme}",
-    "vaultPurpose": "Vault · preview on this device"
+    "vaultPurpose": "Vault · preview on this device",
+    "guide": "Every use of your data is written down here, as field names only.",
+    "guideChecking": "Checking each link in the chain.",
+    "guideOk": "Every link holds. Nothing was changed.",
+    "guideBroken": "Entry #{idx} was changed after it was written, so the chain breaks there."
+  },
+  "guide": {
+    "label": "Your guide"
   }
 }

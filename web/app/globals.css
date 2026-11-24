@@ -33,11 +33,17 @@ html {
   background: var(--bg);
 }
 
+/* No body background: the page colour comes from html so the ambient layer can sit above it. */
 body {
-  background: var(--bg);
   color: var(--ink);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+}
+
+/* Secondary text that sits directly on the page background. A little darker than muted so it stays
+   AA over the ambient blobs. Built from the ink token. */
+.text-soft {
+  color: color-mix(in srgb, var(--ink) 72%, transparent);
 }
 
 :focus-visible {

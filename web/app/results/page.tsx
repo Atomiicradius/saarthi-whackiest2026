@@ -3,10 +3,13 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { evaluate, getSchemes, optimize } from "@/lib/api";
+import { GuidePanel } from "@/components/guide/guide-panel";
+import type { GuideState } from "@/components/guide/guide";
 import { Lane } from "@/components/results/lane";
 import { PlanHero } from "@/components/results/plan-hero";
 import { SampleDataBanner } from "@/components/sample-data-banner";
 import { Button } from "@/components/ui/button";
+import { formatInr } from "@/lib/format";
 import { buildLanes } from "@/lib/results-model";
 import { useSession } from "@/lib/session";
 import { useStaggerReveal } from "@/lib/use-stagger-reveal";
@@ -24,7 +27,8 @@ export default function ResultsPage() {
   const [data, setData] = useState<Loaded | null>(null);
   const [failed, setFailed] = useState(false);
   const [attempt, setAttempt] = useState(0);
-  const container = useRef<HTMLDivElement>(null);
+  const [settled, setSettled] = useState(false);
+  const container = useRef<HTMLElement>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -40,6 +44,13 @@ export default function ResultsPage() {
     };
   }, [profile, attempt]);
 
+  // The guide is happy when the results first appear, then settles.
+  useEffect(() => {
+    if (!data) return;
+    const timer = setTimeout(() => setSettled(true), 2800);
+    return () => clearTimeout(timer);
+  }, [data]);
+
   const retry = useCallback(() => {
     setFailed(false);
     setAttempt((count) => count + 1);
@@ -52,23 +63,37 @@ export default function ResultsPage() {
 
   useStaggerReveal(container, lanes !== null);
 
+  const guideState: GuideState = failed
+    ? "concerned"
+    : !data
+      ? "thinking"
+      : settled
+        ? "idle"
+        : "happy";
+  const planCount = data?.plan.selected.length ?? 0;
+  const guideMessage = failed
+    ? t("results.error")
+    : !data
+      ? t("results.loading")
+      : planCount > 0
+        ? t("results.guide", {
+            count: planCount,
+            total: formatInr(data.plan.total_inr_per_year),
+          })
+        : t("results.guideNone");
+
   return (
-    <main ref={container} className="mx-auto max-w-[480px]">
+    <main ref={container}>
       <h1 className="sr-only">{t("results.title")}</h1>
+
+      <div className="mb-6 max-w-3xl">
+        <GuidePanel variant="strip" state={guideState} message={guideMessage} />
+      </div>
 
       {failed && (
         <div role="alert" className="rounded-3xl border border-danger bg-surface p-4">
-          <p>{t("results.error")}</p>
-          <Button className="mt-3" onClick={retry}>
-            {t("results.retry")}
-          </Button>
+          <Button onClick={retry}>{t("results.retry")}</Button>
         </div>
-      )}
-
-      {!failed && !data && (
-        <p role="status" className="py-16 text-center text-muted">
-          {t("results.loading")}
-        </p>
       )}
 
       {data && lanes && (
@@ -80,7 +105,7 @@ export default function ResultsPage() {
           <Lane title={t("results.lane.closed")} tone="neutral" views={lanes.closed} t={t} />
           <Lane title={t("results.lane.not")} tone="danger" views={lanes.not} t={t} />
 
-          <p data-reveal className="mt-8 text-center text-sm text-muted">
+          <p data-reveal className="text-soft mt-8 text-center text-sm">
             {t("results.footer")}
           </p>
           <div data-reveal className="mt-4 flex justify-center">
