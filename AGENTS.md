@@ -7,11 +7,11 @@ Start here. This file tells you what this repo is, what to read, and the rules y
 It tells a student which scholarships they qualify for, picks the best combination, keeps their documents in an encrypted on-device vault, and helps fill applications.
 
 ## Read these first, in order
-1. `project-context.md`: the problem, the users, the features, the scope.
-2. `data-and-contracts.md`: schemas and API contracts. **Code must match these.**
-3. `code-standards.md`: stack, conventions, testing, commit rules.
-4. `team-plan.md`: who owns which directory, and the schedule.
-5. `decisions-and-progress.md`: decisions already made, open questions, what is done.
+1. `context/project-context.md`: the problem, the users, the features, the scope.
+2. `context/data-and-contracts.md`: schemas and API contracts. **Code must match these.**
+3. `context/code-standards.md`: stack, conventions, testing, commit rules.
+4. `context/team-plan.md`: who owns which directory, and the schedule.
+5. `context/decisions-and-progress.md`: decisions already made, open questions, what is done.
 
 ## Non-negotiable rules
 1. **The LLM never decides eligibility.** Eligibility comes only from the deterministic rules engine. An LLM may extract text into slots or parse notices into a review queue, nothing more.
@@ -21,13 +21,13 @@ It tells a student which scholarships they qualify for, picks the best combinati
 5. **No secrets in the repo.** API keys live in environment variables. Provide `.env.example` with placeholders.
 6. **Scheme data needs a source.** Every scheme record has `source_url`, `confidence` and `last_verified`. Do not invent scheme criteria, amounts or deadlines. If you do not know, mark it `unknown` or leave it for human review.
 7. **Portal automation runs only against our sandbox replica**, never real government portals. The user performs OTP, CAPTCHA and final submit.
-8. **Do not weaken the contracts silently.** If a schema or endpoint must change, update `data-and-contracts.md` in the same task and note it in `decisions-and-progress.md`.
+8. **Do not weaken the contracts silently.** If a schema or endpoint must change, update `context/data-and-contracts.md` in the same task and note it in `context/decisions-and-progress.md`.
 
 ## Working agreement
-- **One commit per task**, not one per part. Make a separate commit only for a risky change that must be revertable on its own (for example a crypto format change or a schema change). See `code-standards.md`.
+- **One commit per task**, not one per part. Make a separate commit only for a risky change that must be revertable on its own (for example a crypto format change or a schema change). See `context/code-standards.md`.
 - Keep changes inside your task's scope. Do not refactor unrelated code.
 - If something in these files conflicts with the request, stop and flag it instead of guessing.
-- When you finish a task, update the checklist in `decisions-and-progress.md`.
+- When you finish a task, update the checklist in `context/decisions-and-progress.md`.
 
 ## Where things live (proposed layout)
 ```
