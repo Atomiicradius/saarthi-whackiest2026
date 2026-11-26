@@ -8,6 +8,7 @@ from __future__ import annotations
 
 from typing import Any
 
+from saarthi_engine.fields import FIELDS
 from saarthi_engine.format import describe_value, money
 
 Profile = dict[str, Any]
@@ -127,6 +128,17 @@ def _near_miss(failed: dict[str, Any], profile: Profile) -> dict[str, Any] | Non
     return None
 
 
+def _unanswered_near_miss(missing: list[str]) -> dict[str, Any]:
+    """A scheme blocked only by questions nobody has answered yet: answering them can settle it."""
+    questions = [FIELDS[f].question["en"] if f in FIELDS else LABELS.get(f, f) for f in missing]
+    lead = (
+        "Answer this question to find out"
+        if len(questions) == 1
+        else "Answer these questions to find out"
+    )
+    return {"field": missing[0], "gap": f"{lead}: {'; '.join(questions)}", "fixable": True}
+
+
 def evaluate_scheme(scheme: Scheme, profile: Profile) -> Result:
     reasons = []
     missing: list[str] = []
@@ -162,6 +174,9 @@ def evaluate_scheme(scheme: Scheme, profile: Profile) -> Result:
         near = _near_miss(failed[0], profile)
         if near:
             result["near_miss"] = near
+    elif verdict == "unknown":
+        # No criterion failed; only unanswered fields block this scheme. That is fixable.
+        result["near_miss"] = _unanswered_near_miss(missing)
     return result
 
 

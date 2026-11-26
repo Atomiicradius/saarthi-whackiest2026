@@ -80,7 +80,7 @@ Field names are the same strings used by scheme `criteria[].field`. Add a field 
     { "field": "category", "status": "met | failed | unknown", "detail": "Category SC is in [SC, ST]" }
   ],
   "missing_fields": ["annual_family_income_inr"],
-  "near_miss": {                          // only when ineligible by a small margin or one fixable item
+  "near_miss": {                          // ineligible by a small margin (fixable false), or blocked only by unanswered fields (fixable true)
     "field": "annual_family_income_inr",
     "gap": "Income exceeds the cap by 20000",
     "fixable": false

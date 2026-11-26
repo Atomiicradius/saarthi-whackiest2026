@@ -124,3 +124,61 @@ def test_two_failures_are_not_a_near_miss():
 def test_evaluation_is_deterministic(schemes, profiles):
     profile = profiles["near-miss"]
     assert evaluate_all(schemes, profile) == evaluate_all(schemes, profile)
+
+
+# A scheme blocked only by questions nobody has answered is "almost" and fixable: answering them
+# can settle it. A failed criterion is never fixable, even when unanswered questions remain too.
+INCOME_CAP = {"field": "annual_family_income_inr", "op": "<=", "value": 250000}
+FEMALE_ONLY = {"field": "gender", "op": "==", "value": "F"}
+SC_ONLY = {"field": "category", "op": "==", "value": "SC"}
+
+
+def test_one_unknown_field_only_is_fixable():
+    scheme = make_scheme("s", [INCOME_CAP, FEMALE_ONLY])
+    result = evaluate_scheme(scheme, {"annual_family_income_inr": 100000})
+    assert result["verdict"] == "unknown"
+    assert result["near_miss"] == {
+        "field": "gender",
+        "gap": "Answer this question to find out: What is your gender?",
+        "fixable": True,
+    }
+
+
+def test_several_unknown_fields_are_listed_and_fixable():
+    scheme = make_scheme("s", [FEMALE_ONLY, SC_ONLY])
+    near = evaluate_scheme(scheme, {})["near_miss"]
+    assert near["fixable"] is True
+    assert near["field"] == "gender"
+    assert near["gap"].startswith("Answer these questions to find out: ")
+    assert near["gap"].count(";") == 1
+
+
+def test_a_failed_criterion_is_never_fixable():
+    scheme = make_scheme("s", [INCOME_CAP])
+    near_miss_income = evaluate_scheme(scheme, {"annual_family_income_inr": 270000})
+    assert near_miss_income["verdict"] == "ineligible"
+    assert near_miss_income["near_miss"]["fixable"] is False
+    wrong_category = evaluate_scheme(make_scheme("t", [SC_ONLY]), {"category": "GEN"})
+    assert "near_miss" not in wrong_category
+
+
+def test_a_failed_criterion_plus_an_unknown_field_is_not_fixable():
+    income_and_gender = make_scheme("s", [INCOME_CAP, FEMALE_ONLY])
+    over = evaluate_scheme(income_and_gender, {"annual_family_income_inr": 270000})
+    assert over["verdict"] == "ineligible"
+    assert over["near_miss"]["fixable"] is False
+    assert over["near_miss"]["field"] == "annual_family_income_inr"
+    category_and_gender = make_scheme("t", [SC_ONLY, FEMALE_ONLY])
+    wrong = evaluate_scheme(category_and_gender, {"category": "GEN"})
+    assert wrong["verdict"] == "ineligible"
+    assert "near_miss" not in wrong
+
+
+def test_a_fully_answered_profile_is_unchanged():
+    scheme = make_scheme("s", [INCOME_CAP, FEMALE_ONLY])
+    eligible = evaluate_scheme(scheme, {"annual_family_income_inr": 100000, "gender": "F"})
+    assert eligible["verdict"] == "eligible"
+    assert "near_miss" not in eligible
+    ineligible = evaluate_scheme(scheme, {"annual_family_income_inr": 100000, "gender": "M"})
+    assert ineligible["verdict"] == "ineligible"
+    assert "near_miss" not in ineligible

@@ -45,7 +45,7 @@ India has many central and state scholarships, but students from underserved bac
 | Step | Description |
 |---|---|
 | **1. Ask** | A short voice or tap interview. The next question is chosen by information gain, so a student answers a handful of questions, not a long form. Every answer is read back for confirmation. |
-| **2. Match** | A deterministic rules engine checks each scheme and returns *eligible*, *ineligible* or *unknown*, with the reason for every verdict. It also shows near-misses ("you miss this by Rs 20,000" or "you'd qualify with a caste certificate"). |
+| **2. Match** | A deterministic rules engine checks each scheme and returns *eligible*, *ineligible* or *unknown*, with the reason for every verdict. It also shows near-misses ("you miss this by Rs 20,000") and which unanswered questions could change the result. |
 | **3. Optimise** | On the National Scholarship Portal a student can apply for one merit-based scheme plus welfare-based schemes. Saarthi picks the best merit scheme by value and deadline and keeps every eligible welfare scheme. State and private schemes may follow different rules. |
 | **4. Protect** | Documents are encrypted in the browser (AES-256-GCM) with a key from the student's passphrase. The server only ever sees ciphertext. Every access is written to a tamper-evident audit log. |
 | **5. Apply** | A copilot pre-fills the application form and checks rejection risk. The student does OTP, CAPTCHA and final submit. |

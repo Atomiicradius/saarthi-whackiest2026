@@ -48,6 +48,9 @@ def test_merit_tie_goes_to_earlier_deadline():
     assert plan["dropped"][0]["reason"].endswith("EARLY closes sooner")
 
 
+INFERRED = "inferred from the scheme guidelines, check the notice"
+
+
 def test_exclusive_pair_keeps_the_better_combination():
     a = make_scheme("a", [], amount_inr_per_year=30000, exclusive_with=["b"])
     b = make_scheme("b", [], amount_inr_per_year=20000)
@@ -60,14 +63,18 @@ def test_exclusive_pair_keeps_the_better_combination():
     assert plan["dropped"] == [
         {
             "scheme_id": "a",
-            "reason": "Cannot be combined with B (inferred from the scheme guidelines, check the notice)",
+            "reason": f"Cannot be combined with B ({INFERRED})",
         }
     ]
 
 
 def test_exclusive_pair_with_a_cited_source_is_an_official_rule():
     a = make_scheme(
-        "a", [], amount_inr_per_year=30000, exclusive_with=["b"], exclusivity_source={"b": "https://x"}
+        "a",
+        [],
+        amount_inr_per_year=30000,
+        exclusive_with=["b"],
+        exclusivity_source={"b": "https://x"},
     )
     b = make_scheme("b", [], amount_inr_per_year=40000, exclusive_with=["a"])
     plan = optimize([a, b], {})
