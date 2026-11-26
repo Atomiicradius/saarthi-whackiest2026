@@ -1,0 +1,489 @@
+[
+  {
+    "id": "csss-pm-usp-ug",
+    "name": "PM-USP Central Sector Scheme of Scholarship for College and University Students (UG)",
+    "provider": "central",
+    "portal": "nsp",
+    "scheme_type": "merit",
+    "level": [
+      "UG"
+    ],
+    "amount_inr_per_year": 12000,
+    "deadline": null,
+    "application_window": null,
+    "criteria": [
+      {
+        "field": "annual_family_income_inr",
+        "op": "<=",
+        "value": 450000
+      },
+      {
+        "field": "course_level",
+        "op": "in",
+        "value": [
+          "UG"
+        ]
+      }
+    ],
+    "docs_required": [
+      "marksheet",
+      "income_certificate",
+      "caste_certificate",
+      "disability_certificate"
+    ],
+    "exclusive_with": [
+      "pm-yasasvi-obc-post-matric",
+      "aicte-pragati-degree",
+      "ka-sc-postmatric-fee-reimbursement",
+      "ka-sc-technical-medical-ayush-fee-reimbursement",
+      "ka-sc-professional-tuition-fee-quota",
+      "aicte-saksham-degree",
+      "central-post-matric-sc",
+      "central-post-matric-st"
+    ],
+    "exclusivity_group": null,
+    "portal_url": "https://scholarships.gov.in/",
+    "source_url": "https://scholarships.gov.in/public/schemeGuidelines/CSSS_GUIDLINES_06022024.pdf",
+    "confidence": 0.9,
+    "last_verified": "2026-11-26",
+    "notes": "Source: official PM-USP CSSS guidelines (Department of Higher Education, 6 Feb 2024 version, read directly) and the myScheme page https://www.myscheme.gov.in/schemes/csss-cus, which agree. Amount: Rs 12,000 a year for years 1-3; B.Tech/B.E. students get Rs 20,000 in year 4 (amount field holds the year 1-3 rate). Merit rule not encodable: applicant must be above the 80th percentile of successful candidates in their stream and Board in Class 12, so no marks criterion is set and this is NOT checked by the engine. Other conditions not encoded: regular (not correspondence/distance) course at an AICTE-recognised institution; renewal needs at least 50% marks and 75% attendance; Aadhaar-seeded bank account. Excludes diploma students (course_level limited to UG). Students already getting any other scholarship, including State scholarship or fee waiver/reimbursement schemes, are not eligible, hence exclusive_with. caste_certificate applies to reserved categories only; disability_certificate only if applicable. Application window not set: NSP publishes timelines and the 2026-27 window was not confirmed."
+  },
+  {
+    "id": "pm-yasasvi-obc-post-matric",
+    "name": "PM-YASASVI: Post-Matric Scholarship for OBC, EBC and DNT Students",
+    "provider": "central",
+    "portal": "nsp",
+    "scheme_type": "welfare",
+    "level": [
+      "UG",
+      "PG",
+      "DIPLOMA"
+    ],
+    "amount_inr_per_year": 20000,
+    "deadline": null,
+    "application_window": null,
+    "criteria": [
+      {
+        "field": "category",
+        "op": "in",
+        "value": [
+          "OBC"
+        ]
+      },
+      {
+        "field": "annual_family_income_inr",
+        "op": "<=",
+        "value": 250000
+      }
+    ],
+    "docs_required": [
+      "income_certificate",
+      "caste_certificate",
+      "marksheet",
+      "domicile_certificate"
+    ],
+    "exclusive_with": [
+      "csss-pm-usp-ug",
+      "aicte-pragati-degree",
+      "aicte-saksham-degree",
+      "central-post-matric-sc",
+      "central-post-matric-st"
+    ],
+    "exclusivity_group": null,
+    "portal_url": "https://scholarships.gov.in/",
+    "source_url": "https://www.myscheme.gov.in/schemes/pm-yasasvipmsobcebcdnts",
+    "confidence": 0.75,
+    "last_verified": "2026-11-26",
+    "notes": "Source: myScheme (Govt of India), Ministry of Social Justice and Empowerment. Amount shown is Group 1 (degree and post-graduate professional courses): Rs 10,000 academic allowance plus Rs 10,000 tuition fee. Other groups pay Rs 13,000, Rs 8,000 and Rs 5,000. Income ceiling is Rs 2.5 lakh a year (parents'/guardians' income, or combined income for employed students). Open to OBC, EBC and DNT students as notified for the applicant's own State; the profile has only an OBC category, so EBC and DNT students are not matched. Only two boys of the same parents can receive it (this limit does not apply to girls), not encoded. A holder may not hold another scholarship or stipend and must choose one; exclusive_with lists the other central scheme in this file. Domicile/permanent settlement in the State is required but not encoded. Application window not confirmed."
+  },
+  {
+    "id": "ka-sc-postmatric-fee-reimbursement",
+    "name": "Karnataka SSP: Fee reimbursement for SC students in post-matric courses (family income below Rs 2.5 lakh)",
+    "provider": "karnataka",
+    "portal": "other",
+    "scheme_type": "welfare",
+    "level": [
+      "UG",
+      "PG",
+      "DIPLOMA"
+    ],
+    "amount_inr_per_year": null,
+    "deadline": null,
+    "application_window": null,
+    "criteria": [
+      {
+        "field": "category",
+        "op": "in",
+        "value": [
+          "SC"
+        ]
+      },
+      {
+        "field": "annual_family_income_inr",
+        "op": "<",
+        "value": 250000
+      }
+    ],
+    "docs_required": [],
+    "exclusive_with": [
+      "csss-pm-usp-ug",
+      "aicte-pragati-degree",
+      "aicte-saksham-degree",
+      "central-post-matric-sc",
+      "central-post-matric-st"
+    ],
+    "exclusivity_group": null,
+    "portal_url": "https://ssp.karnataka.gov.in/",
+    "source_url": "https://ssp.karnataka.gov.in/Schemes",
+    "confidence": 0.65,
+    "last_verified": "2026-11-26",
+    "notes": "Source: Karnataka State Scholarship Portal scheme list, Social Welfare Department (page text is in Kannada; translated). The page states only: fee reimbursement for SC students in post-matric courses whose family income is below Rs 2.5 lakh. Amount, documents, domicile rule and application dates are not on that page, so amount is null and docs_required is empty (unknown). Karnataka domicile is likely required but is not stated, so it is not encoded. Marked exclusive with PM-USP because PM-USP excludes students who already get State fee reimbursement."
+  },
+  {
+    "id": "ka-sc-technical-medical-ayush-fee-reimbursement",
+    "name": "Karnataka SSP: Fee reimbursement for SC students in technical, medical and AYUSH courses (family income Rs 2.5-10 lakh)",
+    "provider": "karnataka",
+    "portal": "other",
+    "scheme_type": "welfare",
+    "level": [
+      "UG",
+      "PG",
+      "DIPLOMA"
+    ],
+    "amount_inr_per_year": null,
+    "deadline": null,
+    "application_window": null,
+    "criteria": [
+      {
+        "field": "category",
+        "op": "in",
+        "value": [
+          "SC"
+        ]
+      },
+      {
+        "field": "annual_family_income_inr",
+        "op": ">",
+        "value": 250000
+      },
+      {
+        "field": "annual_family_income_inr",
+        "op": "<",
+        "value": 1000000
+      }
+    ],
+    "docs_required": [],
+    "exclusive_with": [
+      "csss-pm-usp-ug",
+      "aicte-pragati-degree",
+      "aicte-saksham-degree",
+      "central-post-matric-sc",
+      "central-post-matric-st"
+    ],
+    "exclusivity_group": null,
+    "portal_url": "https://ssp.karnataka.gov.in/",
+    "source_url": "https://ssp.karnataka.gov.in/Schemes",
+    "confidence": 0.65,
+    "last_verified": "2026-11-26",
+    "notes": "Source: Karnataka State Scholarship Portal scheme list, Social Welfare Department (Kannada; translated). Stated conditions: SC students in technical, medical or AYUSH courses with annual family income above Rs 2.5 lakh and below Rs 10 lakh. The course type (technical/medical/AYUSH) is not encoded because the profile 'course' field is free text; the portal's wording leaves income of exactly Rs 2.5 lakh and exactly Rs 10 lakh outside both this scheme and the Rs 2.5 lakh one, so those two values give no match. Amount, documents, domicile rule and dates are not stated on that page (amount null, docs empty). Marked exclusive with PM-USP for the same reason as the other Karnataka fee reimbursement."
+  },
+  {
+    "id": "ka-sc-professional-tuition-fee-quota",
+    "name": "Karnataka SSP: Tuition fee reimbursement for SC students in professional courses under management or private quota",
+    "provider": "karnataka",
+    "portal": "other",
+    "scheme_type": "welfare",
+    "level": [
+      "UG",
+      "PG"
+    ],
+    "amount_inr_per_year": null,
+    "deadline": null,
+    "application_window": null,
+    "criteria": [
+      {
+        "field": "category",
+        "op": "in",
+        "value": [
+          "SC"
+        ]
+      }
+    ],
+    "docs_required": [],
+    "exclusive_with": [
+      "csss-pm-usp-ug",
+      "aicte-pragati-degree",
+      "aicte-saksham-degree",
+      "central-post-matric-sc",
+      "central-post-matric-st"
+    ],
+    "exclusivity_group": null,
+    "portal_url": "https://ssp.karnataka.gov.in/",
+    "source_url": "https://ssp.karnataka.gov.in/Schemes",
+    "confidence": 0.5,
+    "last_verified": "2026-11-26",
+    "notes": "Source: Karnataka State Scholarship Portal scheme list, Social Welfare Department (Kannada; translated). The page says only: tuition fee reimbursement for SC students studying professional courses under the management quota or private quota. No income limit is shown there, and the quota condition cannot be checked from the profile, so the engine treats every SC student as matching on category alone. Low confidence: read the full scheme notice before showing this to a student. Amount, documents and dates are not stated on that page."
+  },
+  {
+    "id": "ka-sc-hostel-maintenance-technical-medical",
+    "name": "Karnataka SSP: Hostel maintenance cost for SC students in hostels run by technical and medical colleges",
+    "provider": "karnataka",
+    "portal": "other",
+    "scheme_type": "welfare",
+    "level": [
+      "UG",
+      "PG"
+    ],
+    "amount_inr_per_year": null,
+    "deadline": null,
+    "application_window": null,
+    "criteria": [
+      {
+        "field": "category",
+        "op": "in",
+        "value": [
+          "SC"
+        ]
+      }
+    ],
+    "docs_required": [],
+    "exclusive_with": [
+      "aicte-pragati-degree",
+      "aicte-saksham-degree",
+      "central-post-matric-sc",
+      "central-post-matric-st"
+    ],
+    "exclusivity_group": null,
+    "portal_url": "https://ssp.karnataka.gov.in/",
+    "source_url": "https://ssp.karnataka.gov.in/Schemes",
+    "confidence": 0.5,
+    "last_verified": "2026-11-26",
+    "notes": "Source: Karnataka State Scholarship Portal scheme list, Social Welfare Department (Kannada; translated). The page says only: hostel maintenance cost for SC students living in hostels managed by colleges that run technical and medical courses. Living in such a hostel cannot be checked from the profile, so category is the only criterion; a student who does not live in a college-run hostel will still see this as a match. Low confidence: read the full scheme notice first. Amount, documents, income limit and dates are not stated on that page."
+  },
+  {
+    "id": "aicte-pragati-degree",
+    "name": "AICTE Pragati Scholarship Scheme for Girl Students (Degree)",
+    "provider": "central",
+    "portal": "nsp",
+    "scheme_type": "merit",
+    "level": [
+      "UG"
+    ],
+    "amount_inr_per_year": 50000,
+    "deadline": "2026-11-30",
+    "application_window": {
+      "ay": "2026-27",
+      "opens": "2026-06-19",
+      "closes": "2026-11-30",
+      "status": "open"
+    },
+    "criteria": [
+      {
+        "field": "gender",
+        "op": "==",
+        "value": "F"
+      },
+      {
+        "field": "course_level",
+        "op": "in",
+        "value": [
+          "UG"
+        ]
+      },
+      {
+        "field": "year_of_study",
+        "op": "<=",
+        "value": 2
+      },
+      {
+        "field": "annual_family_income_inr",
+        "op": "<=",
+        "value": 800000
+      }
+    ],
+    "docs_required": [
+      "income_certificate",
+      "marksheet",
+      "caste_certificate"
+    ],
+    "exclusive_with": [
+      "csss-pm-usp-ug",
+      "pm-yasasvi-obc-post-matric",
+      "ka-sc-postmatric-fee-reimbursement",
+      "ka-sc-technical-medical-ayush-fee-reimbursement",
+      "ka-sc-professional-tuition-fee-quota",
+      "ka-sc-hostel-maintenance-technical-medical",
+      "aicte-saksham-degree",
+      "central-post-matric-sc",
+      "central-post-matric-st"
+    ],
+    "exclusivity_group": null,
+    "portal_url": "https://scholarships.gov.in/",
+    "source_url": "https://scholarships.gov.in/public/schemeGuidelines/AICTE/AICTE_2010_G.pdf",
+    "confidence": 0.6,
+    "last_verified": "2026-11-26",
+    "notes": "Source: AICTE guidelines for the Pragati Scholarship Scheme for Girl Students (Degree), dated July 2020 (academic year 2020-21), read directly from the PDF on the National Scholarship Portal. These are the only guidelines on NSP for the degree scheme; confidence is lowered because they are from 2020 and no 2026-27 eligibility guideline was seen. Eligibility: girl admitted to first year of a degree course, or second year through lateral entry, in an AICTE-approved institution; maximum two girl children per family; family income from all sources not above Rs 8 lakh a year with a State/UT income certificate. year_of_study <= 2 stands in for first year or second-year lateral entry, so a regular second-year student may show a false match. Amount Rs 50,000 a year, for up to 4 years (3 for lateral entry). Only 5,000 awards a year, with Karnataka's allocation at 398; selection is by merit of 10+2 marks, which the engine does not check, so eligible means eligible to apply, not selected. A student may not receive any other scholarship, stipend or emolument from any source, hence exclusive_with lists every other scholarship in this file. A gap of more than two years between the qualifying exam and admission makes a student ineligible (not encoded). Reserved-category students need their category certificate. Dates: AICTE notification of 19.06.2026 says the 2026-27 portal had opened (opens is that notice date) with last date 31.10.2026; a later AICTE notification extends student applications to 30.11.2026 (institute verification to 15.12.2026)."
+  },
+  {
+    "id": "aicte-saksham-degree",
+    "name": "AICTE Saksham Scholarship Scheme for Specially-abled Students (Degree)",
+    "provider": "central",
+    "portal": "nsp",
+    "scheme_type": "welfare",
+    "level": [
+      "UG"
+    ],
+    "amount_inr_per_year": 50000,
+    "deadline": "2026-11-30",
+    "application_window": {
+      "ay": "2026-27",
+      "opens": "2026-06-19",
+      "closes": "2026-11-30",
+      "status": "open"
+    },
+    "criteria": [
+      {
+        "field": "disability",
+        "op": "==",
+        "value": true
+      },
+      {
+        "field": "course_level",
+        "op": "in",
+        "value": [
+          "UG"
+        ]
+      },
+      {
+        "field": "year_of_study",
+        "op": "<=",
+        "value": 2
+      },
+      {
+        "field": "annual_family_income_inr",
+        "op": "<=",
+        "value": 800000
+      }
+    ],
+    "docs_required": [
+      "income_certificate",
+      "disability_certificate",
+      "marksheet"
+    ],
+    "exclusive_with": [
+      "csss-pm-usp-ug",
+      "pm-yasasvi-obc-post-matric",
+      "ka-sc-postmatric-fee-reimbursement",
+      "ka-sc-technical-medical-ayush-fee-reimbursement",
+      "ka-sc-professional-tuition-fee-quota",
+      "ka-sc-hostel-maintenance-technical-medical",
+      "aicte-pragati-degree",
+      "central-post-matric-sc",
+      "central-post-matric-st"
+    ],
+    "exclusivity_group": null,
+    "portal_url": "https://scholarships.gov.in/",
+    "source_url": "https://scholarships.gov.in/public/schemeGuidelines/AICTE/AICTE_2012_G.pdf",
+    "confidence": 0.65,
+    "last_verified": "2026-11-26",
+    "notes": "Source: AICTE guidelines for the Saksham Scholarship Scheme (Degree), July 2020 (2020-21), and the AICTE Saksham FAQ, both read directly. Eligibility: specially-abled student with disability of not less than 40%; admitted to first year of a degree course, or second year through lateral entry, in an AICTE-approved institution; family income from all sources not more than Rs 8 lakh (the guidelines say 'not more than' and the FAQ says 'less than', so exactly Rs 8 lakh is uncertain). The profile's disability field only records whether the student has a disability certificate, so the 40% threshold is not checked. year_of_study <= 2 stands in for first year or second-year lateral entry; the FAQ says a third-year student is not eligible. Amount Rs 50,000 a year for up to 4 years (3 for lateral entry). All eligible applicants get it (no merit cap stated). A student may not receive any other Central, State or AICTE scholarship, so exclusive_with lists every other scholarship in this file. Guidelines are from 2020; 2026-27 eligibility notice not seen. Dates: AICTE notification of 19.06.2026 says the 2026-27 portal had opened (opens is that notice date) with last date 31.10.2026; a later AICTE notification extends student applications to 30.11.2026 (institute verification to 15.12.2026)."
+  },
+  {
+    "id": "central-post-matric-sc",
+    "name": "Post Matric Scholarship for Scheduled Caste Students (Centrally Sponsored)",
+    "provider": "central",
+    "portal": "other",
+    "scheme_type": "welfare",
+    "level": [
+      "UG",
+      "PG",
+      "DIPLOMA"
+    ],
+    "amount_inr_per_year": 7000,
+    "deadline": null,
+    "application_window": null,
+    "criteria": [
+      {
+        "field": "category",
+        "op": "==",
+        "value": "SC"
+      },
+      {
+        "field": "annual_family_income_inr",
+        "op": "<=",
+        "value": 250000
+      }
+    ],
+    "docs_required": [
+      "caste_certificate",
+      "income_certificate",
+      "marksheet",
+      "domicile_certificate"
+    ],
+    "exclusive_with": [
+      "csss-pm-usp-ug",
+      "pm-yasasvi-obc-post-matric",
+      "ka-sc-postmatric-fee-reimbursement",
+      "ka-sc-technical-medical-ayush-fee-reimbursement",
+      "ka-sc-professional-tuition-fee-quota",
+      "ka-sc-hostel-maintenance-technical-medical",
+      "aicte-pragati-degree",
+      "aicte-saksham-degree"
+    ],
+    "exclusivity_group": null,
+    "portal_url": "https://ssp.karnataka.gov.in/",
+    "source_url": "https://socialjustice.gov.in/",
+    "confidence": 0.6,
+    "last_verified": "2026-11-26",
+    "notes": "Source: guidelines of the Ministry of Social Justice and Empowerment, March 2021, for 2020-21 to 2025-26 (saved file data/Postmatric_SC.pdf, scanned; pages 1-9 read). WARNING: the stated validity ends with 2025-26 and no 2026-27 renewal of these guidelines was seen. source_url is the ministry home page because the exact download link was not recorded. Eligibility: SC as notified for the State the student belongs to; passed matriculation or higher; parents'/guardians' income from all sources not above Rs 2.5 lakh in the last financial year; recognised institution. Seats filled through management, NRI or spot quota are not eligible (not encoded). A holder may not keep another scholarship or stipend. Amount is only the Group 1 (degree professional course) day-scholar academic allowance of Rs 7,000 (Rs 13,500 for hostellers); compulsory non-refundable fees are also paid and are not counted, so the real value is higher. Applied through the State's portal. Probably the same benefit that Karnataka SSP delivers as SC fee reimbursement, so these are marked exclusive to avoid double counting."
+  },
+  {
+    "id": "central-post-matric-st",
+    "name": "Post Matric Scholarship for Scheduled Tribe Students (Centrally Sponsored)",
+    "provider": "central",
+    "portal": "other",
+    "scheme_type": "welfare",
+    "level": [
+      "UG",
+      "PG",
+      "DIPLOMA"
+    ],
+    "amount_inr_per_year": 5500,
+    "deadline": null,
+    "application_window": null,
+    "criteria": [
+      {
+        "field": "category",
+        "op": "==",
+        "value": "ST"
+      },
+      {
+        "field": "annual_family_income_inr",
+        "op": "<=",
+        "value": 250000
+      }
+    ],
+    "docs_required": [
+      "caste_certificate",
+      "income_certificate",
+      "marksheet",
+      "domicile_certificate"
+    ],
+    "exclusive_with": [
+      "csss-pm-usp-ug",
+      "pm-yasasvi-obc-post-matric",
+      "ka-sc-postmatric-fee-reimbursement",
+      "ka-sc-technical-medical-ayush-fee-reimbursement",
+      "ka-sc-professional-tuition-fee-quota",
+      "ka-sc-hostel-maintenance-technical-medical",
+      "aicte-pragati-degree",
+      "aicte-saksham-degree"
+    ],
+    "exclusivity_group": null,
+    "portal_url": "https://ssp.karnataka.gov.in/",
+    "source_url": "https://tribal.nic.in/",
+    "confidence": 0.8,
+    "last_verified": "2026-11-26",
+    "notes": "Source: Ministry of Tribal Affairs guidelines, applicable from 01-04-2022 (saved file 'Centrally Sponsored Scheme of Post Matric Scholarship Scheme for ST Students_scheme.pdf', read directly). source_url is the ministry home page because the exact download link was not recorded. Eligibility: ST as specified for the student's domicile State; passed matriculation or higher; family income from all sources not above Rs 2.5 lakh a year (income test does not apply to an orphan supported by a guardian); recognised institution; not getting any other scholarship. Students in the Ministry's listed Top Class institutes are covered by a different scheme instead (not encoded). Amount is only the Group I day-scholar stipend of Rs 5,500 a year (Rs 12,000 for hostellers); compulsory non-refundable fees are also paid (Government of India support capped at Rs 2.5 lakh a year for engineering in private institutes) and are not counted. Applied through the State's portal."
+  }
+]
