@@ -45,7 +45,7 @@ export function displayValue(field: ProfileFieldName, value: FieldValue): string
     case "last_exam_marks_pct":
       return `${value}%`;
     case "year_of_study":
-      return `Year ${value}`;
+      return String(value); // the row and the read-back already say "Year"
     case "institution_type":
       return INSTITUTION_LABELS[String(value)] ?? String(value);
     case "state_of_domicile":
@@ -53,6 +53,21 @@ export function displayValue(field: ProfileFieldName, value: FieldValue): string
     default:
       return String(value);
   }
+}
+
+// The text shown for an answer: a chip answer uses its (translated) chip label, so a yes/no
+// answer reads "Yes" or "No" and never "true" or "false". Numbers keep their own formatting.
+export function valueText(
+  field: ProfileFieldName,
+  value: FieldValue,
+  t: (path: string) => string,
+): string {
+  const config = ANSWER_CONFIG[field];
+  if (config?.kind === "chips" && field !== "year_of_study") {
+    const label = Object.entries(config.values).find(([, chip]) => chip === value)?.[0];
+    if (label) return t(`choices.${label}`);
+  }
+  return displayValue(field, value);
 }
 
 export function chipValue(field: ProfileFieldName, label: string): FieldValue {

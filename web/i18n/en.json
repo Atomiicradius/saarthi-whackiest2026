@@ -29,7 +29,10 @@
     "useThis": "Use this answer",
     "loading": "Loading the next question",
     "error": "Could not load the next question. Please try again.",
-    "retry": "Try again"
+    "retry": "Try again",
+    "stateQuestion": "Which state do you live in?",
+    "notNeeded": "Not needed for your schemes",
+    "skippedNote": "Saarthi skipped questions that would not change your results."
   },
   "fields": {
     "state_of_domicile": "State",

@@ -14,7 +14,7 @@ import { ReadbackBubbles } from "@/components/interview/readback-bubbles";
 import { StepperInput } from "@/components/interview/stepper-input";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { ANSWER_CONFIG, chipValue, displayValue } from "@/lib/answer-config";
+import { ANSWER_CONFIG, chipValue, displayValue, valueText } from "@/lib/answer-config";
 import { cn } from "@/lib/cn";
 import { useSession } from "@/lib/session";
 import { useVoiceAnswer } from "@/lib/use-voice-answer";
@@ -50,7 +50,21 @@ export default function InterviewPage() {
   }, [profile]);
   const requestKey = `${steps.map((step) => step.field).join(",")}|${locale}|${attempt}`;
 
+  // With the API, the first question is always the state (no scheme needs it, so the engine never
+  // asks). The sample data already starts with it.
+  const needsState = !usingMocks && profile.state_of_domicile?.confirmed !== true;
+  const stateQuestion = useMemo<InterviewNext>(
+    () => ({
+      field: "state_of_domicile",
+      question: t("interview.stateQuestion"),
+      choices: ["Karnataka", "Another state"],
+      resolves_estimate: 0,
+    }),
+    [t],
+  );
+
   useEffect(() => {
+    if (needsState) return;
     let cancelled = false;
     interviewNext(profileRef.current, locale)
       .then((next) => {
@@ -62,10 +76,10 @@ export default function InterviewPage() {
     return () => {
       cancelled = true;
     };
-  }, [requestKey, locale]);
+  }, [requestKey, locale, needsState]);
 
-  const question = loaded?.key === requestKey ? loaded.question : null;
-  const failed = failedKey === requestKey;
+  const question = needsState ? stateQuestion : loaded?.key === requestKey ? loaded.question : null;
+  const failed = !needsState && failedKey === requestKey;
 
   useEffect(() => {
     getSchemeCount()
@@ -140,7 +154,7 @@ export default function InterviewPage() {
     else goBack();
   }
 
-  const answerText = field && hasPending ? displayValue(field, pendingValue) : "";
+  const answerText = field && hasPending ? valueText(field, pendingValue, t) : "";
 
   const guideState: GuideState = failed ? "concerned" : !question ? "thinking" : mood;
   const guideMessage = failed
@@ -261,7 +275,7 @@ export default function InterviewPage() {
           )}
         </Card>
 
-        <ProfileCard />
+        <ProfileCard currentField={field} done={question !== null && field === null} />
       </div>
     </PageColumns>
   );
