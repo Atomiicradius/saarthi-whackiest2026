@@ -98,13 +98,18 @@
     "notInPlan": "Eligible, not in plan",
     "sampleData": "Sample data: scheme names, amounts and dates are examples, not real schemes.",
     "guide": "I found {count} schemes for your plan, worth about {total} a year. They appear eligible, so check each official notice before applying.",
-    "guideNone": "I could not find an open scheme for your plan yet."
+    "guideNone": "I could not find an open scheme for your plan yet.",
+    "guideOne": "I found 1 scheme for your plan, worth about {total} a year. It appears eligible, so check the official notice before applying.",
+    "amountsUnconfirmed": "Amounts not confirmed yet",
+    "guideNoAmount": "I found schemes for your plan, but their amounts are not confirmed yet. They appear eligible, so check each official notice before applying."
   },
   "docs": {
     "income_certificate": "income certificate",
     "caste_certificate": "caste certificate",
     "marksheet": "marksheet",
-    "bonafide_certificate": "bonafide certificate"
+    "bonafide_certificate": "bonafide certificate",
+    "domicile_certificate": "domicile certificate",
+    "disability_certificate": "disability certificate"
   },
   "demo": {
     "resetToRavi": "Reset to Ravi"
@@ -155,7 +160,8 @@
     "stubNote": "Prototype vault: AES-256-GCM in your browser",
     "loading": "Loading your documents",
     "lockedBadge": "Locked",
-    "guide": "I lock each document on this device before anything is stored. The server only ever sees scrambled bytes."
+    "guide": "I lock each document on this device before anything is stored. The server only ever sees scrambled bytes.",
+    "fallbackNote": "The schemes in your plan have no documents confirmed yet. These are the documents asked for by schemes you may still qualify for."
   },
   "serverView": {
     "title": "What the server sees",

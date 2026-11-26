@@ -5,9 +5,9 @@
     "actor": "user",
     "action": "grant",
     "fields": ["annual_family_income_inr", "category"],
-    "purpose": "sandbox-portal:example-welfare-c",
+    "purpose": "sandbox-portal:ka-sc-professional-tuition-fee-quota",
     "prev_hash": "0000000000000000000000000000000000000000000000000000000000000000",
-    "hash": "167d69c1adb54400664266776daac99f19b98c9818240167d0e25389649231f6"
+    "hash": "0630b867ab302951e57e4a198395a8e6b0f5cbc0c8d5a5dc932133833f322679"
   },
   {
     "idx": 1,
@@ -15,9 +15,9 @@
     "actor": "copilot",
     "action": "prefill",
     "fields": ["annual_family_income_inr", "category"],
-    "purpose": "sandbox-portal:example-welfare-c",
-    "prev_hash": "167d69c1adb54400664266776daac99f19b98c9818240167d0e25389649231f6",
-    "hash": "cb80bfa3e7c335efde5ce40433589df1abf3c18255284c0238adc45216f3f6bf"
+    "purpose": "sandbox-portal:ka-sc-professional-tuition-fee-quota",
+    "prev_hash": "0630b867ab302951e57e4a198395a8e6b0f5cbc0c8d5a5dc932133833f322679",
+    "hash": "c767d10c0dd21635eec2bc07712ed2c71fed85514bb5765f5b1800bb2a5ca018"
   },
   {
     "idx": 2,
@@ -25,8 +25,8 @@
     "actor": "user",
     "action": "revoke",
     "fields": ["annual_family_income_inr", "category"],
-    "purpose": "sandbox-portal:example-welfare-c",
-    "prev_hash": "cb80bfa3e7c335efde5ce40433589df1abf3c18255284c0238adc45216f3f6bf",
-    "hash": "87ba5e3866d5ac608c52589c436a465633506942fcbd4dce48f1456110f915a7"
+    "purpose": "sandbox-portal:ka-sc-professional-tuition-fee-quota",
+    "prev_hash": "c767d10c0dd21635eec2bc07712ed2c71fed85514bb5765f5b1800bb2a5ca018",
+    "hash": "af1ba0e1e4a889d1b7e00a4f9af8f84e2e0eb77c547835e51d5f803ec93cbd53"
   }
 ]

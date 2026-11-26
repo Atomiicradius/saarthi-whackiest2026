@@ -1,0 +1,13 @@
+{
+  "state_of_domicile": { "value": "Karnataka", "source": "tap", "confirmed": true },
+  "category": { "value": "SC", "source": "tap", "confirmed": true },
+  "minority_community": { "value": false, "source": "tap", "confirmed": true },
+  "gender": { "value": "M", "source": "tap", "confirmed": true },
+  "disability": { "value": false, "source": "tap", "confirmed": true },
+  "annual_family_income_inr": { "value": 500000, "source": "tap", "confirmed": true },
+  "course": { "value": "BE-CSE", "source": "tap", "confirmed": true },
+  "course_level": { "value": "UG", "source": "tap", "confirmed": true },
+  "year_of_study": { "value": 2, "source": "tap", "confirmed": true },
+  "institution_type": { "value": "private", "source": "tap", "confirmed": true },
+  "last_exam_marks_pct": { "value": 78.5, "source": "tap", "confirmed": true }
+}

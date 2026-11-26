@@ -11,7 +11,7 @@ import {
 } from "react";
 import auditMock from "@/mocks/audit.json";
 import interviewMock from "@/mocks/interview.json";
-import raviProfile from "@/mocks/ravi.profile.json";
+import { RAVI } from "@/lib/ravi";
 import { translate, type Locale } from "@/lib/i18n";
 import { vault, type NewAuditEntry, type VaultBlob } from "@/lib/vault-adapter";
 import type { AuditEntry, FieldValue, Profile, ProfileFieldName } from "@/lib/types";
@@ -118,7 +118,7 @@ export function SessionProvider({ children }: { children: ReactNode }) {
 
   const loadRavi = useCallback(() => {
     setPersona(null);
-    setProfile(raviProfile as Profile);
+    setProfile(RAVI);
     setSteps(
       interviewMock.questions.map((question) => ({
         field: question.field as ProfileFieldName,

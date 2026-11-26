@@ -86,12 +86,21 @@ def _best_subset(
     return list(best)
 
 
+def _rule_label(a: Scheme, b: Scheme) -> str:
+    # "Official rule" only when the data cites a source for this pair (`exclusivity_source` on
+    # either record). Otherwise the pair is an inference from the scheme guidelines.
+    sourced = b["id"] in (a.get("exclusivity_source") or {}) or a["id"] in (
+        b.get("exclusivity_source") or {}
+    )
+    return "official rule" if sourced else "inferred from the scheme guidelines, check the notice"
+
+
 def _drop_reason(
     scheme: Scheme, selected: list[Scheme], pairs: set[frozenset[str]], weights: dict[str, float]
 ) -> str:
     for other in selected:
         if frozenset((scheme["id"], other["id"])) in pairs:
-            return f"Cannot be combined with {other['name']} (official rule)"
+            return f"Cannot be combined with {other['name']} ({_rule_label(scheme, other)})"
     if _is_nsp_merit(scheme):
         winner = next((s for s in selected if _is_nsp_merit(s)), None)
         if winner:

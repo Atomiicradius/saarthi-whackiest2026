@@ -69,7 +69,7 @@ India has many central and state scholarships, but students from underserved bac
   <img src="docs/screenshots/audit-broken.png" width="100%" alt="Audit chain broken at an edited entry" />
 </div>
 
-*Prototype screenshots, shown with labelled sample data.*
+*Prototype screenshots with the sourced scheme data and a sample student.*
 
 ## How Saarthi Is Different
 
@@ -139,7 +139,7 @@ We're upfront about this, since it matters for judging the demo honestly. Update
 
 | Component | Status |
 |---|:---:|
-| Scheme dataset (central + Karnataka, undergraduate engineering) | 🟡 **In progress**, being collected from official sources. The demo runs on clearly labelled EXAMPLE schemes until it lands |
+| Scheme dataset (central + Karnataka, undergraduate engineering) | 🟡 **In progress.** 10 schemes sourced from official portals, with a confidence level recorded on each. More are listed for review. The sample-data mode still uses clearly labelled EXAMPLE schemes |
 | Eligibility engine (tri-state verdicts, explanations, near-miss) | ✅ **Built and tested** in `/engine`, used by the UI in API mode |
 | Adaptive interview (information-gain question picker) | ✅ **Working**, questions in English, Hindi and Kannada |
 | Portfolio optimiser (NSP one-merit-plus-welfare rule) | ✅ **Working** |
@@ -156,6 +156,9 @@ We're upfront about this, since it matters for judging the demo honestly. Update
 **Limits to keep in mind**
 - Scheme criteria, amounts and deadlines go stale. Every record carries a `source_url` and `last_verified` date.
 - Saarthi says a student *appears eligible*. It is not an approval, and the official notice is the final word.
+- Scheme level (UG, PG, diploma) is not enforced yet, so a scheme without a course-level condition can match any level.
+- Some state scheme amounts are unknown and show as "Amount not confirmed".
+- Some scheme criteria are lower confidence: conditions such as merit percentile, college quota, hostel stay and domicile are not checked, so "appears eligible" can be wider than the real rule.
 - Speech recognition was tested on clean synthetic speech in all three languages. Real, noisy, regional-accent audio is still to be tested, so every answer is read back for confirmation and tapping always works.
 - Voice audio goes to a cloud service. Students are asked to speak profile answers only, never IDs or document contents.
 - A lost passphrase means lost vault data. A printed recovery key is planned.
@@ -183,7 +186,7 @@ Design goals. In the prototype today, documents are encrypted in the browser wit
 cp .env.example .env
 cp web/.env.example web/.env.local   # NEXT_PUBLIC_USE_MOCKS=false in web/.env.local uses the API at http://localhost:8000, which must be running (true, the default, = built-in sample data)
 
-# 2. Backend (Python 3.11+)
+# 2. Backend (Python 3.11+). It reads data/schemes.json by default; no variable is needed.
 cd api
 pip install -r requirements-dev.txt
 uvicorn main:app --reload --env-file ../.env
