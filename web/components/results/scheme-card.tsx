@@ -80,11 +80,11 @@ export function SchemeCard({ view, t }: { view: SchemeView; t: T }) {
         </div>
       ) : (
         <ul className="mt-3 space-y-2">
-          {result.reasons.map((reason) => {
+          {result.reasons.map((reason, index) => {
             const { icon: Icon, className, label } = REASON_ICON[reason.status];
             return (
               <li
-                key={`${reason.field}-${reason.detail}`}
+                key={`${reason.field}-${reason.detail}-${index}`}
                 className="flex items-start gap-2 text-sm"
               >
                 <Icon className={`mt-0.5 size-5 shrink-0 ${className}`} aria-hidden />

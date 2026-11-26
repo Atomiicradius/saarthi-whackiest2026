@@ -28,11 +28,15 @@ class VoiceUnavailable(Exception):
     """No API key configured, or ElevenLabs refused the call."""
 
 
+def key_configured() -> bool:
+    key = os.environ.get("ELEVENLABS_API_KEY", "").strip()
+    return bool(key) and key != "your-key-here"
+
+
 def _key() -> str:
-    key = os.environ.get("ELEVENLABS_API_KEY", "")
-    if not key or key == "your-key-here":
-        raise VoiceUnavailable("Voice is not configured on this server")
-    return key
+    if not key_configured():
+        raise VoiceUnavailable("ELEVENLABS_API_KEY is not set")
+    return os.environ["ELEVENLABS_API_KEY"].strip()
 
 
 async def transcribe(audio: bytes, filename: str, content_type: str, lang: str) -> str:

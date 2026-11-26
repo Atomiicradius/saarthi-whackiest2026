@@ -22,9 +22,13 @@ from fastapi.responses import JSONResponse
 from saarthi_engine import evaluate_all, load_schemes, next_question, optimize
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
-import slots
-import voice
-from models import (
+import envfile
+
+ENV_FILES_READ = envfile.load()  # before voice: it reads settings from the environment
+
+import slots  # noqa: E402
+import voice  # noqa: E402
+from models import (  # noqa: E402
     AuditHead,
     InterviewRequest,
     ProfileRequest,
@@ -68,6 +72,10 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
     # In memory only for round 1: ciphertext blobs and the latest audit head.
     app.state.blobs = {}
     app.state.audit_head = None
+    # uvicorn's own logger, so the line shows in the console; never the key itself.
+    logging.getLogger("uvicorn.error").info(
+        "ElevenLabs key: %s", "found" if voice.key_configured() else "not found"
+    )
     log.info("schemes_loaded count=%d skipped_no_source=%d", len(schemes), len(skipped))
     yield
 

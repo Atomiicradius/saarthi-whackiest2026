@@ -44,11 +44,11 @@ export function HowToQualify({ scheme, result, t }: HowToQualifyProps) {
         <div className="h-full rounded-full bg-primary" style={{ width: `${percent}%` }} />
       </div>
       <ul className="mt-3 space-y-2">
-        {result.reasons.map((reason) => {
+        {result.reasons.map((reason, index) => {
           const met = reason.status === "met";
           const Icon = met ? SquareCheck : Square;
           return (
-            <li key={`${reason.field}-${reason.detail}`} className="flex items-start gap-2 text-sm">
+            <li key={`${reason.field}-${reason.detail}-${index}`} className="flex items-start gap-2 text-sm">
               <Icon
                 className={
                   met ? "mt-0.5 size-5 shrink-0 text-success" : "mt-0.5 size-5 shrink-0 text-muted"

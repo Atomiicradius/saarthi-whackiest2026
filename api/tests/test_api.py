@@ -120,15 +120,61 @@ def test_slots_extract_rejects_huge_transcript(client):
     assert_error(response, 422, "invalid_request")
 
 
-def test_voice_without_key_is_unavailable(client):
+def test_voice_without_key_is_unavailable(client, monkeypatch):
+    monkeypatch.delenv("ELEVENLABS_API_KEY", raising=False)
     response = client.post("/api/voice/speak", json={"text": "Hello", "lang": "en"})
     assert_error(response, 503, "voice_unavailable")
+    assert response.json()["error"]["message"] == "ELEVENLABS_API_KEY is not set"
+    monkeypatch.setenv("ELEVENLABS_API_KEY", "your-key-here")
+    response = client.post("/api/voice/speak", json={"text": "Hello", "lang": "en"})
+    assert response.json()["error"]["message"] == "ELEVENLABS_API_KEY is not set"
+    monkeypatch.setenv("ELEVENLABS_API_KEY", "test-key")
+    monkeypatch.delenv("ELEVENLABS_VOICE_ID", raising=False)
+    response = client.post("/api/voice/speak", json={"text": "Hello", "lang": "en"})
+    assert response.json()["error"]["message"] == "ELEVENLABS_VOICE_ID is not set"
+    monkeypatch.delenv("ELEVENLABS_API_KEY")
     response = client.post(
         "/api/voice/transcribe",
         files={"audio": ("a.webm", b"x", "audio/webm")},
         data={"lang": "kn"},
     )
     assert_error(response, 503, "voice_unavailable")
+
+
+def test_startup_logs_whether_a_key_was_found(monkeypatch, caplog):
+    import logging
+
+    from fastapi.testclient import TestClient
+
+    import main
+
+    for value, expected in (("", "not found"), ("sk-secret-value", "found")):
+        monkeypatch.setenv("ELEVENLABS_API_KEY", value)
+        caplog.clear()
+        with caplog.at_level(logging.INFO, logger="uvicorn.error"), TestClient(main.app):
+            pass
+        assert f"ElevenLabs key: {expected}" in caplog.text
+        assert "sk-secret-value" not in caplog.text
+
+
+def test_env_file_parsing_and_precedence(tmp_path, monkeypatch):
+    import os
+
+    import envfile
+
+    env = tmp_path / ".env"
+    env.write_text('# c\nA_KEY="quoted"\nexport B_KEY=plain # note\nC_KEY=real\n', encoding="utf-8")
+    monkeypatch.setenv("C_KEY", "already")
+    monkeypatch.delenv("A_KEY", raising=False)
+    monkeypatch.delenv("B_KEY", raising=False)
+    assert envfile.load((env, tmp_path / "missing.env")) == [env]
+    assert (os.environ["A_KEY"], os.environ["B_KEY"], os.environ["C_KEY"]) == (
+        "quoted",
+        "plain",
+        "already",
+    )
+    for name in ("A_KEY", "B_KEY"):
+        monkeypatch.delenv(name)
 
 
 def test_voice_speak_proxies_audio(client, monkeypatch):

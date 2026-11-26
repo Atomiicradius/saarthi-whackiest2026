@@ -182,7 +182,7 @@ Design goals. In the prototype today, documents are encrypted in the browser wit
 ## Getting Started
 
 ```bash
-# 1. Settings: copy both example files. Add an ElevenLabs key to .env for voice (optional).
+# 1. Settings: copy both example files. Add ELEVENLABS_API_KEY (and ELEVENLABS_VOICE_ID) to api/.env or the root .env for voice (optional); the API reads both at startup, relative to its own folder.
 cp .env.example .env
 cp web/.env.example web/.env.local   # NEXT_PUBLIC_USE_MOCKS=false in web/.env.local uses the API at http://localhost:8000, which must be running (true, the default, = built-in sample data)
 
