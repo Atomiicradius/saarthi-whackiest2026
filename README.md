@@ -62,7 +62,7 @@ India has many central and state scholarships, but students from underserved bac
 
 | Best plan and lanes | Vault: what the server sees |
 |:---:|:---:|
-| <img src="docs/screenshots/results.png" width="100%" alt="Best plan with eligible, almost eligible and closed lanes" /> | <img src="docs/screenshots/server-view.png" width="100%" alt="Document on device versus ciphertext on server" /> |
+| <img src="docs/screenshots/results.png" width="100%" alt="Best plan with eligible and almost eligible lanes" /> | <img src="docs/screenshots/server-view.png" width="100%" alt="Document on device versus ciphertext on server" /> |
 
 <div align="center">
   <b>Tamper-evident audit log</b><br/><br/>

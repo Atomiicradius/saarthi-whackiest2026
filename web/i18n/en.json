@@ -119,13 +119,11 @@
     "disability_certificate": "disability certificate"
   },
   "demo": {
-    "resetToRavi": "Reset to Ravi"
+    "resetToSample": "Reset to {name}"
   },
   "landing": {
     "headline": "Find the scholarships you appear eligible for",
     "pitch": "Answer a few questions by voice or tap, in your language. Your documents stay encrypted on your own device.",
-    "startAsRavi": "Start as Ravi",
-    "raviNote": "Ravi is a sample student with example data.",
     "answerMyself": "Answer the questions myself",
     "guideHello": "Hello! I am your guide. I help you find scholarships you appear eligible for.",
     "how": {
@@ -144,7 +142,9 @@
       "vault": "Encrypted vault",
       "audit": "Tamper-evident audit log"
     },
-    "startAgain": "Ready? Start as Ravi"
+    "startAgain": "Ready? Start as {name}",
+    "startAsSample": "Start as {name}",
+    "sampleNote": "{name} is a sample student with example data."
   },
   "vault": {
     "title": "Your vault",
@@ -250,5 +250,9 @@
     "schemes": "Schemes",
     "vault": "Vault",
     "audit": "Audit"
+  },
+  "persona": {
+    "mock": "Ravi",
+    "api": "Priya"
   }
 }

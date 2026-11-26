@@ -11,7 +11,7 @@ import {
 } from "react";
 import auditMock from "@/mocks/audit.json";
 import interviewMock from "@/mocks/interview.json";
-import { RAVI } from "@/lib/ravi";
+import { SAMPLE_STUDENT } from "@/lib/sample-student";
 import { translate, type Locale } from "@/lib/i18n";
 import { vault, type NewAuditEntry, type VaultBlob } from "@/lib/vault-adapter";
 import type { AuditEntry, FieldValue, Profile, ProfileFieldName } from "@/lib/types";
@@ -38,9 +38,9 @@ interface Session {
   t: (path: string, vars?: Record<string, string | number>) => string;
   profile: Profile;
   steps: Step[];
-  /** "ravi" pre-fills Ravi's answers as suggestions in the interview. */
-  persona: "ravi" | null;
-  setPersona: (persona: "ravi" | null) => void;
+  /** "sample" pre-fills the sample student's answers as suggestions in the interview. */
+  persona: "sample" | null;
+  setPersona: (persona: "sample" | null) => void;
   /** Records a tapped or spoken answer that the student has not confirmed yet. */
   proposeAnswer: (field: ProfileFieldName, value: FieldValue, source?: "tap" | "voice") => void;
   /** Drops an unconfirmed answer ("Change"). */
@@ -50,7 +50,7 @@ interface Session {
   /** Undoes the last confirmed step and returns it. */
   goBack: () => Step | undefined;
   restart: () => void;
-  loadRavi: () => void;
+  loadSample: () => void;
   documents: StoredDoc[];
   addDocument: (doc: StoredDoc) => void;
   audit: AuditEntry[];
@@ -65,7 +65,7 @@ export function SessionProvider({ children }: { children: ReactNode }) {
   const [locale, setLocale] = useState<Locale>("en");
   const [profile, setProfile] = useState<Profile>({});
   const [steps, setSteps] = useState<Step[]>([]);
-  const [persona, setPersona] = useState<"ravi" | null>(null);
+  const [persona, setPersona] = useState<"sample" | null>(null);
   const [documents, setDocuments] = useState<StoredDoc[]>([]);
   const [audit, setAudit] = useState<AuditEntry[]>(auditMock as AuditEntry[]);
   const auditRef = useRef(audit);
@@ -116,9 +116,9 @@ export function SessionProvider({ children }: { children: ReactNode }) {
     setPersona(null);
   }, []);
 
-  const loadRavi = useCallback(() => {
+  const loadSample = useCallback(() => {
     setPersona(null);
-    setProfile(RAVI);
+    setProfile(SAMPLE_STUDENT);
     setSteps(
       interviewMock.questions.map((question) => ({
         field: question.field as ProfileFieldName,
@@ -152,7 +152,7 @@ export function SessionProvider({ children }: { children: ReactNode }) {
       confirmAnswer,
       goBack,
       restart,
-      loadRavi,
+      loadSample,
       documents,
       addDocument,
       audit,
@@ -169,7 +169,7 @@ export function SessionProvider({ children }: { children: ReactNode }) {
       confirmAnswer,
       goBack,
       restart,
-      loadRavi,
+      loadSample,
       documents,
       addDocument,
       audit,

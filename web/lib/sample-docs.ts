@@ -7,7 +7,7 @@ export function makeSampleFile(docKey: string, label: string): File {
     "It is not a real certificate and holds no real personal data.",
     "",
     `Document type : ${docKey}`,
-    "Student       : Ravi (sample)",
+    "Student       : Sample student",
     "Issued by     : Sample Office, Sample District",
   ].join("\n");
   return new File([body], `sample-${docKey}.txt`, { type: "text/plain" });

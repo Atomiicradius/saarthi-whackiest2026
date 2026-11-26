@@ -1,3 +1,4 @@
+import { SAMPLE_NAME_KEY } from "@/lib/sample-student";
 import { Award, Lock, Mic } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -60,9 +61,9 @@ export function HowItWorks({ t, onStart }: { t: T; onStart: () => void }) {
 
       <div data-reveal className="mb-8 mt-10 flex flex-col items-start gap-2">
         <Button className="w-full sm:w-auto sm:min-w-64" onClick={onStart}>
-          {t("landing.startAgain")}
+          {t("landing.startAgain", { name: t(SAMPLE_NAME_KEY) })}
         </Button>
-        <p className="text-soft text-xs">{t("landing.raviNote")}</p>
+        <p className="text-soft text-xs">{t("landing.sampleNote", { name: t(SAMPLE_NAME_KEY) })}</p>
       </div>
     </section>
   );
