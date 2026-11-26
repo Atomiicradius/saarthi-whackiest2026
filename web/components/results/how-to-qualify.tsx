@@ -14,6 +14,14 @@ export function HowToQualify({ scheme, result, t }: HowToQualifyProps) {
   const total = result.reasons.length;
   const done = result.reasons.filter((reason) => reason.status === "met").length;
   const percent = total === 0 ? 0 : Math.round((done / total) * 100);
+  // An engine line that asks for unanswered questions is shown as a short lead plus one bullet per
+  // field, using the UI's own field labels, so the card stays readable in every language.
+  const gap = result.near_miss?.gap ?? "";
+  const unanswered = [
+    ...new Set(result.reasons.filter((r) => r.status === "unknown").map((r) => r.field)),
+  ];
+  const asksQuestions =
+    gap.startsWith("Answer th") && gap.includes("to find out") && unanswered.length > 0;
   const docs = scheme.docs_required.map((doc) => t(`docs.${doc}`)).join(", ");
 
   return (
@@ -53,7 +61,18 @@ export function HowToQualify({ scheme, result, t }: HowToQualifyProps) {
       </ul>
       {result.near_miss && (
         <div className="mt-3 space-y-2 border-t border-border pt-3 text-sm">
-          <p className="font-semibold">{result.near_miss.gap}</p>
+          {asksQuestions ? (
+            <>
+              <p className="font-semibold">{t("results.toFindOut")}</p>
+              <ul className="list-disc space-y-1 pl-5">
+                {unanswered.map((field) => (
+                  <li key={field}>{t(`fields.${field}`)}</li>
+                ))}
+              </ul>
+            </>
+          ) : (
+            <p className="font-semibold">{gap}</p>
+          )}
           <Chip tone={result.near_miss.fixable ? "success" : "neutral"}>
             {result.near_miss.fixable ? t("results.fixable") : t("results.notFixable")}
           </Chip>

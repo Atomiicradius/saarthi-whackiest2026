@@ -40,7 +40,7 @@ Aim to finish **at least 45 minutes before the deadline**.
 ## Thin slice for the first-round repo
 
 Must:
-1. About 30 verified schemes loaded from `/data/schemes.json` (fewer is acceptable if sources are solid; quality over count).
+1. About 30 sourced schemes loaded from `/data/schemes.json` (fewer is acceptable if sources are solid; quality over count).
 2. Eligibility evaluation with explanations and near-miss.
 3. Adaptive interview (next-question endpoint plus UI).
 4. Results page: eligible, almost eligible, not eligible.

@@ -12,21 +12,18 @@ interface LaneProps {
 }
 
 export function Lane({ title, tone, views, t }: LaneProps) {
+  if (views.length === 0) return null;
   return (
     <section aria-label={title} className="mt-8">
       <div data-reveal className="flex items-center gap-3">
         <h2 className="font-serif text-2xl font-semibold lg:text-3xl">{title}</h2>
         <Chip tone={tone}>{views.length}</Chip>
       </div>
-      {views.length === 0 ? (
-        <p className="text-soft mt-3 text-sm">{t("results.laneEmpty")}</p>
-      ) : (
-        <div className="mt-3 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
-          {views.map((view) => (
-            <SchemeCard key={view.scheme.id} view={view} t={t} />
-          ))}
-        </div>
-      )}
+      <div className="mt-3 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+        {views.map((view) => (
+          <SchemeCard key={view.scheme.id} view={view} t={t} />
+        ))}
+      </div>
     </section>
   );
 }

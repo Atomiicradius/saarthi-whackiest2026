@@ -93,7 +93,7 @@
     "keepReady": "Keep ready: {docs}",
     "answerMore": "Answer: {fields}",
     "source": "Source",
-    "verified": "verified {date}",
+    "verified": "last checked {date}",
     "footer": "Check the official notice before applying.",
     "loading": "Checking your schemes",
     "error": "Could not load your results. Please try again.",
@@ -107,7 +107,8 @@
     "amountsUnconfirmed": "Amounts not confirmed yet",
     "guideNoAmount": "I found schemes for your plan, but their amounts are not confirmed yet. They appear eligible, so check each official notice before applying.",
     "partialNote": "These results use the answers so far.",
-    "continueInterview": "Continue the interview"
+    "continueInterview": "Continue the interview",
+    "toFindOut": "To find out, answer:"
   },
   "docs": {
     "income_certificate": "income certificate",
