@@ -147,10 +147,10 @@
       "central-post-matric-st"
     ],
     "portal_url": "https://ssp.karnataka.gov.in/",
-    "source_url": "https://ssp.karnataka.gov.in/Schemes",
+    "source_url": "https://swd.karnataka.gov.in/44/education/kn",
     "confidence": 0.65,
     "last_verified": "2026-11-26",
-    "notes": "Source: Karnataka State Scholarship Portal scheme list, Social Welfare Department (page text is in Kannada; translated). The page states only: fee reimbursement for SC students in post-matric courses whose family income is below Rs 2.5 lakh. Amount, documents, domicile rule and application dates are not on that page, so amount is null and docs_required is empty (unknown). Karnataka domicile is likely required but is not stated, so it is not encoded. Marked exclusive with PM-USP because PM-USP excludes students who already get State fee reimbursement."
+    "notes": "Source: Karnataka Social Welfare Department education page (Kannada; translated; undated), post-matric scholarship section; the scheme was first read from the State Scholarship Portal scheme list. No single yearly amount exists, so amount is null: the department pays the compulsory non-refundable fees, which vary by course, plus a maintenance allowance that varies by group (day scholar / hosteller): Group I degree and PG professional Rs 7,000 / 13,500; Group II Rs 6,500 / 9,500; Group III Rs 3,000 / 6,000; Group IV Rs 2,500 / 4,000. The page says this is a centrally sponsored programme, so it is the same benefit as central-post-matric-sc. The page gives the family income limit as Rs 2.5 lakh; whether exactly Rs 2.5 lakh qualifies is unclear. Documents and domicile rule are not stated, so docs_required is empty (unknown) and no state criterion is set. Marked exclusive with PM-USP because PM-USP excludes students who already get State fee reimbursement."
   },
   {
     "id": "ka-sc-technical-medical-ayush-fee-reimbursement",
@@ -194,10 +194,10 @@
       "central-post-matric-st"
     ],
     "portal_url": "https://ssp.karnataka.gov.in/",
-    "source_url": "https://ssp.karnataka.gov.in/Schemes",
+    "source_url": "https://swd.karnataka.gov.in/44/education/kn",
     "confidence": 0.65,
     "last_verified": "2026-11-26",
-    "notes": "Source: Karnataka State Scholarship Portal scheme list, Social Welfare Department (Kannada; translated). Stated conditions: SC students in technical, medical or AYUSH courses with annual family income above Rs 2.5 lakh and below Rs 10 lakh. The course type (technical/medical/AYUSH) is not encoded because the profile 'course' field is free text; the portal's wording leaves income of exactly Rs 2.5 lakh and exactly Rs 10 lakh outside both this scheme and the Rs 2.5 lakh one, so those two values give no match. Amount, documents, domicile rule and dates are not stated on that page (amount null, docs empty). Marked exclusive with PM-USP for the same reason as the other Karnataka fee reimbursement."
+    "notes": "Amount: the Karnataka Social Welfare Department education page (Kannada; translated; undated) says engineering and medical students with family income from Rs 2.5 lakh to Rs 10 lakh get a 50 per cent fee concession from the Technical and Medical Education departments. It is a share of the course fee, not a fixed figure, so amount is null; AYUSH is not mentioned there. Other conditions below come from the Karnataka State Scholarship Portal scheme list, Social Welfare Department (Kannada; translated). Stated conditions: SC students in technical, medical or AYUSH courses with annual family income above Rs 2.5 lakh and below Rs 10 lakh. The course type (technical/medical/AYUSH) is not encoded because the profile 'course' field is free text; the portal's wording leaves income of exactly Rs 2.5 lakh and exactly Rs 10 lakh outside both this scheme and the Rs 2.5 lakh one, so those two values give no match. Documents, domicile rule and dates are not stated on either page (docs empty, no state criterion). Marked exclusive with PM-USP for the same reason as the other Karnataka fee reimbursement."
   },
   {
     "id": "ka-sc-professional-tuition-fee-quota",
@@ -456,10 +456,10 @@
       "aicte-saksham-degree"
     ],
     "portal_url": "https://ssp.karnataka.gov.in/",
-    "source_url": "https://socialjustice.gov.in/",
-    "confidence": 0.6,
+    "source_url": "https://socialjustice.gov.in/schemes/25",
+    "confidence": 0.5,
     "last_verified": "2026-11-26",
-    "notes": "Source: guidelines of the Ministry of Social Justice and Empowerment, March 2021, for 2020-21 to 2025-26 (saved file data/Postmatric_SC.pdf, scanned; pages 1-9 read). WARNING: the stated validity ends with 2025-26 and no 2026-27 renewal of these guidelines was seen. source_url is the ministry home page because the exact download link was not recorded. Eligibility: SC as notified for the State the student belongs to; passed matriculation or higher; parents'/guardians' income from all sources not above Rs 2.5 lakh in the last financial year; recognised institution. Seats filled through management, NRI or spot quota are not eligible (not encoded). A holder may not keep another scholarship or stipend. Amount is only the Group 1 (degree professional course) day-scholar academic allowance of Rs 7,000 (Rs 13,500 for hostellers); compulsory non-refundable fees are also paid and are not counted, so the real value is higher. Applied through the State's portal. Probably the same benefit that Karnataka SSP delivers as SC fee reimbursement, so these are marked exclusive to avoid double counting."
+    "notes": "Source: guidelines of the Ministry of Social Justice and Empowerment, March 2021, for 2020-21 to 2025-26 (saved file data/Postmatric_SC.pdf, scanned; pages 1-9 read). WARNING: the guidelines' stated validity ended with 2025-26 and no 2026-27 renewal was seen, so confidence is lowered. source_url is the ministry's page for this scheme, found by web search; it returned 503 Service Unavailable on 2026-11-26 and was not opened. The Karnataka Social Welfare Department page https://swd.karnataka.gov.in/44/education/kn (undated) shows the same Group I allowance of Rs 7,000 / 13,500. Eligibility: SC as notified for the State the student belongs to; passed matriculation or higher; parents'/guardians' income from all sources not above Rs 2.5 lakh in the last financial year; recognised institution. Seats filled through management, NRI or spot quota are not eligible (not encoded). A holder may not keep another scholarship or stipend. Amount is only the Group 1 (degree professional course) day-scholar academic allowance of Rs 7,000 (Rs 13,500 for hostellers); compulsory non-refundable fees are also paid and are not counted, so the real value is higher. Applied through the State's portal. Probably the same benefit that Karnataka SSP delivers as SC fee reimbursement, so these are marked exclusive to avoid double counting."
   },
   {
     "id": "central-post-matric-st",
@@ -504,15 +504,15 @@
       "aicte-saksham-degree"
     ],
     "exclusivity_source": {
-      "ka-sc-hostel-maintenance-technical-medical": "https://tribal.nic.in/",
-      "ka-sc-postmatric-fee-reimbursement": "https://tribal.nic.in/",
-      "ka-sc-professional-tuition-fee-quota": "https://tribal.nic.in/",
-      "ka-sc-technical-medical-ayush-fee-reimbursement": "https://tribal.nic.in/"
+      "ka-sc-hostel-maintenance-technical-medical": "https://tribal.nic.in/downloads/guidelines/post-matric/Post-matric-guidelines-15032023.pdf",
+      "ka-sc-postmatric-fee-reimbursement": "https://tribal.nic.in/downloads/guidelines/post-matric/Post-matric-guidelines-15032023.pdf",
+      "ka-sc-professional-tuition-fee-quota": "https://tribal.nic.in/downloads/guidelines/post-matric/Post-matric-guidelines-15032023.pdf",
+      "ka-sc-technical-medical-ayush-fee-reimbursement": "https://tribal.nic.in/downloads/guidelines/post-matric/Post-matric-guidelines-15032023.pdf"
     },
     "portal_url": "https://ssp.karnataka.gov.in/",
-    "source_url": "https://tribal.nic.in/",
+    "source_url": "https://tribal.nic.in/downloads/guidelines/post-matric/Post-matric-guidelines-15032023.pdf",
     "confidence": 0.8,
     "last_verified": "2026-11-26",
-    "notes": "Source: Ministry of Tribal Affairs guidelines, applicable from 01-04-2022 (saved file 'Centrally Sponsored Scheme of Post Matric Scholarship Scheme for ST Students_scheme.pdf', read directly). source_url is the ministry home page because the exact download link was not recorded. Eligibility: ST as specified for the student's domicile State; passed matriculation or higher; family income from all sources not above Rs 2.5 lakh a year (income test does not apply to an orphan supported by a guardian); recognised institution; not getting any other scholarship. Students in the Ministry's listed Top Class institutes are covered by a different scheme instead (not encoded). Amount is only the Group I day-scholar stipend of Rs 5,500 a year (Rs 12,000 for hostellers); compulsory non-refundable fees are also paid (Government of India support capped at Rs 2.5 lakh a year for engineering in private institutes) and are not counted. Applied through the State's portal."
+    "notes": "Source: Ministry of Tribal Affairs guidelines, applicable from 01-04-2022 (saved file 'Centrally Sponsored Scheme of Post Matric Scholarship Scheme for ST Students_scheme.pdf', read directly). source_url is the ministry's own PDF link; its size on the server matches the saved file exactly (612,474 bytes). Eligibility: ST as specified for the student's domicile State; passed matriculation or higher; family income from all sources not above Rs 2.5 lakh a year (income test does not apply to an orphan supported by a guardian); recognised institution; not getting any other scholarship. Students in the Ministry's listed Top Class institutes are covered by a different scheme instead (not encoded). Amount is only the Group I day-scholar stipend of Rs 5,500 a year (Rs 12,000 for hostellers); compulsory non-refundable fees are also paid (Government of India support capped at Rs 2.5 lakh a year for engineering in private institutes) and are not counted. Applied through the State's portal."
   }
 ]
