@@ -75,12 +75,14 @@ export default function ResultsPage() {
     ? t("results.error")
     : !data
       ? t("results.loading")
-      : planCount > 0
-        ? t("results.guide", {
-            count: planCount,
-            total: formatInr(data.plan.total_inr_per_year),
-          })
-        : t("results.guideNone");
+      : planCount > 0 && data.plan.total_inr_per_year === 0
+        ? t("results.guideNoAmount")
+        : planCount > 0
+          ? t(planCount === 1 ? "results.guideOne" : "results.guide", {
+              count: planCount,
+              total: formatInr(data.plan.total_inr_per_year),
+            })
+          : t("results.guideNone");
 
   return (
     <main ref={container}>

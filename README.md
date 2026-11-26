@@ -183,7 +183,7 @@ Design goals. In the prototype today, documents are encrypted in the browser wit
 cp .env.example .env
 cp web/.env.example web/.env.local   # NEXT_PUBLIC_USE_MOCKS=false in web/.env.local uses the API at http://localhost:8000, which must be running (true, the default, = built-in sample data)
 
-# 2. Backend (Python 3.11+)
+# 2. Backend (Python 3.11+). It reads data/schemes.json by default; no variable is needed.
 cd api
 pip install -r requirements-dev.txt
 uvicorn main:app --reload --env-file ../.env

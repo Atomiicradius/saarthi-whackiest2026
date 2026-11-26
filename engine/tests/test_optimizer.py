@@ -56,6 +56,22 @@ def test_exclusive_pair_keeps_the_better_combination():
     # b + c (35,000) beats a alone (30,000).
     assert sorted(plan["selected"]) == ["b", "c"]
     assert plan["total_inr_per_year"] == 35000
+    # No `exclusivity_source` in the data, so the pair is described as inferred.
+    assert plan["dropped"] == [
+        {
+            "scheme_id": "a",
+            "reason": "Cannot be combined with B (inferred from the scheme guidelines, check the notice)",
+        }
+    ]
+
+
+def test_exclusive_pair_with_a_cited_source_is_an_official_rule():
+    a = make_scheme(
+        "a", [], amount_inr_per_year=30000, exclusive_with=["b"], exclusivity_source={"b": "https://x"}
+    )
+    b = make_scheme("b", [], amount_inr_per_year=40000, exclusive_with=["a"])
+    plan = optimize([a, b], {})
+    assert plan["selected"] == ["b"]
     assert plan["dropped"] == [
         {"scheme_id": "a", "reason": "Cannot be combined with B (official rule)"}
     ]

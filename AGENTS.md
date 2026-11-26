@@ -41,7 +41,7 @@ It tells a student which scholarships they qualify for, picks the best combinati
 
 ## Commands (fill in as they are created)
 - Web: `cd web && npm install && npm run dev`
-- API: `cd api && pip install -r requirements-dev.txt && uvicorn main:app --reload --env-file ../.env` (copy `.env.example` to `.env`; it points `SAARTHI_SCHEMES_PATH` at the EXAMPLE fixture until `data/schemes.json` exists)
+- API: `cd api && pip install -r requirements-dev.txt && uvicorn main:app --reload --env-file ../.env` (copy `.env.example` to `.env`; the API reads `data/schemes.json` by default)
 - API tests: `cd api && pytest`
 - Engine tests: `cd engine && pytest`
 - Vault tests: `cd web && npm run test:vault`

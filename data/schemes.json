@@ -41,7 +41,16 @@
       "central-post-matric-sc",
       "central-post-matric-st"
     ],
-    "exclusivity_group": null,
+    "exclusivity_source": {
+      "aicte-pragati-degree": "https://scholarships.gov.in/public/schemeGuidelines/CSSS_GUIDLINES_06022024.pdf",
+      "aicte-saksham-degree": "https://scholarships.gov.in/public/schemeGuidelines/CSSS_GUIDLINES_06022024.pdf",
+      "central-post-matric-sc": "https://scholarships.gov.in/public/schemeGuidelines/CSSS_GUIDLINES_06022024.pdf",
+      "central-post-matric-st": "https://scholarships.gov.in/public/schemeGuidelines/CSSS_GUIDLINES_06022024.pdf",
+      "ka-sc-postmatric-fee-reimbursement": "https://scholarships.gov.in/public/schemeGuidelines/CSSS_GUIDLINES_06022024.pdf",
+      "ka-sc-professional-tuition-fee-quota": "https://scholarships.gov.in/public/schemeGuidelines/CSSS_GUIDLINES_06022024.pdf",
+      "ka-sc-technical-medical-ayush-fee-reimbursement": "https://scholarships.gov.in/public/schemeGuidelines/CSSS_GUIDLINES_06022024.pdf",
+      "pm-yasasvi-obc-post-matric": "https://scholarships.gov.in/public/schemeGuidelines/CSSS_GUIDLINES_06022024.pdf"
+    },
     "portal_url": "https://scholarships.gov.in/",
     "source_url": "https://scholarships.gov.in/public/schemeGuidelines/CSSS_GUIDLINES_06022024.pdf",
     "confidence": 0.9,
@@ -89,7 +98,12 @@
       "central-post-matric-sc",
       "central-post-matric-st"
     ],
-    "exclusivity_group": null,
+    "exclusivity_source": {
+      "aicte-pragati-degree": "https://www.myscheme.gov.in/schemes/pm-yasasvipmsobcebcdnts",
+      "aicte-saksham-degree": "https://www.myscheme.gov.in/schemes/pm-yasasvipmsobcebcdnts",
+      "central-post-matric-sc": "https://www.myscheme.gov.in/schemes/pm-yasasvipmsobcebcdnts",
+      "central-post-matric-st": "https://www.myscheme.gov.in/schemes/pm-yasasvipmsobcebcdnts"
+    },
     "portal_url": "https://scholarships.gov.in/",
     "source_url": "https://www.myscheme.gov.in/schemes/pm-yasasvipmsobcebcdnts",
     "confidence": 0.75,
@@ -132,7 +146,6 @@
       "central-post-matric-sc",
       "central-post-matric-st"
     ],
-    "exclusivity_group": null,
     "portal_url": "https://ssp.karnataka.gov.in/",
     "source_url": "https://ssp.karnataka.gov.in/Schemes",
     "confidence": 0.65,
@@ -180,7 +193,6 @@
       "central-post-matric-sc",
       "central-post-matric-st"
     ],
-    "exclusivity_group": null,
     "portal_url": "https://ssp.karnataka.gov.in/",
     "source_url": "https://ssp.karnataka.gov.in/Schemes",
     "confidence": 0.65,
@@ -217,7 +229,6 @@
       "central-post-matric-sc",
       "central-post-matric-st"
     ],
-    "exclusivity_group": null,
     "portal_url": "https://ssp.karnataka.gov.in/",
     "source_url": "https://ssp.karnataka.gov.in/Schemes",
     "confidence": 0.5,
@@ -253,7 +264,6 @@
       "central-post-matric-sc",
       "central-post-matric-st"
     ],
-    "exclusivity_group": null,
     "portal_url": "https://ssp.karnataka.gov.in/",
     "source_url": "https://ssp.karnataka.gov.in/Schemes",
     "confidence": 0.5,
@@ -317,7 +327,15 @@
       "central-post-matric-sc",
       "central-post-matric-st"
     ],
-    "exclusivity_group": null,
+    "exclusivity_source": {
+      "aicte-saksham-degree": "https://scholarships.gov.in/public/schemeGuidelines/AICTE/AICTE_2010_G.pdf",
+      "central-post-matric-sc": "https://scholarships.gov.in/public/schemeGuidelines/AICTE/AICTE_2010_G.pdf",
+      "central-post-matric-st": "https://scholarships.gov.in/public/schemeGuidelines/AICTE/AICTE_2010_G.pdf",
+      "ka-sc-hostel-maintenance-technical-medical": "https://scholarships.gov.in/public/schemeGuidelines/AICTE/AICTE_2010_G.pdf",
+      "ka-sc-postmatric-fee-reimbursement": "https://scholarships.gov.in/public/schemeGuidelines/AICTE/AICTE_2010_G.pdf",
+      "ka-sc-professional-tuition-fee-quota": "https://scholarships.gov.in/public/schemeGuidelines/AICTE/AICTE_2010_G.pdf",
+      "ka-sc-technical-medical-ayush-fee-reimbursement": "https://scholarships.gov.in/public/schemeGuidelines/AICTE/AICTE_2010_G.pdf"
+    },
     "portal_url": "https://scholarships.gov.in/",
     "source_url": "https://scholarships.gov.in/public/schemeGuidelines/AICTE/AICTE_2010_G.pdf",
     "confidence": 0.6,
@@ -381,7 +399,14 @@
       "central-post-matric-sc",
       "central-post-matric-st"
     ],
-    "exclusivity_group": null,
+    "exclusivity_source": {
+      "central-post-matric-sc": "https://scholarships.gov.in/public/schemeGuidelines/AICTE/AICTE_2012_G.pdf",
+      "central-post-matric-st": "https://scholarships.gov.in/public/schemeGuidelines/AICTE/AICTE_2012_G.pdf",
+      "ka-sc-hostel-maintenance-technical-medical": "https://scholarships.gov.in/public/schemeGuidelines/AICTE/AICTE_2012_G.pdf",
+      "ka-sc-postmatric-fee-reimbursement": "https://scholarships.gov.in/public/schemeGuidelines/AICTE/AICTE_2012_G.pdf",
+      "ka-sc-professional-tuition-fee-quota": "https://scholarships.gov.in/public/schemeGuidelines/AICTE/AICTE_2012_G.pdf",
+      "ka-sc-technical-medical-ayush-fee-reimbursement": "https://scholarships.gov.in/public/schemeGuidelines/AICTE/AICTE_2012_G.pdf"
+    },
     "portal_url": "https://scholarships.gov.in/",
     "source_url": "https://scholarships.gov.in/public/schemeGuidelines/AICTE/AICTE_2012_G.pdf",
     "confidence": 0.65,
@@ -430,7 +455,6 @@
       "aicte-pragati-degree",
       "aicte-saksham-degree"
     ],
-    "exclusivity_group": null,
     "portal_url": "https://ssp.karnataka.gov.in/",
     "source_url": "https://socialjustice.gov.in/",
     "confidence": 0.6,
@@ -479,7 +503,12 @@
       "aicte-pragati-degree",
       "aicte-saksham-degree"
     ],
-    "exclusivity_group": null,
+    "exclusivity_source": {
+      "ka-sc-hostel-maintenance-technical-medical": "https://tribal.nic.in/",
+      "ka-sc-postmatric-fee-reimbursement": "https://tribal.nic.in/",
+      "ka-sc-professional-tuition-fee-quota": "https://tribal.nic.in/",
+      "ka-sc-technical-medical-ayush-fee-reimbursement": "https://tribal.nic.in/"
+    },
     "portal_url": "https://ssp.karnataka.gov.in/",
     "source_url": "https://tribal.nic.in/",
     "confidence": 0.8,

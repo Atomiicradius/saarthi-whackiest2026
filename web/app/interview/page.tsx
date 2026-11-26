@@ -18,8 +18,8 @@ import { ANSWER_CONFIG, chipValue, displayValue } from "@/lib/answer-config";
 import { cn } from "@/lib/cn";
 import { useSession } from "@/lib/session";
 import { useVoiceAnswer } from "@/lib/use-voice-answer";
-import raviProfile from "@/mocks/ravi.profile.json";
-import type { FieldValue, InterviewNext, Profile, ProfileFieldName } from "@/lib/types";
+import { RAVI } from "@/lib/ravi";
+import type { FieldValue, InterviewNext, ProfileFieldName } from "@/lib/types";
 
 export default function InterviewPage() {
   const router = useRouter();
@@ -110,8 +110,7 @@ export default function InterviewPage() {
   const voice = useVoiceAnswer(field, locale, proposeSpoken);
   const tapped = field ? profile[field] : undefined;
   // "Start as Ravi" suggests Ravi's answer for each question; the student still confirms it.
-  const suggested =
-    persona === "ravi" && field ? (raviProfile as Profile)[field]?.value : undefined;
+  const suggested = persona === "ravi" && field ? RAVI[field]?.value : undefined;
   const pendingValue: FieldValue | undefined =
     tapped && !tapped.confirmed ? tapped.value : suggested;
   const hasPending = pendingValue !== undefined && pendingValue !== null;

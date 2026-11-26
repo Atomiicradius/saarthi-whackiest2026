@@ -28,6 +28,7 @@ All money is INR per year unless stated. All dates are ISO 8601 (`YYYY-MM-DD`). 
   ],
   "docs_required": ["income_certificate", "caste_certificate", "marksheet"],
   "exclusive_with": [],                       // ONLY where an official source states the pair is exclusive; else empty
+  "exclusivity_source": {},                    // optional: other scheme id -> source URL, only for pairs whose exclusivity an official source states; pairs without an entry are described as inferred
   "portal_url": "https://example.invalid",
   "source_url": "https://example.invalid",    // REQUIRED: official notice or guideline
   "confidence": 0.9,                          // 0..1, lower goes to human review
