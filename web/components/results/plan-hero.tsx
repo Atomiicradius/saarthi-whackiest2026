@@ -37,19 +37,27 @@ export function PlanHero({
         {t("results.heroLabel")}
       </p>
       <p className="text-soft mt-1 text-sm">
-        {count > 0 ? t("results.heroBody") : t("results.noPlan")}
+        {count === 0
+          ? t("results.noPlan")
+          : plan.total_inr_per_year > 0
+            ? t("results.heroBody")
+            : t("results.amountsUnconfirmed")}
       </p>
 
       <div className="mt-3 grid grid-cols-2 gap-3 lg:grid-cols-4">
         <div className="col-span-2 rounded-3xl bg-primary p-5 text-white shadow-[0_14px_32px_-16px_rgba(15,61,62,0.6)] lg:p-8">
-          <p className="font-serif text-5xl font-semibold leading-none lg:text-7xl">
-            {plan.total_inr_per_year > 0 ? (
-              <CountUp value={plan.total_inr_per_year} kind="inr" />
-            ) : (
-              t("results.amountsUnconfirmed")
-            )}
-          </p>
-          <p className="mt-2 text-sm text-white/80">{t("results.perYear")}</p>
+          {plan.total_inr_per_year > 0 ? (
+            <>
+              <p className="font-serif text-5xl font-semibold leading-none lg:text-7xl">
+                <CountUp value={plan.total_inr_per_year} kind="inr" />
+              </p>
+              <p className="mt-2 text-sm text-white/80">{t("results.perYear")}</p>
+            </>
+          ) : (
+            <p className="font-serif text-3xl font-semibold leading-tight lg:text-5xl">
+              {t("results.amountsUnconfirmed")}
+            </p>
+          )}
         </div>
 
         <Card className="p-4">

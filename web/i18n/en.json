@@ -160,7 +160,8 @@
     "stubNote": "Prototype vault: AES-256-GCM in your browser",
     "loading": "Loading your documents",
     "lockedBadge": "Locked",
-    "guide": "I lock each document on this device before anything is stored. The server only ever sees scrambled bytes."
+    "guide": "I lock each document on this device before anything is stored. The server only ever sees scrambled bytes.",
+    "fallbackNote": "The schemes in your plan have no documents confirmed yet. These are the documents asked for by schemes you may still qualify for."
   },
   "serverView": {
     "title": "What the server sees",
