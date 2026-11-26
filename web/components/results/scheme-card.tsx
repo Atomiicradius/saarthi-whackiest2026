@@ -4,6 +4,7 @@ import { Chip, type ChipTone } from "@/components/ui/chip";
 import { DaysChip } from "@/components/results/days-chip";
 import { HowToQualify } from "@/components/results/how-to-qualify";
 import { SourceChip } from "@/components/results/source-chip";
+import { reasonText } from "@/lib/reason-text";
 import { formatDate, formatInr } from "@/lib/format";
 import { closeDate } from "@/lib/dates";
 import type { SchemeView } from "@/lib/results-model";
@@ -88,7 +89,7 @@ export function SchemeCard({ view, t }: { view: SchemeView; t: T }) {
               >
                 <Icon className={`mt-0.5 size-5 shrink-0 ${className}`} aria-hidden />
                 <span className="sr-only">{t(label)}: </span>
-                <span>{reason.detail}</span>
+                <span>{reasonText(reason, t)}</span>
               </li>
             );
           })}

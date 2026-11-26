@@ -20,7 +20,7 @@
     "confirmed": true
   },
   "disability": {
-    "value": false,
+    "value": true,
     "source": "tap",
     "confirmed": true
   },

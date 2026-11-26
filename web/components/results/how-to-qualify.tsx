@@ -1,4 +1,5 @@
 import { Square, SquareCheck } from "lucide-react";
+import { reasonText } from "@/lib/reason-text";
 import { Chip } from "@/components/ui/chip";
 import type { EligibilityResult, Scheme } from "@/lib/types";
 
@@ -54,7 +55,7 @@ export function HowToQualify({ scheme, result, t }: HowToQualifyProps) {
                 }
                 aria-hidden
               />
-              <span>{reason.detail}</span>
+              <span>{reasonText(reason, t)}</span>
             </li>
           );
         })}

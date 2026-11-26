@@ -108,7 +108,9 @@
     "guideNoAmount": "I found schemes for your plan, but their amounts are not confirmed yet. They appear eligible, so check each official notice before applying.",
     "partialNote": "These results use the answers so far.",
     "continueInterview": "Continue the interview",
-    "toFindOut": "To find out, answer:"
+    "toFindOut": "To find out, answer:",
+    "needsDisability": "Needs a disability certificate",
+    "needs": "Needs {label}"
   },
   "docs": {
     "income_certificate": "income certificate",
