@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { evaluate, getSchemes, optimize } from "@/lib/api";
+import { evaluate, getSchemes, interviewNext, optimize, usingMocks } from "@/lib/api";
 import { GuidePanel } from "@/components/guide/guide-panel";
 import type { GuideState } from "@/components/guide/guide";
 import { Lane } from "@/components/results/lane";
@@ -19,11 +19,13 @@ interface Loaded {
   schemes: Scheme[];
   results: EligibilityResult[];
   plan: OptimizeResponse;
+  /** True when the interview has more questions to ask, so these results use the answers so far. */
+  partial: boolean;
 }
 
 export default function ResultsPage() {
   const router = useRouter();
-  const { profile, t, restart } = useSession();
+  const { profile, locale, t, restart } = useSession();
   const [data, setData] = useState<Loaded | null>(null);
   const [failed, setFailed] = useState(false);
   const [attempt, setAttempt] = useState(0);
@@ -32,9 +34,14 @@ export default function ResultsPage() {
 
   useEffect(() => {
     let cancelled = false;
-    Promise.all([getSchemes(), evaluate(profile), optimize(profile)])
-      .then(([schemes, results, plan]) => {
-        if (!cancelled) setData({ schemes, results, plan });
+    // The interview is unfinished when the state has not been asked or the engine still has a
+    // question left. With the sample data there is no partial state.
+    const nextQuestion = usingMocks ? Promise.resolve(null) : interviewNext(profile, locale);
+    Promise.all([getSchemes(), evaluate(profile), optimize(profile), nextQuestion])
+      .then(([schemes, results, plan, next]) => {
+        const partial =
+          !usingMocks && (profile.state_of_domicile?.confirmed !== true || next?.field != null);
+        if (!cancelled) setData({ schemes, results, plan, partial });
       })
       .catch(() => {
         if (!cancelled) setFailed(true);
@@ -42,7 +49,7 @@ export default function ResultsPage() {
     return () => {
       cancelled = true;
     };
-  }, [profile, attempt]);
+  }, [profile, locale, attempt]);
 
   // The guide is happy when the results first appear, then settles.
   useEffect(() => {
@@ -100,6 +107,14 @@ export default function ResultsPage() {
 
       {data && lanes && (
         <>
+          {data.partial && (
+            <div data-reveal className="mb-4 flex flex-wrap items-center gap-3">
+              <p className="text-soft text-sm">{t("results.partialNote")}</p>
+              <Button onClick={() => router.push("/interview")}>
+                {t("results.continueInterview")}
+              </Button>
+            </div>
+          )}
           <SampleDataBanner schemes={data.schemes} text={t("results.sampleData")} />
           <PlanHero plan={data.plan} planned={lanes.eligible.filter((view) => view.inPlan)} t={t} />
           <Lane title={t("results.lane.eligible")} tone="success" views={lanes.eligible} t={t} />

@@ -32,7 +32,8 @@
     "retry": "Try again",
     "stateQuestion": "Which state do you live in?",
     "notNeeded": "Not needed for your schemes",
-    "skippedNote": "Saarthi skipped questions that would not change your results."
+    "skippedNote": "Saarthi skipped questions that would not change your results.",
+    "seeResultsSoFar": "See results so far"
   },
   "fields": {
     "state_of_domicile": "State",
@@ -104,7 +105,9 @@
     "guideNone": "I could not find an open scheme for your plan yet.",
     "guideOne": "I found 1 scheme for your plan, worth about {total} a year. It appears eligible, so check the official notice before applying.",
     "amountsUnconfirmed": "Amounts not confirmed yet",
-    "guideNoAmount": "I found schemes for your plan, but their amounts are not confirmed yet. They appear eligible, so check each official notice before applying."
+    "guideNoAmount": "I found schemes for your plan, but their amounts are not confirmed yet. They appear eligible, so check each official notice before applying.",
+    "partialNote": "These results use the answers so far.",
+    "continueInterview": "Continue the interview"
   },
   "docs": {
     "income_certificate": "income certificate",

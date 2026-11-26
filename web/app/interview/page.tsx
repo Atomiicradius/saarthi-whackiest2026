@@ -235,6 +235,15 @@ export default function InterviewPage() {
 
           {question && field && (
             <>
+              {!usingMocks && steps.length >= 3 && (
+                <Button
+                  variant="ghost"
+                  className="-ml-3 self-start"
+                  onClick={() => router.push("/results")}
+                >
+                  {t("interview.seeResultsSoFar")}
+                </Button>
+              )}
               {hasPending ? (
                 <ReadbackBubbles
                   answerText={answerText}
