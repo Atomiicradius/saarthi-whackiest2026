@@ -1,11 +1,10 @@
 import { Award, Check, CircleHelp, HeartHandshake, X } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Chip, type ChipTone } from "@/components/ui/chip";
-import { CountUp } from "@/components/ui/count-up";
 import { DaysChip } from "@/components/results/days-chip";
 import { HowToQualify } from "@/components/results/how-to-qualify";
 import { SourceChip } from "@/components/results/source-chip";
-import { formatDate } from "@/lib/format";
+import { formatDate, formatInr } from "@/lib/format";
 import { closeDate } from "@/lib/dates";
 import type { SchemeView } from "@/lib/results-model";
 import type { ReasonStatus } from "@/lib/types";
@@ -60,13 +59,9 @@ export function SchemeCard({ view, t }: { view: SchemeView; t: T }) {
 
       <h3 className="mt-3 font-serif text-xl font-semibold leading-snug">{scheme.name}</h3>
       <p className="mt-1 text-lg font-bold text-primary">
-        {scheme.amount_inr_per_year === null ? (
-          t("results.amountUnknown")
-        ) : (
-          <>
-            <CountUp value={scheme.amount_inr_per_year} kind="inr" /> {t("results.perYearShort")}
-          </>
-        )}
+        {scheme.amount_inr_per_year === null
+          ? t("results.amountUnknown")
+          : `${formatInr(scheme.amount_inr_per_year)} ${t("results.perYearShort")}`}
       </p>
       {showDates && close && scheme.application_window?.status === "open" && (
         <p className="text-xs text-muted">

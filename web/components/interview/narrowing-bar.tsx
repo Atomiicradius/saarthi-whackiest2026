@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
-import { CountUp } from "@/components/ui/count-up";
 
 interface NarrowingBarProps {
   total: number;
@@ -34,7 +33,7 @@ export function NarrowingBar({ total, remaining, label, caption }: NarrowingBarP
       <div className="flex items-baseline justify-between gap-3">
         <p className="text-sm font-semibold">{label}</p>
         <p className="font-serif text-2xl font-semibold text-primary">
-          <CountUp value={remaining} />
+          {remaining}
           <span className="text-sm font-normal text-muted"> / {total}</span>
         </p>
       </div>

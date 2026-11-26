@@ -17,7 +17,7 @@ function render(kind: "inr" | "int", amount: number): string {
   return kind === "inr" ? formatInr(amount) : String(Math.round(amount));
 }
 
-// Counts up with GSAP the first time it scrolls into view, and from the old value to the new one
+// Counts up with GSAP, for the plan hero total only (every other amount is shown at once).
 // after that. With reduced motion it shows the final value at once.
 export function CountUp({ value, kind = "int", className }: CountUpProps) {
   const ref = useRef<HTMLSpanElement>(null);

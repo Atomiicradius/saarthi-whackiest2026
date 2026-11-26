@@ -62,9 +62,7 @@ export function PlanHero({
 
         <Card className="p-4">
           <Layers className="size-5 text-primary" aria-hidden />
-          <p className="mt-2 font-serif text-3xl font-semibold leading-none">
-            <CountUp value={count} />
-          </p>
+          <p className="mt-2 font-serif text-3xl font-semibold leading-none">{count}</p>
           <p className="mt-1 text-xs text-muted">
             {count === 1 ? t("results.schemeCountOne") : t("results.schemeCount", { count })}
           </p>
