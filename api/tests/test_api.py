@@ -135,7 +135,7 @@ def test_voice_speak_proxies_audio(client, monkeypatch):
     import voice
 
     async def fake_speak(text, lang):
-        return b"ID3-fake-mp3"
+        return b"ID3-fake-mp3", False
 
     monkeypatch.setattr(voice, "speak", fake_speak)
     response = client.post("/api/voice/speak", json={"text": "Hello", "lang": "en"})
@@ -186,3 +186,59 @@ def test_audit_head_only_moves_forward(client):
 def test_audit_head_rejects_bad_hash(client):
     response = client.put("/api/audit/head", json={"idx": 0, "hash": "not-hex"})
     assert_error(response, 422, "invalid_request")
+
+
+@pytest.fixture(autouse=True)
+def speech_cache(tmp_path, monkeypatch):
+    monkeypatch.setenv("SAARTHI_SPEECH_CACHE", str(tmp_path / "speech"))
+
+
+def test_speech_is_cached_by_text_voice_and_language(client, monkeypatch):
+    import httpx
+
+    monkeypatch.setenv("ELEVENLABS_API_KEY", "test-key")
+    monkeypatch.setenv("ELEVENLABS_VOICE_ID", "voice-1")
+    calls = []
+
+    class FakeClient:
+        def __init__(self, *args, **kwargs):
+            pass
+
+        async def __aenter__(self):
+            return self
+
+        async def __aexit__(self, *exc):
+            return False
+
+        async def post(self, url, headers=None, json=None):
+            calls.append(json["text"])
+            return httpx.Response(200, content=b"ID3-audio-" + json["text"].encode())
+
+    monkeypatch.setattr(httpx, "AsyncClient", FakeClient)
+    first = client.post("/api/voice/speak", json={"text": "Hello", "lang": "en"})
+    second = client.post("/api/voice/speak", json={"text": "Hello", "lang": "en"})
+    other_lang = client.post("/api/voice/speak", json={"text": "Hello", "lang": "hi"})
+    assert first.headers["x-speech-cache"] == "miss"
+    assert second.headers["x-speech-cache"] == "hit"
+    assert second.content == first.content
+    assert other_lang.headers["x-speech-cache"] == "miss"
+    assert calls == ["Hello", "Hello"]
+    # A cached line is served even when the key is later removed.
+    monkeypatch.delenv("ELEVENLABS_API_KEY")
+    assert client.post("/api/voice/speak", json={"text": "Hello", "lang": "en"}).status_code == 200
+    assert_error(
+        client.post("/api/voice/speak", json={"text": "Not cached", "lang": "en"}),
+        503,
+        "voice_unavailable",
+    )
+
+
+def test_speech_cache_is_capped(monkeypatch, tmp_path):
+    import voice
+
+    monkeypatch.setenv("SAARTHI_SPEECH_CACHE", str(tmp_path / "small"))
+    monkeypatch.setattr(voice, "CACHE_MAX_BYTES", 25)
+    for index in range(4):
+        voice._store(voice.cache_path(f"line {index}", "v", "en"), b"x" * 10)
+    files = list((tmp_path / "small").glob("*.mp3"))
+    assert sum(f.stat().st_size for f in files) <= 25

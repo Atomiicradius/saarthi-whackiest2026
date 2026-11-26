@@ -206,6 +206,8 @@ Without an ElevenLabs key everything works except voice; tap to answer instead. 
 
 Open **http://localhost:3000**.
 
+**Speaking guide.** The speaker icon on a guide bubble plays that bubble's text. The API caches generated speech on disk (`api/.speech-cache/`, git-ignored, capped at 50 MB), so a repeated line is instant and works without the key. Before a pitch, with the API running, run `python tools/warm_speech_cache.py --langs en,hi,kn` once to pre-generate every demo-path bubble.
+
 ---
 
 ## Project Structure

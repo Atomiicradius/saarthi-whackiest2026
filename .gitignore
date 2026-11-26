@@ -27,3 +27,6 @@ Thumbs.db
 next-env.d.ts
 # written by `next dev`, not by the team
 web/AGENTS.md
+
+# generated speech audio
+api/.speech-cache/

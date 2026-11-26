@@ -6,6 +6,8 @@ import { MicButton } from "@/components/guide/mic-button";
 import { SpeechBubble } from "@/components/guide/speech-bubble";
 import { cn } from "@/lib/cn";
 import { useSession } from "@/lib/session";
+import { useSpeechPlayback } from "@/lib/use-speech-playback";
+import { usePrefersReducedMotion } from "@/lib/use-reduced-motion";
 import type { MicState } from "@/lib/use-voice-answer";
 
 interface GuidePanelProps {
@@ -28,6 +30,8 @@ export function GuidePanel({
   voice,
 }: GuidePanelProps) {
   const { t } = useSession();
+  const playback = useSpeechPlayback();
+  const reduced = usePrefersReducedMotion();
   const [listening, setListening] = useState(false);
   const stacked = variant === "panel";
 
@@ -39,7 +43,10 @@ export function GuidePanel({
 
   // Without real voice input, pressing the mic says where voice answers can be given.
   const recording = voice?.state === "recording";
-  const shownState: GuideState = listening || recording ? "listening" : state;
+  const shownState: GuideState =
+    listening || recording ? "listening" : playback.speaking ? "speaking" : state;
+  // With reduced motion the mouth stays open while speaking instead of moving.
+  const mouthLevel = reduced ? 0.5 : playback.level;
   const shownMessage = recording
     ? t("voice.listening")
     : listening
@@ -53,10 +60,11 @@ export function GuidePanel({
     >
       <Guide
         state={shownState}
+        mouthLevel={mouthLevel}
         className={cn("w-24 shrink-0 sm:w-28", stacked ? "lg:mx-auto lg:w-56" : "lg:w-32")}
       />
       <div className="min-w-0 flex-1 space-y-3">
-        <SpeechBubble text={shownMessage} stacked={stacked} />
+        <SpeechBubble text={shownMessage} stacked={stacked} playback={playback} />
         {showMic && (
           <div className={cn(stacked && "lg:flex lg:justify-center")}>
             {voice ? (

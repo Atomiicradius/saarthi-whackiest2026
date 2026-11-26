@@ -1,24 +1,54 @@
 "use client";
 
-import { Volume2 } from "lucide-react";
-import { readAloudProvider } from "@/lib/read-aloud";
+import { useEffect } from "react";
+import { Square, Volume2 } from "lucide-react";
 import { useSession } from "@/lib/session";
+import { useSpeechPlayback, type SpeechPlayback } from "@/lib/use-speech-playback";
 
-// Speaker icon for chat messages. Disabled when voice is not available (mocks on).
-export function ReadAloudButton({ text }: { text: string }) {
+interface ReadAloudButtonProps {
+  text: string;
+  /** The guide's playback, so the guide can speak. Without it the button plays on its own. */
+  playback?: SpeechPlayback;
+}
+
+// Speaker icon for chat messages. Plays the same text the bubble shows. Click again to stop.
+// Disabled when voice is not available (mocks on).
+export function ReadAloudButton({ text, playback }: ReadAloudButtonProps) {
   const { locale, t } = useSession();
-  const provider = readAloudProvider;
-  const label = provider ? t("voice.readAloud") : t("voice.readAloudSoon");
+  const own = useSpeechPlayback();
+  const speech = playback ?? own;
+  const { stop } = speech;
+  const label = !speech.available
+    ? t("voice.readAloudSoon")
+    : speech.active
+      ? t("voice.stopReading")
+      : t("voice.readAloud");
+
+  // A new line replaces the old one, so stop what was playing.
+  useEffect(() => stop, [text, stop]);
+
+  const Icon = speech.active ? Square : Volume2;
   return (
-    <button
-      type="button"
-      disabled={!provider}
-      onClick={() => void provider?.speak(text, locale).catch(() => undefined)}
-      aria-label={label}
-      title={label}
-      className="inline-flex size-12 shrink-0 items-center justify-center rounded-full text-muted hover:text-primary disabled:opacity-60"
-    >
-      <Volume2 className="size-5" aria-hidden />
-    </button>
+    <div className="relative shrink-0">
+      <button
+        type="button"
+        disabled={!speech.available}
+        onClick={() => speech.toggle(text, locale)}
+        aria-label={label}
+        aria-pressed={speech.active}
+        title={label}
+        className="inline-flex size-12 items-center justify-center rounded-full text-muted hover:text-primary disabled:opacity-60"
+      >
+        <Icon className="size-5" aria-hidden />
+      </button>
+      {speech.failed && !playback && (
+        <p
+          role="status"
+          className="absolute right-0 top-full z-10 mt-1 w-max max-w-48 text-right text-xs text-muted"
+        >
+          {t("voice.unavailable")}
+        </p>
+      )}
+    </div>
   );
 }

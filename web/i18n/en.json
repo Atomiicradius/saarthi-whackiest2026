@@ -233,7 +233,9 @@
     "denied": "I cannot use the microphone. Allow it in your browser, or tap an answer.",
     "failed": "Voice did not work just now. Please tap an answer.",
     "readAloud": "Read aloud",
-    "readAloudSoon": "Read aloud (needs the API)"
+    "readAloudSoon": "Read aloud (needs the API)",
+    "stopReading": "Stop reading",
+    "unavailable": "Voice is unavailable right now"
   },
   "choices": {
     "Karnataka": "Karnataka",

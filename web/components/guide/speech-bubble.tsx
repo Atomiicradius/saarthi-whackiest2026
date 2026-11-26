@@ -3,19 +3,24 @@
 import { useEffect, useState } from "react";
 import gsap from "gsap";
 import { ReadAloudButton } from "@/components/ui/read-aloud-button";
+import type { SpeechPlayback } from "@/lib/use-speech-playback";
 import { cn } from "@/lib/cn";
 import { usePrefersReducedMotion } from "@/lib/use-reduced-motion";
+import { useSession } from "@/lib/session";
 
 interface SpeechBubbleProps {
   text: string;
   /** Tail points up (stacked panel on desktop) instead of left. */
   stacked?: boolean;
+  /** The guide playback, so the guide speaks while the audio plays. */
+  playback?: SpeechPlayback;
 }
 
 // The guide's words, typed out. The full text is always in the DOM for screen readers and to
-// keep the bubble from changing size while it types. No audio is played.
-export function SpeechBubble({ text, stacked = false }: SpeechBubbleProps) {
+// keep the bubble from changing size while it types. The speaker icon plays the same text.
+export function SpeechBubble({ text, stacked = false, playback }: SpeechBubbleProps) {
   const reduced = usePrefersReducedMotion();
+  const { t } = useSession();
   const [typed, setTyped] = useState({ text: "", count: 0 });
 
   useEffect(() => {
@@ -56,8 +61,13 @@ export function SpeechBubble({ text, stacked = false }: SpeechBubbleProps) {
             {shown}
           </p>
         </div>
-        <ReadAloudButton text={text} />
+        <ReadAloudButton text={text} playback={playback} />
       </div>
+      {playback?.failed && (
+        <p role="status" className="mt-1 pl-3 text-xs text-muted">
+          {t("voice.unavailable")}
+        </p>
+      )}
     </div>
   );
 }
