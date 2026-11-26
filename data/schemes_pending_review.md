@@ -23,7 +23,7 @@ to one department with certainty and are marked.
 | Vidyasiri scheme for Backward Classes students | Backward Classes Welfare | name only | everything |
 | Post-matric scholarship for nomadic and semi-nomadic students | Backward Classes Welfare | name only | everything |
 | Fee reimbursement for Backward Classes students | Backward Classes Welfare | name only | everything |
-| Vidyasiri scheme and fee reimbursement for minorities | Minority Welfare | name only (ended 30/11/2026 per portal) | everything |
+| Vidyasiri scheme and fee reimbursement for minorities | Minority Welfare | name only (last date 30/11/2026 per portal) | everything |
 | Fee reimbursement for Arya Vysya community students | Arya Vysya Development Corporation | community only | income, amount, docs; last date 30/11/2026 |
 | Sandipani scholarship | Brahmin Development Board | name only | everything |
 | Sanchi Honnamma scholarship; C V Raman scholarship; Kittur Rani Chennamma award | College Education (attribution uncertain) | name only | everything |
