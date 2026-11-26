@@ -46,7 +46,7 @@ India has many central and state scholarships, but students from underserved bac
 |---|---|
 | **1. Ask** | A short voice or tap interview. The next question is chosen by information gain, so a student answers a handful of questions, not a long form. Every answer is read back for confirmation. |
 | **2. Match** | A deterministic rules engine checks each scheme and returns *eligible*, *ineligible* or *unknown*, with the reason for every verdict. It also shows near-misses ("you miss this by Rs 20,000") and which unanswered questions could change the result. |
-| **3. Optimise** | On the National Scholarship Portal a student can apply for one merit-based scheme plus welfare-based schemes. Saarthi picks the best merit scheme by value and deadline and keeps every eligible welfare scheme. State and private schemes may follow different rules. |
+| **3. Optimise** | Saarthi builds the best plan from the schemes a student appears eligible for. Where schemes cannot be held together under the rules (one merit scheme on the National Scholarship Portal, and pairs a scheme says cannot be combined), it keeps the most valuable one. For every scheme left out it shows the reason and whether that is an official rule or inferred from the scheme guidelines, so the student can check the notice. Schemes with no conflict are all kept, and a scheme whose window has closed is listed with that reason. |
 | **4. Protect** | Documents are encrypted in the browser (AES-256-GCM) with a key from the student's passphrase. The server only ever sees ciphertext. Every access is written to a tamper-evident audit log. |
 | **5. Apply** | A copilot pre-fills the application form and checks rejection risk. The student does OTP, CAPTCHA and final submit. |
 
@@ -69,7 +69,7 @@ India has many central and state scholarships, but students from underserved bac
   <img src="docs/screenshots/audit-broken.png" width="100%" alt="Audit chain broken at an edited entry" />
 </div>
 
-*Prototype screenshots with the sourced scheme data and a sample student.*
+*Prototype screenshots with the sourced scheme data and a sample student. The sample student, Priya, is synthetic: no real person's data is used anywhere in this repo.*
 
 ## How Saarthi Is Different
 
@@ -79,7 +79,7 @@ Government portals such as myScheme already help students check scheme eligibili
 - **A best-plan picker** that respects the National Scholarship Portal's one-merit-plus-welfare rule.
 - **An encrypted on-device vault** so documents never reach our server in readable form.
 - **A tamper-evident audit log** of every use of the student's data.
-- **Voice, in the student's language** (planned, depends on language testing).
+- **Voice, in the student's language** (built in the API, switched off in the demo for now; see below).
 
 ---
 
@@ -142,19 +142,20 @@ We're upfront about this, since it matters for judging the demo honestly. Update
 | Scheme dataset (central + Karnataka, undergraduate engineering) | 🟡 **In progress.** 10 schemes sourced from official portals, with a confidence level recorded on each. More are listed for review. The sample-data mode still uses clearly labelled EXAMPLE schemes |
 | Eligibility engine (tri-state verdicts, explanations, near-miss) | ✅ **Built and tested** in `/engine`, used by the UI in API mode |
 | Adaptive interview (information-gain question picker) | ✅ **Working**, questions in English, Hindi and Kannada |
-| Portfolio optimiser (NSP one-merit-plus-welfare rule) | ✅ **Working** |
-| API (FastAPI, every endpoint in the contract) | ✅ **Working**, 44 tests |
+| Portfolio optimiser (NSP one-merit-plus-welfare rule, schemes that cannot be combined, reason and rule source for each scheme left out) | ✅ **Working** |
+| API (FastAPI, every endpoint in the contract) | ✅ **Working**, 48 tests |
 | Encrypted vault (browser-side AES-256-GCM) | ✅ **Client-side encryption works** (AES-256-GCM in the browser) |
 | Hash-chained audit log | ✅ **Hash chain** with verify and tamper demo |
 | Ciphertext upload to the server | 🟡 **Planned** |
-| Voice answers and read-aloud (ElevenLabs) | 🟡 **Works in API mode** with an ElevenLabs key (English, Hindi, Kannada), tested only on clean synthetic speech. Off in the default mock mode |
+| Voice (ElevenLabs text-to-speech and speech-to-text) | 🟡 **Built** (ElevenLabs text-to-speech and speech-to-text in the API). Switched off in the demo pending an account issue; needs `ELEVENLABS_API_KEY` and `ELEVENLABS_VOICE_ID`. |
+| "See results so far" and the unanswered-question near-miss | ✅ **Built**. Results can be opened mid-interview with a note that they use the answers so far; a near-miss lists the questions that could change the verdict |
 | App text in English, Hindi and Kannada | ✅ **Working**. Scheme names and verdict reasons stay in English |
 | Application copilot | 🟠 **Sandbox demo only**, never real government portals. Not built yet |
 | On-device OCR, consent grants, recovery key | ⚪ **Planned** |
 | Cross-document consistency checker, helper mode, reminders | ⚪ **Roadmap** |
 
 **Limits to keep in mind**
-- Scheme criteria, amounts and deadlines go stale. Every record carries a `source_url` and `last_verified` date.
+- Scheme criteria, amounts and deadlines go stale. Every record carries a `source_url` and a last-checked date.
 - Saarthi says a student *appears eligible*. It is not an approval, and the official notice is the final word.
 - Scheme level (UG, PG, diploma) is not enforced yet, so a scheme without a course-level condition can match any level.
 - Some state scheme amounts are unknown and show as "Amount not confirmed".
@@ -182,14 +183,16 @@ Design goals. In the prototype today, documents are encrypted in the browser wit
 ## Getting Started
 
 ```bash
-# 1. Settings: copy both example files. Add ELEVENLABS_API_KEY (and ELEVENLABS_VOICE_ID) to api/.env or the root .env for voice (optional); the API reads both at startup, relative to its own folder.
-cp .env.example .env
-cp web/.env.example web/.env.local   # NEXT_PUBLIC_USE_MOCKS=false in web/.env.local uses the API at http://localhost:8000, which must be running (true, the default, = built-in sample data)
+# 1. Settings. Mock mode is the default: web/.env.example sets NEXT_PUBLIC_USE_MOCKS=true (built-in sample data).
+cp web/.env.example web/.env.local   # set NEXT_PUBLIC_USE_MOCKS=false in web/.env.local for real data from the API at http://localhost:8000, which must be running
+# Voice (optional): put ELEVENLABS_API_KEY and ELEVENLABS_VOICE_ID in api/.env (copy .env.example). The API reads api/.env, then the root .env, at startup, relative to its own folder.
+cp .env.example api/.env
 
 # 2. Backend (Python 3.11+). It reads data/schemes.json by default; no variable is needed.
+#    api/.env is loaded automatically; --env-file is optional.
 cd api
 pip install -r requirements-dev.txt
-uvicorn main:app --reload --env-file ../.env
+uvicorn main:app --reload
 
 # 3. Frontend (Node 22+), in a second terminal
 cd web
