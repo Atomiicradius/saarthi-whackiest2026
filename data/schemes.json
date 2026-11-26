@@ -106,9 +106,9 @@
     },
     "portal_url": "https://scholarships.gov.in/",
     "source_url": "https://www.myscheme.gov.in/schemes/pm-yasasvipmsobcebcdnts",
-    "confidence": 0.75,
+    "confidence": 0.5,
     "last_verified": "2026-11-26",
-    "notes": "Source: myScheme (Govt of India), Ministry of Social Justice and Empowerment. Amount shown is Group 1 (degree and post-graduate professional courses): Rs 10,000 academic allowance plus Rs 10,000 tuition fee. Other groups pay Rs 13,000, Rs 8,000 and Rs 5,000. Income ceiling is Rs 2.5 lakh a year (parents'/guardians' income, or combined income for employed students). Open to OBC, EBC and DNT students as notified for the applicant's own State; the profile has only an OBC category, so EBC and DNT students are not matched. Only two boys of the same parents can receive it (this limit does not apply to girls), not encoded. A holder may not hold another scholarship or stipend and must choose one; exclusive_with lists the other central scheme in this file. Domicile/permanent settlement in the State is required but not encoded. Application window not confirmed."
+    "notes": "Source: myScheme (Govt of India), Ministry of Social Justice and Empowerment. Amount shown is Group 1 (degree and post-graduate professional courses): Rs 10,000 academic allowance plus Rs 10,000 tuition fee. Other groups pay Rs 13,000, Rs 8,000 and Rs 5,000. Income ceiling is Rs 2.5 lakh a year (parents'/guardians' income, or combined income for employed students). Open to OBC, EBC and DNT students as notified for the applicant's own State; the profile has only an OBC category, so EBC and DNT students are not matched. Only two boys of the same parents can receive it (this limit does not apply to girls), not encoded. A holder may not hold another scholarship or stipend and must choose one; exclusive_with lists the other central scheme in this file. Domicile/permanent settlement in the State is required but not encoded. Application window not confirmed. CONFLICT, confidence lowered: the SSP document \"Postmatric Scholarship: Eligibility criteria document for FY 2025-26\" (listed at https://ssp.karnataka.gov.in/Downloads), Backward Classes Welfare section, gives different rules for Karnataka: income up to Rs 2.5 lakh for Category-1 but only Rs 1 lakh for other OBC categories (2A, 3A, 3B); minimum marks 60 per cent (Category-1) or 70 per cent (others); not for management, private or COMED-K seats, or students already getting fee concession or the NT/SNT scholarship. These are not encoded: the profile has no OBC sub-category, and 2026-27 rules were not seen."
   },
   {
     "id": "ka-sc-postmatric-fee-reimbursement",
@@ -134,11 +134,14 @@
       },
       {
         "field": "annual_family_income_inr",
-        "op": "<",
+        "op": "<=",
         "value": 250000
       }
     ],
-    "docs_required": [],
+    "docs_required": [
+      "caste_certificate",
+      "income_certificate"
+    ],
     "exclusive_with": [
       "csss-pm-usp-ug",
       "aicte-pragati-degree",
@@ -150,7 +153,7 @@
     "source_url": "https://swd.karnataka.gov.in/44/education/kn",
     "confidence": 0.65,
     "last_verified": "2026-11-26",
-    "notes": "Source: Karnataka Social Welfare Department education page (Kannada; translated; undated), post-matric scholarship section; the scheme was first read from the State Scholarship Portal scheme list. No single yearly amount exists, so amount is null: the department pays the compulsory non-refundable fees, which vary by course, plus a maintenance allowance that varies by group (day scholar / hosteller): Group I degree and PG professional Rs 7,000 / 13,500; Group II Rs 6,500 / 9,500; Group III Rs 3,000 / 6,000; Group IV Rs 2,500 / 4,000. The page says this is a centrally sponsored programme, so it is the same benefit as central-post-matric-sc. The page gives the family income limit as Rs 2.5 lakh; whether exactly Rs 2.5 lakh qualifies is unclear. Documents and domicile rule are not stated, so docs_required is empty (unknown) and no state criterion is set. Marked exclusive with PM-USP because PM-USP excludes students who already get State fee reimbursement."
+    "notes": "Source: Karnataka Social Welfare Department education page (Kannada; translated; undated), post-matric scholarship section; the scheme was first read from the State Scholarship Portal scheme list. No single yearly amount exists, so amount is null: the department pays the compulsory non-refundable fees, which vary by course, plus a maintenance allowance that varies by group (day scholar / hosteller): Group I degree and PG professional Rs 7,000 / 13,500; Group II Rs 6,500 / 9,500; Group III Rs 3,000 / 6,000; Group IV Rs 2,500 / 4,000. The page says this is a centrally sponsored programme, so it is the same benefit as central-post-matric-sc. Marked exclusive with PM-USP because PM-USP excludes students who already get State fee reimbursement. Checked against the SSP document \"Postmatric Scholarship: Eligibility criteria document for FY 2025-26\" (listed at https://ssp.karnataka.gov.in/Downloads), Social Welfare section: SC, family income less than or equal to Rs 2.5 lakh, all courses; it lists RD-numbered caste and income certificates (and Aadhaar, not recorded here). It states no amount and no domicile rule, so no state criterion is set."
   },
   {
     "id": "ka-sc-technical-medical-ayush-fee-reimbursement",
@@ -181,7 +184,7 @@
       },
       {
         "field": "annual_family_income_inr",
-        "op": "<",
+        "op": "<=",
         "value": 1000000
       }
     ],
@@ -197,7 +200,7 @@
     "source_url": "https://swd.karnataka.gov.in/44/education/kn",
     "confidence": 0.65,
     "last_verified": "2026-11-26",
-    "notes": "Amount: the Karnataka Social Welfare Department education page (Kannada; translated; undated) says engineering and medical students with family income from Rs 2.5 lakh to Rs 10 lakh get a 50 per cent fee concession from the Technical and Medical Education departments. It is a share of the course fee, not a fixed figure, so amount is null; AYUSH is not mentioned there. Other conditions below come from the Karnataka State Scholarship Portal scheme list, Social Welfare Department (Kannada; translated). Stated conditions: SC students in technical, medical or AYUSH courses with annual family income above Rs 2.5 lakh and below Rs 10 lakh. The course type (technical/medical/AYUSH) is not encoded because the profile 'course' field is free text; the portal's wording leaves income of exactly Rs 2.5 lakh and exactly Rs 10 lakh outside both this scheme and the Rs 2.5 lakh one, so those two values give no match. Documents, domicile rule and dates are not stated on either page (docs empty, no state criterion). Marked exclusive with PM-USP for the same reason as the other Karnataka fee reimbursement."
+    "notes": "Amount: the Karnataka Social Welfare Department education page (Kannada; translated; undated) says engineering and medical students with family income from Rs 2.5 lakh to Rs 10 lakh get a 50 per cent fee concession from the Technical and Medical Education departments. It is a share of the course fee, not a fixed figure, so amount is null; AYUSH is not mentioned there. Other conditions below come from the Karnataka State Scholarship Portal scheme list, Social Welfare Department (Kannada; translated). Stated conditions: SC students in technical, medical or AYUSH courses with annual family income above Rs 2.5 lakh and below Rs 10 lakh. The course type (technical/medical/AYUSH) is not encoded because the profile 'course' field is free text; Documents, domicile rule and dates are not stated on either page (docs empty, no state criterion). Marked exclusive with PM-USP for the same reason as the other Karnataka fee reimbursement. The income band follows the SSP document \"Postmatric Scholarship: Eligibility criteria document for FY 2025-26\" (listed at https://ssp.karnataka.gov.in/Downloads): above Rs 2.5 lakh and up to and including Rs 10 lakh, professional courses. That document says the details of this scheme will be published later."
   },
   {
     "id": "ka-sc-professional-tuition-fee-quota",
@@ -268,7 +271,7 @@
     "source_url": "https://ssp.karnataka.gov.in/Schemes",
     "confidence": 0.5,
     "last_verified": "2026-11-26",
-    "notes": "Source: Karnataka State Scholarship Portal scheme list, Social Welfare Department (Kannada; translated). The page says only: hostel maintenance cost for SC students living in hostels managed by colleges that run technical and medical courses. Living in such a hostel cannot be checked from the profile, so category is the only criterion; a student who does not live in a college-run hostel will still see this as a match. Low confidence: read the full scheme notice first. Amount, documents, income limit and dates are not stated on that page."
+    "notes": "Source: Karnataka State Scholarship Portal scheme list, Social Welfare Department (Kannada; translated). The page says only: hostel maintenance cost for SC students living in hostels managed by colleges that run technical and medical courses. Living in such a hostel cannot be checked from the profile, so category is the only criterion; a student who does not live in a college-run hostel will still see this as a match. Low confidence: read the full scheme notice first. Amount, documents, income limit and dates are not stated on that page. The SSP document \"Postmatric Scholarship: Eligibility criteria document for FY 2025-26\" (listed at https://ssp.karnataka.gov.in/Downloads) lists a Hostel Fee scheme for SC students covering department-run, college or university-run and grant-in-aid hostels, with no amount; it does not limit it to technical and medical colleges."
   },
   {
     "id": "aicte-pragati-degree",
@@ -513,6 +516,6 @@
     "source_url": "https://tribal.nic.in/downloads/guidelines/post-matric/Post-matric-guidelines-15032023.pdf",
     "confidence": 0.8,
     "last_verified": "2026-11-26",
-    "notes": "Source: Ministry of Tribal Affairs guidelines, applicable from 01-04-2022 (saved file 'Centrally Sponsored Scheme of Post Matric Scholarship Scheme for ST Students_scheme.pdf', read directly). source_url is the ministry's own PDF link; its size on the server matches the saved file exactly (612,474 bytes). Eligibility: ST as specified for the student's domicile State; passed matriculation or higher; family income from all sources not above Rs 2.5 lakh a year (income test does not apply to an orphan supported by a guardian); recognised institution; not getting any other scholarship. Students in the Ministry's listed Top Class institutes are covered by a different scheme instead (not encoded). Amount is only the Group I day-scholar stipend of Rs 5,500 a year (Rs 12,000 for hostellers); compulsory non-refundable fees are also paid (Government of India support capped at Rs 2.5 lakh a year for engineering in private institutes) and are not counted. Applied through the State's portal."
+    "notes": "Source: Ministry of Tribal Affairs guidelines, applicable from 01-04-2022 (saved file 'Centrally Sponsored Scheme of Post Matric Scholarship Scheme for ST Students_scheme.pdf', read directly). source_url is the ministry's own PDF link; its size on the server matches the saved file exactly (612,474 bytes). Eligibility: ST as specified for the student's domicile State; passed matriculation or higher; family income from all sources not above Rs 2.5 lakh a year (income test does not apply to an orphan supported by a guardian); recognised institution; not getting any other scholarship. Students in the Ministry's listed Top Class institutes are covered by a different scheme instead (not encoded). Amount is only the Group I day-scholar stipend of Rs 5,500 a year (Rs 12,000 for hostellers); compulsory non-refundable fees are also paid (Government of India support capped at Rs 2.5 lakh a year for engineering in private institutes) and are not counted. Applied through the State's portal. For Karnataka, the SSP document \"Postmatric Scholarship: Eligibility criteria document for FY 2025-26\" (listed at https://ssp.karnataka.gov.in/Downloads), Tribal Welfare section, says private and management seat applications are not eligible (not encoded)."
   }
 ]
